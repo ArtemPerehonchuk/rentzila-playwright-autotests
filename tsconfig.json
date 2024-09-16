@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "types": ["node", "playwright"],
+    "module": "esnext", 
+    "target": "es6",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node"
+  },
+  "include": ["./tests/**/*.ts"],
+  "exclude": ["node_modules"]
+}
