@@ -36,7 +36,6 @@ class ProductsPage extends Page {
     }
 
     async clickOnDropdownArrow() {
-        await this.locators.dropdownArrow.scrollIntoViewIfNeeded()
         await this.locators.dropdownArrow.click();
     }
 

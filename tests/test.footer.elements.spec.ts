@@ -49,6 +49,7 @@ test('test case C214: Verify that all elements on the footer are displayed and a
     await tendersPage.checkSerchInput();
     await tendersPage.clickOnLogo();
     await homepage.checkUrl(homepageUrl);
+    await homepage.checkContactsEmail();
 })
 
 test('test case C226: Verify "У Вас залишилися питання?" form', async ({ page }) => {

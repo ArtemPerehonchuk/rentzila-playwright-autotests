@@ -1,7 +1,6 @@
 import { Page as PlaywrightPage, Locator, expect, request, APIRequestContext } from '@playwright/test';
 import Page from './page';
 import ApiHelper from '../helpers/api.helper';
-import { th } from '@faker-js/faker/.';
 
 
 class HomePage extends Page {
@@ -30,7 +29,7 @@ class HomePage extends Page {
             tendersLink: this.page.locator('[role="listitem"] > a').getByText('Тендери'),
             jobRequestsLink: this.page.locator('[role="listitem"] > a').getByText('Запити на роботу'),
             contactsTitle: this.page.locator('div[class*="RentzilaContacts_title"]'),
-            contactsEmail: this.page.locator('div[class*="RentzilaContacts_contacts"]'),
+            contactsEmail: this.page.locator('a[class*="RentzilaContacts_email"]'),
             copyrightLabel: this.page.getByTestId('copyright'),
             searchServicesSpecialEquipmentTitle: this.page.locator('h1[class*="HeroSection_title"]'),
             consultationForm: this.page.locator('div[class*="ConsultationForm_container"]'),
@@ -110,25 +109,21 @@ class HomePage extends Page {
     }
 
     async clickOnPrivacyPolicyLink() {
-        await this.locators.privacyPolicyLink.scrollIntoViewIfNeeded();
         await this.locators.privacyPolicyLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async clickOnCookiePolicyLink() {
-        await this.locators.cookiePolicyLink.scrollIntoViewIfNeeded();
         await this.locators.cookiePolicyLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async clickOnTermsConditionsLink() {
-        await this.locators.termsConditionsLink.scrollIntoViewIfNeeded();
         await this.locators.termsConditionsLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async clickOnAnnouncementsLink() {
-        await this.locators.announcementsLink.scrollIntoViewIfNeeded();
         await this.locators.announcementsLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
@@ -138,13 +133,17 @@ class HomePage extends Page {
     }
 
     async clickOnTendersLink() {
-        await this.locators.tendersLink.scrollIntoViewIfNeeded();
         await this.locators.tendersLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async clickOnContactsEmail() {
         await this.locators.contactsEmail.click();
+    }
+
+    async checkContactsEmail() {
+        const emailAttr = await this.locators.contactsEmail.getAttribute('href');
+        await expect(emailAttr).toContain('mailto:')
     }
 
     async scrollToConsultationForm() {
@@ -157,60 +156,34 @@ class HomePage extends Page {
 
     async clickOnSubmitConsultationBtn() {
         await this.locators.submitConsultationBtn.click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(3000);
     }
 
     async checkInputError(inputName: string) {
-        const inputNameValue = await this.locators.consultationFormNameInput.evaluate((el) => {
-            return (el as HTMLInputElement).value;
-        });
-        const inputPhoneValue = await this.locators.consultationFormPhoneInput.evaluate((el) => {
-            return (el as HTMLInputElement).value;
-        });
-        if(inputName == 'name') {
-            if(inputNameValue === '') {
-                const nameBorderColor = await this.locators.consultationFormNameInput.evaluate((el) => {
-                    return window.getComputedStyle(el).borderColor;
-                });
-                await expect(nameBorderColor).toBe('rgb(247, 56, 89)');
-                await this.locators.consultationFormErrorMessage.first().scrollIntoViewIfNeeded();
-                await expect(this.locators.consultationFormErrorMessage.first()).toBeVisible();
-                const consultationFormNameErrorMessageText = await this.locators.consultationFormErrorMessage.first().innerText();
-                await expect(consultationFormNameErrorMessageText).toBe('Поле не може бути порожнім');
-
-                return true;
-            }
-            
-            else {
-                return false;
-            }
-        } else if(inputName == 'phone') {
-            if(inputPhoneValue === '' && inputNameValue === '') {
-                const phoneBorderColor = await this.locators.consultationFormPhoneInput.evaluate((el) => {
-                    return window.getComputedStyle(el).borderColor;
-                });
-                await expect(phoneBorderColor).toBe('rgb(247, 56, 89)');
-                await this.locators.consultationFormErrorMessage.nth(1).scrollIntoViewIfNeeded();
-                await expect(this.locators.consultationFormErrorMessage.nth(1)).toBeVisible();
-                const consultationFormPhoneErrorMessageText = await this.locators.consultationFormErrorMessage.nth(1).innerText();
-                await expect(consultationFormPhoneErrorMessageText).toBe('Поле не може бути порожнім');
-
-                return true;
-            }else if(inputName == 'phone' && inputNameValue !== '') {
-                const phoneBorderColor = await this.locators.consultationFormPhoneInput.evaluate((el) => {
-                    return window.getComputedStyle(el).borderColor;
-                });
-                await expect(phoneBorderColor).toBe('rgb(247, 56, 89)');
-                await this.locators.consultationFormErrorMessage.first().scrollIntoViewIfNeeded();
-                await expect(this.locators.consultationFormErrorMessage.first()).toBeVisible();
-                const consultationFormPhoneErrorMessageText = await this.locators.consultationFormErrorMessage.first().innerText();
-                await expect(consultationFormPhoneErrorMessageText).toBe('Поле не може бути порожнім');
-
-                return true
-            } else {
-                return false
-            }
+        const inputValues = {
+            name: await this.locators.consultationFormNameInput.evaluate((el) => (el as HTMLInputElement).value),
+            phone: await this.locators.consultationFormPhoneInput.evaluate((el) => (el as HTMLInputElement).value),
+        };
+    
+        const showError = async (inputLocator: any, errorLocator: any, errorIndex: number) => {
+            const borderColor = await inputLocator.evaluate((el: any) => window.getComputedStyle(el).borderColor);
+            await expect(borderColor).toBe('rgb(247, 56, 89)');
+            await expect(errorLocator.nth(errorIndex)).toBeVisible();
+            const errorMessageText = await errorLocator.nth(errorIndex).innerText();
+            await expect(errorMessageText).toBe('Поле не може бути порожнім');
+            return true;
+        };
+    
+        if (inputName === 'name' && inputValues.name === '') {
+            return await showError(this.locators.consultationFormNameInput, this.locators.consultationFormErrorMessage, 0);
         }
+    
+        if (inputName === 'phone' && inputValues.phone === '') {
+            const errorIndex = inputValues.name === '' ? 1 : 0;
+            return await showError(this.locators.consultationFormPhoneInput, this.locators.consultationFormErrorMessage, errorIndex);
+        }
+    
+        return false;
     }
 
     async fillInput(inputName: string, inputValue: string) {

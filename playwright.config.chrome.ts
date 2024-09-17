@@ -18,7 +18,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     ...devices['Desktop Chrome'],
-    headless: false
+    headless: true
   },
   projects: [
     {

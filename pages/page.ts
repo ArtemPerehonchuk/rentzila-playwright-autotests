@@ -21,7 +21,6 @@ class Page {
     }
 
     async clickOnLogo() {
-        await this.logo.waitFor();
         await this.logo.click();
         await this.page.waitForTimeout(2000);
     }
