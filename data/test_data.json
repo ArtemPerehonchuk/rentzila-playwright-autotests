@@ -1,0 +1,40 @@
+{
+    "valid-email": "forsomemytests@gmail.com",
+    "valid-password": "Qwerty12",
+    "valid-phone": "+380991234786",
+    "homepageUrl": "https://dev.rentzila.com.ua/",
+    "correct-phone-numbers": {
+        "full": "+380991234786",
+        "without +": "380991234786",
+        "without +38": "0991234786"
+    },
+    "incorrect-phone-numbers": {
+        "without country code": "991234786",
+        "withoutln": "099123478",
+        "with-": "+380-99-123-47-86",
+        "with spaces" : "+380 99 123 47 86",
+        "with ()": "+380(99)1234786",
+        "with () without country code": "(99)1234786",
+        "11 numders": "+38099123478",
+        "other country code": "+10991234786",
+        "without 38": "+0991234786"
+    },
+    "incorrect-emails": {
+        "space": "for somemytests@gmail.com",
+        "cyrillic": "еуіегіуккутеяшдф",
+        "without @": "forsomemytestsgmail.com",
+        "without .": "forsomemytests@gmailcom",
+        "without com": "forsomemytests@gmail.",
+        "without gmail": "forsomemytests@.com",
+        "without @gmail.com": "forsomemytests",
+        "with 2 @": "forsomemytests@@gmail.com"
+    },
+    "incorrect-passwords": {
+        "space at the end": "Qwerty12 ",
+        "space at the begining": " Qwerty12",
+        "non-existent": "Qwerty17",
+        "without 1 uppercase": "qwerty12",
+        "without 1 lowercase": "QWERTY12",
+        "cyrillic": "Йцукен12"
+    }
+}
