@@ -13,7 +13,8 @@ class Page {
     }
 
     async navigate(path = '') {
-        await this.page.goto(path)
+        await this.page.goto(path);
+        await this.page.waitForLoadState('domcontentloaded');
     }
 
     async checkUrl(expectedUrl: string) {
