@@ -5,9 +5,13 @@ import CookiePolicyPage from '../pages/cookie.policy.page';
 import TermsConditionsPage from '../pages/terms.conditions.page';
 import ProductsPage from "../pages/products.page";
 import TendersPage from '../pages/tenders.page';
-import { faker } from '@faker-js/faker'
+import { faker } from '@faker-js/faker';
 
-const homepageUrl = 'https://dev.rentzila.com.ua/'
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const homepageUrl: string = process.env.HOMEPAGE_URL || '';
 
 test.beforeEach(async ({ page }) => {
     const apiRequestContext = await request.newContext();

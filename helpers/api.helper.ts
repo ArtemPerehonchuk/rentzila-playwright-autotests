@@ -1,6 +1,16 @@
 import { APIRequestContext } from '@playwright/test';
 
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const admin_email: string = process.env.ADMIN_EMAIL || '';
+const admin_password: string = process.env.ADMIN_PASSWORD || '';
+const user_email: string = process.env.VALID_EMAIL || ''
+const user_password: string = process.env.VALID_PASSWORD || ''
+
 let adminAccessToken: any = null;
+let userAccessToken: any = null;
 let user: any = null;
 
 class ApiHelper {
@@ -13,14 +23,29 @@ class ApiHelper {
             await this.request
                 .post('https://dev.rentzila.com.ua/api/auth/jwt/create/', {
                     data: {
-                        email: 'txt2021@ukr.net',
-                        password: 'Qwerty123+'
+                        email: admin_email,
+                        password: admin_password
                     }
                 }).then(async (response) => {
                     adminAccessToken = (await response.json()).access
                 })
         }
         return adminAccessToken
+    }
+
+    async createUserAccessToken() {
+        if(userAccessToken === null) {
+            await this.request
+                .post('https://dev.rentzila.com.ua/api/auth/jwt/create/', {
+                    data: {
+                        email: user_email,
+                        password: user_password
+                    }
+                }).then(async (response) => {
+                    userAccessToken = (await response.json()).access
+                })
+        }
+        return userAccessToken
     }
 
     async getUserDetails() {

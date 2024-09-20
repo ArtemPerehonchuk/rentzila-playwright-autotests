@@ -178,9 +178,17 @@ class HomePage extends Page {
         const inputValues = {
             name: await this.locators.consultationFormNameInput.evaluate((el) => (el as HTMLInputElement).value),
             phone: await this.locators.consultationFormPhoneInput.evaluate((el) => (el as HTMLInputElement).value),
-            email: await this.locators.loginEmailOrPhoneInput.evaluate((el) => (el as HTMLInputElement).value),
-            password: await this.locators.loginPasswordInput.evaluate((el) => (el as HTMLInputElement).value)
+            email: '',
+            password: ''
         };
+
+        if (await this.locators.loginEmailOrPhoneInput.isVisible()) {
+            inputValues.email = await this.locators.loginEmailOrPhoneInput.evaluate((el) => (el as HTMLInputElement).value);
+        }
+
+        if (await this.locators.loginPasswordInput.isVisible()) {
+            inputValues.password = await this.locators.loginPasswordInput.evaluate((el) => (el as HTMLInputElement).value);
+        }
     
         const showError = async (inputLocator: any, errorLocator: any, errorIndex: number) => {
             const borderColor = await inputLocator.evaluate((el: any) => window.getComputedStyle(el).borderColor);

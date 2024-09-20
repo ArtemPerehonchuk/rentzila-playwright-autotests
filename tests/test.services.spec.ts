@@ -3,7 +3,11 @@ import HomePage from '../pages/home.page';
 import ProductsPage from '../pages/products.page';
 import UnitPage from '../pages/unit.page';
 
-const homepageUrl = 'https://dev.rentzila.com.ua/'
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const homepageUrl: string = process.env.HOMEPAGE_URL || '';
 
 test.beforeEach(async ({ page }) => {
     const apiRequestContext = await request.newContext();
