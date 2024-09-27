@@ -1,18 +1,16 @@
-import { Page as PlaywrightPage, Locator, expect } from '@playwright/test';
+import { Page as PlaywrightPage, expect } from '@playwright/test';
 import Page from './page';
 
-class CookiePolicyPage extends Page {
-    public locators: { [key: string]: Locator};   
+class CookiePolicyPage extends Page {  
 
     constructor(page: PlaywrightPage) {
         super(page);
-        this.locators = {
-        cookiePolicyTitle: this.page.getByText('Політика використання файлів cookie')
-        }
     }
 
+    cookiePolicyTitle = this.page.locator('h1[class*="Cookies_title"]');
+
     async checkCookiePolicyTitle() {
-        await expect(this.locators.cookiePolicyTitle).toBeVisible();
+        await expect(this.cookiePolicyTitle).toBeVisible();
     }
 
 }

@@ -1,26 +1,23 @@
-import { test, request } from "@playwright/test";
+import { test } from "@playwright/test";
 import HomePage from '../pages/home.page';
 import ProductsPage from '../pages/products.page';
 import UnitPage from '../pages/unit.page';
 
-import dotenv from 'dotenv';
-
-dotenv.config();
-
 const homepageUrl: string = process.env.HOMEPAGE_URL || '';
 
+let homepage: HomePage;
+let productsPage: ProductsPage;
+let unitPage: UnitPage;
+
 test.beforeEach(async ({ page }) => {
-    const apiRequestContext = await request.newContext();
-    const homepage = new HomePage(page, apiRequestContext);
+    homepage = new HomePage(page);
+    productsPage = new ProductsPage(page);
+    unitPage = new UnitPage(page);
     await homepage.navigate('/');
 });
 
 test('test case c212: Checking ""Послуги"" section on the main page', async ({ page }) => {
-    const apiRequestContext = await request.newContext();
-    const homepage = new HomePage(page, apiRequestContext);
-    const productsPage = new ProductsPage(page);
-    const unitPage = new UnitPage(page);
-    const servicesList = homepage.locators.servicesList;
+    const servicesList = homepage.servicesList;
     const servicesCount = await servicesList.count();
     let firstServicesUnitName;
 
@@ -34,7 +31,7 @@ test('test case c212: Checking ""Послуги"" section on the main page', asy
         await productsPage.checkFilters(firstServicesUnitName);
         await productsPage.checkUnitsContainerIsVisible();
         await productsPage.clickFirstProduct();
-        await unitPage.checkUnit();
+        await unitPage.checkUnitIsVisible();
         await unitPage.clickOnLogo();
         await homepage.checkUrl(homepageUrl)
         await homepage.clickOnAnnouncementsNavMenuItem();
@@ -45,27 +42,22 @@ test('test case c212: Checking ""Послуги"" section on the main page', asy
 })
 
 test('test case c213: Checking ""Спецтехніка"" section on the main page', async ({ page }) => {
-    const apiRequestContext = await request.newContext();
-    const homepage = new HomePage(page, apiRequestContext);
-    const productsPage = new ProductsPage(page);
-    const unitPage = new UnitPage(page);
-    const specialEquipmentsList = homepage.locators.specialEquipmentsList;
+    const specialEquipmentsList = homepage.specialEquipmentsList;
     const specialEquipmentsCount = await specialEquipmentsList.count();
 
     for (let i = 0; i < specialEquipmentsCount; i++) {
-        await homepage.scrollToSpicialEquipmentContainer();
+        await homepage.scrollToSpecialEquipmentContainer();
         await homepage.checkSpecialEquipments();
         await specialEquipmentsList.nth(i).click({force: true});
         await homepage.clickFirstSpecialEquipmentUnit();
         await productsPage.checkProductsFilter();
-        await productsPage.checkCategoriesCheckboxes();
+        await productsPage.checkCategoriesCheckboxesAreChecked();
         await productsPage.checkUnitsContainerIsVisible();
         await productsPage.clickFirstProduct();
-        await unitPage.checkUnit();
+        await unitPage.checkUnitIsVisible();
         await unitPage.clickOnLogo();
         await homepage.checkUrl(homepageUrl);
         await homepage.clickOnAnnouncementsNavMenuItem();
-        await productsPage.checkCategoriesCheckboxes();
-        await homepage.clickOnLogo();
+        await productsPage.checkCategoriesCheckboxesAreChecked();
     }
 })

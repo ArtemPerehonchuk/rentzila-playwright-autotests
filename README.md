@@ -2,7 +2,7 @@
 
 ## Description
 
-This project contains end-to-end tests for the Rentzila application using Playwright. It ensures the functionality and quality of the Rentzila web application through automated browser testing.
+This project contains end-to-end tests for the Rentzila web site using Playwright. It ensures the functionality and quality of the Rentzila web site through automated browser testing.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ This project contains end-to-end tests for the Rentzila application using Playwr
 1. Clone the branch with all tests from the repository:
 
    ```bash
-   git clone -b tc-C212-C213-C214-C226 https://github.com/ArtemPerehonchuk/rentzila-playwright-tests.git
+   git clone -b test-cases-for-login https://github.com/ArtemPerehonchuk/rentzila-playwright-tests.git
 
    ```
 2. Navigate to the project directory:

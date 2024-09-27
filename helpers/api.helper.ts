@@ -1,9 +1,5 @@
 import { APIRequestContext } from '@playwright/test';
 
-import dotenv from 'dotenv';
-
-dotenv.config();
-
 const admin_email: string = process.env.ADMIN_EMAIL || '';
 const admin_password: string = process.env.ADMIN_PASSWORD || '';
 const user_email: string = process.env.VALID_EMAIL || ''
@@ -21,7 +17,7 @@ class ApiHelper {
     async createAdminAccessToken() {
         if(adminAccessToken === null) {
             await this.request
-                .post('https://dev.rentzila.com.ua/api/auth/jwt/create/', {
+                .post(`${process.env.HOMEPAGE_URL}api/auth/jwt/create/`, {
                     data: {
                         email: admin_email,
                         password: admin_password
@@ -36,7 +32,7 @@ class ApiHelper {
     async createUserAccessToken() {
         if(userAccessToken === null) {
             await this.request
-                .post('https://dev.rentzila.com.ua/api/auth/jwt/create/', {
+                .post(`${process.env.HOMEPAGE_URL}api/auth/jwt/create/`, {
                     data: {
                         email: user_email,
                         password: user_password
@@ -51,7 +47,7 @@ class ApiHelper {
     async getUserDetails() {
         const accessAdminToken = await this.createAdminAccessToken();
         await this.request
-              .get('https://dev.rentzila.com.ua/api/backcall/', {
+              .get(`${process.env.HOMEPAGE_URL}api/backcall/`, {
                 headers: {
                     Authorization: `Bearer ${accessAdminToken}`
                 }
