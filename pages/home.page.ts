@@ -1,11 +1,9 @@
-import { Page as PlaywrightPage, Locator, expect, request, APIRequestContext } from '@playwright/test';
+import { Page as PlaywrightPage, expect, request, APIRequestContext } from '@playwright/test';
 import Page from './page';
 import ApiHelper from '../helpers/api.helper';
 
 
 class HomePage extends Page {
-    
-    public locators: { [key: string]: Locator };
     private apiHelper?: ApiHelper;
 
     constructor(page: PlaywrightPage, request?: APIRequestContext) {
@@ -13,181 +11,183 @@ class HomePage extends Page {
         if(request) {
             this.apiHelper = new ApiHelper(request);
         }
-        this.locators = {
-            servicesContainer: this.page.locator('[data-testid="services"]'),
-            servicesList: this.page.locator('div[class*="RentzilaProposes_categories_list"] > div[class*="RentzilaProposes_service"]'),
-            servicesUnitsList: this.page.locator('div[class*="RentzilaProposes_proposes_list"]').first().locator('div[class*="RentzilaProposes_proposes_item"]'),
-            announcementsNavMenuItem: this.page.getByTestId('Navbar').getByRole('link', { name: 'Оголошення', exact: true }),
-            specialEquipmentContainer: this.page.getByTestId('specialEquipment'),
-            specialEquipmentsList: this.page.locator('div[class*="RentzilaProposes_categories_list"]').nth(1).locator('div[class*="RentzilaProposes_service"]'),
-            specialEquipmentsUnitsList: this.page.locator('div[class*="RentzilaProposes_proposes_list"]').nth(1).locator('div[class*="RentzilaProposes_proposes_item"]'),
-            footerContainer: this.page.locator('div[class*="Footer_footer__Dhw_9"]'),
-            footerRentzilaLogo: this.page.locator('div[class*="Footer_container"] > div[data-testid="logo"]'),
-            aboutUsTitle: this.page.getByTestId('content'),
-            privacyPolicyLink: this.page.getByTestId('politika-konfidenciinosti'),
-            cookiePolicyLink: this.page.getByTestId('pravila-vikoristannya-failiv-cookie'),
-            termsConditionsLink: this.page.getByTestId('umovi-dostupu-ta-koristuvannya'),
-            announcementsLink: this.page.locator('[role="listitem"]').getByText('Оголошення'),
-            tendersLink: this.page.locator('[role="listitem"] > a').getByText('Тендери'),
-            jobRequestsLink: this.page.locator('[role="listitem"] > a').getByText('Запити на роботу'),
-            contactsTitle: this.page.locator('div[class*="RentzilaContacts_title"]'),
-            contactsEmail: this.page.locator('a[class*="RentzilaContacts_email"]'),
-            copyrightLabel: this.page.getByTestId('copyright'),
-            searchServicesSpecialEquipmentTitle: this.page.locator('h1[class*="HeroSection_title"]'),
-            consultationForm: this.page.locator('div[class*="ConsultationForm_container"]'),
-            submitConsultationBtn: this.page.locator('button[type="submit"]'),
-            consultationFormErrorMessage: this.page.locator('p[class*="ConsultationForm_error_message"]'),
-            consultationFormNameInput: this.page.locator('input[placeholder="Ім\'я"]'),
-            consultationFormPhoneInput: this.page.locator('input[placeholder="Номер телефону"]'),
-            enterBtn: this.page.locator('[class*="NavbarAuthBlock_buttonEnter"]'),
-            loginEmailOrPhoneInput: this.page.locator('#email'),
-            loginPasswordInput: this.page.locator('#password'),
-            loginErrorInputsMsg: this.page.locator('p[class*="CustomReactHookInput_error_message"]'),
-            autorizationForm: this.page.locator('[data-testid="authorizationContainer"]'),
-            submitLoginFormBtn: this.page.locator('button[type="submit"]').getByText('Увійти'),
-            hidePasswordIcon: this.page.locator('div[data-testid="reactHookButton"]'),
-            userIcon: this.page.locator('div[data-testid="avatarBlock"]'),
-            profileDropDown: this.page.locator('[class*="ProfileDropdownMenu_container"]'),
-            profileDropDownEmail: this.page.locator('div[data-testid="email"]'),
-            profileLogoutBtn: this.page.locator('div[data-testid="logout"]'),
-            myProfileMenuItem: this.page.locator('div[data-testid="profile"]'),
-            loginFormErrorMsg: this.page.locator('div[data-testid="errorMessage"]')
-        };
     }
+
+    servicesContainer = this.page.locator('[data-testid="services"]');
+    servicesList = this.page.locator('div[class*="RentzilaProposes_categories_list"] > div[class*="RentzilaProposes_service"]');
+    servicesUnitsList = this.page.locator('div[class*="RentzilaProposes_proposes_list"]').first().locator('div[class*="RentzilaProposes_proposes_item"]');
+    announcementsNavMenuItem = this.page.locator('[class*="Navbar_link"][href="/products/"]');
+    specialEquipmentContainer = this.page.getByTestId('specialEquipment');
+    specialEquipmentsList = this.page.locator('div[class*="RentzilaProposes_categories_list"]').nth(1).locator('div[class*="RentzilaProposes_service"]');
+    specialEquipmentsUnitsList = this.page.locator('div[class*="RentzilaProposes_proposes_list"]').nth(1).locator('div[class*="RentzilaProposes_proposes_item"]');
+    footerContainer = this.page.locator('div[class*="Footer_footer__Dhw_9"]');
+    footerRentzilaLogo = this.page.locator('div[class*="Footer_container"] > div[data-testid="logo"]');
+    aboutUsTitle = this.page.getByTestId('content');
+    privacyPolicyLink = this.page.getByTestId('politika-konfidenciinosti');
+    cookiePolicyLink = this.page.getByTestId('pravila-vikoristannya-failiv-cookie');
+    termsConditionsLink = this.page.getByTestId('umovi-dostupu-ta-koristuvannya');
+    announcementsLink = this.page.locator('div[role="listitem"] > a[href="/products/"]');
+    tendersLink = this.page.locator('div[role="listitem"] > a[href="/tenders-map/"]');
+    jobRequestsLink = this.page.locator('div[role="listitem"] > a[href="/requests-map/"]');
+    contactsTitle = this.page.locator('div[class*="RentzilaContacts_title"]');
+    contactsEmail = this.page.locator('a[class*="RentzilaContacts_email"]');
+    copyrightLabel = this.page.getByTestId('copyright');
+    searchServicesSpecialEquipmentTitle = this.page.locator('h1[class*="HeroSection_title"]');
+    consultationForm = this.page.locator('div[class*="ConsultationForm_container"]');
+    submitConsultationBtn = this.page.locator('button[type="submit"]');
+    consultationFormErrorMessage = this.page.locator('p[class*="ConsultationForm_error_message"]');
+    consultationFormNameInput = this.page.locator('input[name="name"]');
+    consultationFormPhoneInput = this.page.locator('#mobile');
+    enterBtn = this.page.locator('[class*="NavbarAuthBlock_buttonEnter"]');
+    loginEmailOrPhoneInput = this.page.locator('#email');
+    loginPasswordInput = this.page.locator('#password');
+    loginErrorInputsMsg = this.page.locator('p[class*="CustomReactHookInput_error_message"]');
+    autorizationForm = this.page.locator('[data-testid="authorizationContainer"]');
+    submitLoginFormBtn = this.page.locator('[class*="LoginForm_form"] [class*="ItemButtons_darkBlueRoundBtn"]');
+    hidePasswordIcon = this.page.locator('div[data-testid="reactHookButton"]');
+    userIcon = this.page.locator('div[data-testid="avatarBlock"]');
+    profileDropDown = this.page.locator('[class*="ProfileDropdownMenu_container"]');
+    profileDropDownEmail = this.page.locator('div[data-testid="email"]');
+    profileLogoutBtn = this.page.locator('div[data-testid="logout"]');
+    myProfileMenuItem = this.page.locator('div[data-testid="profile"]');
+    invalidEmailOrPasswordError = this.page.locator('div[data-testid="errorMessage"]');
+    createUnitBtn = this.page.locator('a[class*="Navbar_addAnnouncement"]');
+    closePopUpBtn = this.page.locator('[data-testid="crossButton"]');
+    
 
     async scrollToServicesContainer() {
-        await this.locators.servicesContainer.scrollIntoViewIfNeeded();
+        await this.servicesContainer.scrollIntoViewIfNeeded();
     }
 
-    async scrollToSpicialEquipmentContainer() {
-        await this.locators.specialEquipmentContainer.scrollIntoViewIfNeeded();
+    async scrollToSpecialEquipmentContainer() {
+        await this.specialEquipmentContainer.scrollIntoViewIfNeeded();
     }
 
     async checkServices() {
-        await expect(this.locators.servicesContainer).toBeVisible();
-        await expect(this.locators.servicesList.first()).toBeVisible();
+        await expect(this.servicesContainer).toBeVisible();
+        await expect(this.servicesList.first()).toBeVisible();
         
-        const servicesUnitsCount = await this.locators.servicesUnitsList.count(); 
-        await expect(this.locators.servicesUnitsList.first()).toBeVisible();
+        const servicesUnitsCount = await this.servicesUnitsList.count(); 
+        await expect(this.servicesUnitsList.first()).toBeVisible();
         await expect(servicesUnitsCount).toBe(7);
     }
 
     async checkSpecialEquipments() {
-        await expect(this.locators.specialEquipmentContainer).toBeVisible();
-        await expect(this.locators.specialEquipmentsList.first()).toBeVisible();
+        await expect(this.specialEquipmentContainer).toBeVisible();
+        await expect(this.specialEquipmentsList.first()).toBeVisible();
         
-        const specialEquipmentsCount = await this.locators.specialEquipmentsUnitsList.count(); 
-        await expect(this.locators.specialEquipmentsUnitsList.first()).toBeVisible();
+        const specialEquipmentsCount = await this.specialEquipmentsUnitsList.count(); 
+        await expect(this.specialEquipmentsUnitsList.first()).toBeVisible();
         await expect(specialEquipmentsCount).toBe(7);
     }
 
     async clickFirstServicesUnit() {
-        await this.locators.servicesUnitsList.first().click();
+        await this.servicesUnitsList.first().click();
     }
 
     async clickFirstSpecialEquipmentUnit() {
-        await this.locators.specialEquipmentsUnitsList.first().click()
+        await this.specialEquipmentsUnitsList.first().click()
     }
 
     async getFirstServicesUnitName(): Promise<string> {
-        return await this.locators.servicesUnitsList.first().innerText();
+        return await this.servicesUnitsList.first().innerText();
     }
 
     async getFirstSpecialEquipmentsUnitName(): Promise<string> {
-        return await this.locators.specialEquipmentsUnitsList.first().innerText();
+        return await this.specialEquipmentsUnitsList.first().innerText();
     }
 
     async clickOnAnnouncementsNavMenuItem() {
-        await this.locators.announcementsNavMenuItem.click({force: true});
+        await this.announcementsNavMenuItem.click({force: true});
     }
 
     async scrollToFooter() {
-        await this.locators.footerContainer.scrollIntoViewIfNeeded();
+        await this.footerContainer.scrollIntoViewIfNeeded();
     }
     
-    async checkFooter() {
-        await expect(this.locators.footerContainer).toBeVisible();
+    async checkFooterContainerIsVisible() {
+        await expect(this.footerContainer).toBeVisible();
     }
 
     async checkFooterElementsAreDisplayed() {
-        await expect(this.locators.aboutUsTitle).toBeVisible();
-        await expect(this.locators.privacyPolicyLink).toBeVisible();
-        await expect(this.locators.cookiePolicyLink).toBeVisible();
-        await expect(this.locators.termsConditionsLink).toBeVisible();
-        await expect(this.locators.announcementsLink).toBeVisible();
-        await expect(this.locators.tendersLink).toBeVisible();
-        await expect(this.locators.jobRequestsLink).toBeVisible();
-        await expect(this.locators.contactsTitle).toBeVisible();
-        await expect(this.locators.contactsEmail).toBeVisible();
-        await expect(this.locators.footerRentzilaLogo).toBeVisible();
-        await expect(this.locators.copyrightLabel).toBeVisible();
+        await expect(this.aboutUsTitle).toBeVisible();
+        await expect(this.privacyPolicyLink).toBeVisible();
+        await expect(this.cookiePolicyLink).toBeVisible();
+        await expect(this.termsConditionsLink).toBeVisible();
+        await expect(this.announcementsLink).toBeVisible();
+        await expect(this.tendersLink).toBeVisible();
+        await expect(this.jobRequestsLink).toBeVisible();
+        await expect(this.contactsTitle).toBeVisible();
+        await expect(this.contactsEmail).toBeVisible();
+        await expect(this.footerRentzilaLogo).toBeVisible();
+        await expect(this.copyrightLabel).toBeVisible();
     }
 
     async clickOnPrivacyPolicyLink() {
-        await this.locators.privacyPolicyLink.click();
+        await this.privacyPolicyLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async clickOnCookiePolicyLink() {
-        await this.locators.cookiePolicyLink.click();
+        await this.cookiePolicyLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async clickOnTermsConditionsLink() {
-        await this.locators.termsConditionsLink.click();
+        await this.termsConditionsLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async clickOnAnnouncementsLink() {
-        await this.locators.announcementsLink.click();
+        await this.announcementsLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
-    async checkSearchServiceSpecialEquipmentTitle() {
-        await expect(await this.locators.searchServicesSpecialEquipmentTitle.innerText()).toContain('Сервіс пошуку');
+    async checkSearchServiceSpecialEquipmentTitle(expectedTitle: string) {
+        await expect(await this.searchServicesSpecialEquipmentTitle.innerText()).toContain(expectedTitle);
     }
 
     async clickOnTendersLink() {
-        await this.locators.tendersLink.click();
+        await this.tendersLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async clickOnContactsEmail() {
-        await this.locators.contactsEmail.click();
+        await this.contactsEmail.click();
     }
 
-    async checkContactsEmail() {
-        const emailAttr = await this.locators.contactsEmail.getAttribute('href');
-        await expect(emailAttr).toContain('mailto:')
+    async checkContactsEmail(expectedEmail: string) {
+        const emailAttr = await this.contactsEmail.getAttribute('href');
+        await expect(emailAttr).toContain(expectedEmail)
     }
 
     async scrollToConsultationForm() {
-        await this.locators.consultationForm.scrollIntoViewIfNeeded();
+        await this.consultationForm.scrollIntoViewIfNeeded();
     }
 
     async checkConsultationFormIsVisible() {
-        await expect(this.locators.consultationForm).toBeVisible();
+        await expect(this.consultationForm).toBeVisible();
     }
 
     async clickOnSubmitConsultationBtn() {
-        await this.locators.submitConsultationBtn.click();
+        await this.submitConsultationBtn.click();
         await this.page.waitForTimeout(3000);
     }
 
-    async checkInputError(inputName: string) {
+    async checkInputErrorIsDisplayed(inputName: string, errorText: string) {
         const inputValues = {
-            name: await this.locators.consultationFormNameInput.evaluate((el) => (el as HTMLInputElement).value),
-            phone: await this.locators.consultationFormPhoneInput.evaluate((el) => (el as HTMLInputElement).value),
+            name: await this.consultationFormNameInput.evaluate((el) => (el as HTMLInputElement).value),
+            phone: await this.consultationFormPhoneInput.evaluate((el) => (el as HTMLInputElement).value),
             email: '',
             password: ''
         };
 
-        if (await this.locators.loginEmailOrPhoneInput.isVisible()) {
-            inputValues.email = await this.locators.loginEmailOrPhoneInput.evaluate((el) => (el as HTMLInputElement).value);
+        if (await this.loginEmailOrPhoneInput.isVisible()) {
+            inputValues.email = await this.loginEmailOrPhoneInput.evaluate((el) => (el as HTMLInputElement).value);
         }
 
-        if (await this.locators.loginPasswordInput.isVisible()) {
-            inputValues.password = await this.locators.loginPasswordInput.evaluate((el) => (el as HTMLInputElement).value);
+        if (await this.loginPasswordInput.isVisible()) {
+            inputValues.password = await this.loginPasswordInput.evaluate((el) => (el as HTMLInputElement).value);
         }
     
         const showError = async (inputLocator: any, errorLocator: any, errorIndex: number) => {
@@ -195,25 +195,25 @@ class HomePage extends Page {
             await expect(borderColor).toBe('rgb(247, 56, 89)');
             await expect(errorLocator.nth(errorIndex)).toBeVisible();
             const errorMessageText = await errorLocator.nth(errorIndex).innerText();
-            await expect(errorMessageText).toBe('Поле не може бути порожнім');
+            await expect(errorMessageText).toBe(errorText);
             return true;
         };
     
         if (inputName === 'name' && inputValues.name === '') {
-            return await showError(this.locators.consultationFormNameInput, this.locators.consultationFormErrorMessage, 0);
+            return await showError(this.consultationFormNameInput, this.consultationFormErrorMessage, 0);
         }
     
         if (inputName === 'phone' && inputValues.phone === '') {
             const errorIndex = inputValues.name === '' ? 1 : 0;
-            return await showError(this.locators.consultationFormPhoneInput, this.locators.consultationFormErrorMessage, errorIndex);
+            return await showError(this.consultationFormPhoneInput, this.consultationFormErrorMessage, errorIndex);
         }
 
         if (inputName === 'email' && inputValues.email === '') {
-            return await showError(this.locators.loginEmailOrPhoneInput, this.locators.loginErrorInputsMsg, 0);
+            return await showError(this.loginEmailOrPhoneInput, this.loginErrorInputsMsg, 0);
         }
         if (inputName === 'password' && inputValues.password === '') {
             const errorIndex = inputValues.email === '' ? 1 : 0;
-            return await showError(this.locators.loginPasswordInput, this.locators.loginErrorInputsMsg, errorIndex);
+            return await showError(this.loginPasswordInput, this.loginErrorInputsMsg, errorIndex);
         }
     
         return false;
@@ -223,16 +223,16 @@ class HomePage extends Page {
         if (inputValue !== '') {
             switch (inputName) {
                 case 'name':
-                    await this.locators.consultationFormNameInput.fill(inputValue);
+                    await this.consultationFormNameInput.fill(inputValue);
                     break;
                 case 'phone':
-                    await this.locators.consultationFormPhoneInput.fill(inputValue);
+                    await this.consultationFormPhoneInput.fill(inputValue);
                     break;
                 case 'email':
-                    await this.locators.loginEmailOrPhoneInput.fill(inputValue);
+                    await this.loginEmailOrPhoneInput.fill(inputValue);
                     break;
                 case 'password':
-                    await this.locators.loginPasswordInput.fill(inputValue);
+                    await this.loginPasswordInput.fill(inputValue);
                     break;
                 default:
                     throw new Error(`Unknown input name: ${inputName}`);
@@ -241,43 +241,43 @@ class HomePage extends Page {
     }
 
     async clickOnPhoneInput() {
-        await this.locators.consultationFormPhoneInput.click();
+        await this.consultationFormPhoneInput.click();
     }
 
-    async checkPhoneInputAfterClick() {
-        const inputPhoneValue = await this.locators.consultationFormPhoneInput.evaluate((el) => {
+    async checkPhoneInputAfterClick(expectedValue: string) {
+        const inputPhoneValue = await this.consultationFormPhoneInput.evaluate((el) => {
             return (el as HTMLInputElement).value;
         });
-        await expect(inputPhoneValue).toBe('+380')
+        await expect(inputPhoneValue).toBe(expectedValue)
     }
 
     async clearInput(inputName: string) {
         switch(inputName) {
             case 'name':
-                await this.locators.consultationFormNameInput.clear();
+                await this.consultationFormNameInput.clear();
                 break;
             case 'phone':
-                await this.locators.consultationFormPhoneInput.clear();
+                await this.consultationFormPhoneInput.clear();
                 break;
             case 'email':
-                await this.locators.loginEmailOrPhoneInput.clear();
+                await this.loginEmailOrPhoneInput.clear();
                 break;
             case 'password':
-                await this.locators.loginPasswordInput.clear();
+                await this.loginPasswordInput.clear();
                 break;
             default:
                 throw new Error(`Unknown input name: ${inputName}`);
         }
     }
 
-    async checkIncorrectPhoneErrorMsg() {
-        const phoneBorderColor = await this.locators.consultationFormPhoneInput.evaluate((el) => {
+    async checkIncorrectPhoneErrorMsg(expectedText: string) {
+        const phoneBorderColor = await this.consultationFormPhoneInput.evaluate((el) => {
             return window.getComputedStyle(el).borderColor;
         });
         await expect(phoneBorderColor).toBe('rgb(247, 56, 89)');
-        await expect(this.locators.consultationFormErrorMessage.first()).toBeVisible();
-        const consultationFormPhoneErrorMessageText = await this.locators.consultationFormErrorMessage.first().innerText();
-        await expect(consultationFormPhoneErrorMessageText).toBe('Телефон не пройшов валідацію');
+        await expect(this.consultationFormErrorMessage.first()).toBeVisible();
+        const consultationFormPhoneErrorMessageText = await this.consultationFormErrorMessage.first().innerText();
+        await expect(consultationFormPhoneErrorMessageText).toBe(expectedText);
     }
 
     async checkSuccessSubmitConsultationMsg() {
@@ -294,97 +294,113 @@ class HomePage extends Page {
     }
 
     async checkUserDetailsContainUser(userName: string, userPhone: string) {
+        
         const userList = await this.getUsersList();
 
-        const containsUser = userList.some((user: any) => 
-            user.name === userName && user.phone === userPhone
-        );
+        const containsUser = userList.some((user: any) => {
+            return user.name === userName && user.phone === userPhone
+    });
 
         await expect(containsUser).toBe(true);
     }
 
     async clickOnEnterBtn() {
-        await this.locators.enterBtn.click();
+        await this.enterBtn.click();
     }
 
     async checkAutorizationFormIsDisplayed() {
-        await expect(this.locators.autorizationForm).toBeVisible();
+        await expect(this.autorizationForm).toBeVisible();
     }
 
     async clickOnSubmitLoginFormBtn() {
-        await this.locators.submitLoginFormBtn.click();
-        await this.page.waitForLoadState('domcontentloaded');
+        await this.submitLoginFormBtn.click();
+        await this.page.waitForLoadState('networkidle');
     }
 
     async checkInputValue(inputName: string, inputValue: string) {
         switch(inputName) {
             case 'email':
-                await expect(await this.locators.loginEmailOrPhoneInput.inputValue()).toBe(inputValue);
+                await expect(await this.loginEmailOrPhoneInput.inputValue()).toBe(inputValue);
                 break
 
             case 'password':
-                await expect(await this.locators.loginPasswordInput.inputValue()).toBe(inputValue);
+                await expect(await this.loginPasswordInput.inputValue()).toBe(inputValue);
                 break
         }
     }
 
     async clickOnHidePasswordIcon() {
-        await this.locators.hidePasswordIcon.click();
+        await this.hidePasswordIcon.click();
     }
 
-    async checkPasswordInputType(typeName: string) {
-        const passwordInputType = await this.locators.loginPasswordInput.getAttribute('type')
+    async checkPasswordInputType(typeName: string, typeValue: string) {
+        const passwordInputType = await this.loginPasswordInput.getAttribute('type')
         switch(typeName){
             case 'hidden':
-                await expect(passwordInputType).toBe('password');
+                await expect(passwordInputType).toBe(typeValue);
                 break;
             
             case 'shown':
-                await expect(passwordInputType).toBe('text');
+                await expect(passwordInputType).toBe(typeValue);
                 break;
         }
     }
 
     async checkUserIconIsDisplayed(shouldBeVisible: boolean) {
         if(shouldBeVisible) {
-            await expect(this.locators.userIcon).toBeVisible();
-        }else {
-            await expect(this.locators.userIcon).not.toBeVisible();
+            await expect(this.userIcon).toBeVisible();
         }
     }
 
     async clickOnUserIcon() {
-        await this.locators.userIcon.click();
+        await this.userIcon.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async checkProfileDropDownIsDisplayed() {
-        await expect(this.locators.profileDropDown).toBeVisible();
+        await expect(this.profileDropDown).toBeVisible();
     }
 
     async checkProfileDropDownEmail(expectedEmail: string) {
-        const currentEmail = await this.locators.profileDropDownEmail.innerText();
+        const currentEmail = await this.profileDropDownEmail.innerText();
         await expect(currentEmail).toBe(expectedEmail);
     }
 
     async logout() {
-        await this.locators.profileLogoutBtn.click();
+        await this.profileLogoutBtn.click();
     }
 
     async clickOnMyProfileMenuItem() {
-        await this.locators.myProfileMenuItem.click();
+        await this.myProfileMenuItem.click();
         await this.page.waitForTimeout(2000);
     }
     
-    async checkIncorrectInputFormat() {
+    async checkIncorrectEmailOrPhoneInputFormat(expectedText: string) {
+        await this.loginErrorInputsMsg.isVisible();
+        const errorText = await this.loginErrorInputsMsg.innerText();
+        await expect(errorText).toBe(expectedText);
+    }
+
+    async checkIncorrectPasswordInputFormat(incorrectFormatError: string, ivalidCredentialsError: string) {
         await this.checkAutorizationFormIsDisplayed();
         await this.checkUserIconIsDisplayed(false);
-        if (await this.locators.loginErrorInputsMsg.isVisible()) {
-            await expect(this.locators.loginErrorInputsMsg).toBeVisible();
-        } 
-        else if (await this.locators.loginFormErrorMsg.isVisible()) {
-            await expect(this.locators.loginFormErrorMsg).toBeVisible();
+
+        if(await this.invalidEmailOrPasswordError.isVisible()) {
+            const errorText = await this.invalidEmailOrPasswordError.innerText()
+            await expect(errorText).toBe(ivalidCredentialsError);
         }
+        else if(await this.loginErrorInputsMsg.isVisible()) {
+            const errorText = await this.loginErrorInputsMsg.innerText()
+            await expect(errorText).toContain(incorrectFormatError);
+        }       
+    }
+
+    async clickOnCreateUnitBtn() {
+        await this.createUnitBtn.click();
+    }
+
+    async clickOnClosePopUpBtn() {
+        await this.closePopUpBtn.click();
     }
 }
 

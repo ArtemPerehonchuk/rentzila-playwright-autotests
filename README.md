@@ -14,7 +14,7 @@ This project contains end-to-end tests for the Rentzila application using Playwr
 1. Clone the branch with all tests from the repository:
 
    ```bash
-   git clone -b tc-C212-C213-C214-C226 https://github.com/ArtemPerehonchuk/rentzila-playwright-tests.git
+   git clone -b general-info-tab-tests https://github.com/ArtemPerehonchuk/rentzila-playwright-tests.git
 
    ```
 2. Navigate to the project directory:
@@ -33,11 +33,36 @@ This project contains end-to-end tests for the Rentzila application using Playwr
 To run all tests using the default browser configuration:
 
     ```bash
-    npm test
+    npm run test
     ```
 2. Run Tests in Chrome:
-To run tests specifically using Chrome:
 
     ```bash
-    npm test:chrome
+    npm run test:chrome
+    ```
+
+3. To run specific test file in Chrome:
+
+- Run tests for services:
+
+    ```bash
+    npm run test:services:chrome
+    ```
+
+- Run tests for footer elements:
+
+    ```bash
+    npm run test:footer-elements:chrome
+    ```
+
+- Run tests for login:
+
+    ```bash
+    npm run test:login:chrome
+    ```
+
+- Run tests for main info tab on create unit page:
+
+    ```bash
+    npm run test:unit-page-main-info-tab:chrome
     ```

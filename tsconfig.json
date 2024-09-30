@@ -4,6 +4,7 @@
     "module": "esnext", 
     "target": "es6",
     "strict": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
