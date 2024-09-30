@@ -1,0 +1,28 @@
+{
+  "name": "rentzila-playwright-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:chrome": "playwright test --config=playwright.config.chrome.ts",
+    "test:services:chrome": "playwright test tests/test.services.spec.ts --config=playwright.config.chrome.ts",
+    "test:login:chrome": "playwright test tests/test.login.spec.ts --config=playwright.config.chrome.ts",
+    "test:footer-elements:chrome": "playwright test tests/test.footer.elements.spec.ts --config=playwright.config.chrome.ts",
+    "test:unit-page-main-info-tab:chrome": "playwright test tests/test.unit.page.spec.ts --config=playwright.config.chrome.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^9.0.1",
+    "@playwright/test": "^1.47.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/node": "^22.5.4",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
