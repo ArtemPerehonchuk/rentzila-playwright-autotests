@@ -42,6 +42,25 @@
         "incorrect phone with spaces": "+38063 111 111",
         "incorrect phone same digits and spaces": " +1 1111111111111",
         "test": "Test"
-    }
+    },
+    "photo file names": [
+        "pexels-albinberlin-919073",
+        "pexels-alex-amorales-321095-909907",
+        "pexels-alexgtacar-745150-1592384",
+        "pexels-cesarperez209-733745",
+        "pexels-christian-9-454702-1164778",
+        "pexels-mikebirdy-112460",
+        "pexels-mikebirdy-116675",
+        "pexels-mikebirdy-120049",
+        "pexels-mikebirdy-170811",
+        "pexels-mikebirdy-244206",
+        "pexels-mikebirdy-810357",
+        "pexels-nordic-overdrive-202768-627678",
+        "pexels-pixabay-35967",
+        "pexels-pixabay-210019",
+        "pexels-sarmad-mughal-94606-305070",
+        "pexels-trace-707046"
+    ]
+    
 
 }

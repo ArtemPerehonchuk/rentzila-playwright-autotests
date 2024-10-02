@@ -10,7 +10,8 @@
     "test:services:chrome": "playwright test tests/test.services.spec.ts --config=playwright.config.chrome.ts",
     "test:login:chrome": "playwright test tests/test.login.spec.ts --config=playwright.config.chrome.ts",
     "test:footer-elements:chrome": "playwright test tests/test.footer.elements.spec.ts --config=playwright.config.chrome.ts",
-    "test:unit-page-main-info-tab:chrome": "playwright test tests/test.unit.page.spec.ts --config=playwright.config.chrome.ts"
+    "test:unit-page-main-info-tab:chrome": "playwright test tests/test.unit.page.spec.ts --config=playwright.config.chrome.ts",
+    "test:photo-tab:chrome": "playwright test tests/test.photo.tab.spec.ts --config=playwright.config.chrome.ts"
   },
   "keywords": [],
   "author": "",

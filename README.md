@@ -14,7 +14,7 @@ This project contains end-to-end tests for the Rentzila application using Playwr
 1. Clone the branch with all tests from the repository:
 
    ```bash
-   git clone -b general-info-tab-tests https://github.com/ArtemPerehonchuk/rentzila-playwright-tests.git
+   git clone -b photo-tab-tests https://github.com/ArtemPerehonchuk/rentzila-playwright-tests.git
 
    ```
 2. Navigate to the project directory:
@@ -65,4 +65,10 @@ To run all tests using the default browser configuration:
 
     ```bash
     npm run test:unit-page-main-info-tab:chrome
+    ```
+
+- Run tests for photo tab on create unit page:
+
+    ```bash
+    npm run test:photo-tab:chrome
     ```

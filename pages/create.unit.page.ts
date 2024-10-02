@@ -548,7 +548,15 @@ class CreateUnitPage extends Page {
         await this.clickOnMapPopUpSubmitBtn();
     }
 
-
+    async checkFieldsVisibility() {
+        await expect(this.categoriesDropDown).toBeVisible();
+        await expect(this.announcementNameInput).toBeVisible();
+        await expect(this.vehicleManufacturerTitle).toBeVisible();
+        await expect(this.modelNameInput).toBeVisible();
+        await expect(this.technicalInfoInput).toBeVisible();
+        await expect(this.descriptionInfoInput).toBeVisible();
+        await expect(this.addressSelectionInput).toBeVisible();
+    }
 }
 
 export default CreateUnitPage;
