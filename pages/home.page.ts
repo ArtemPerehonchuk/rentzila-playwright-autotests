@@ -306,7 +306,7 @@ class HomePage extends Page {
 
     async clickOnEnterBtn() {
         await this.enterBtn.click();
-        await this.page.waitForTimeout(10000);
+        await this.page.waitForLoadState('networkidle');
     }
 
     async checkAutorizationFormIsDisplayed() {
