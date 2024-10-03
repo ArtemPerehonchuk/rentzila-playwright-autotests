@@ -306,6 +306,7 @@ class HomePage extends Page {
 
     async clickOnEnterBtn() {
         await this.enterBtn.click();
+        await this.page.waitForLoadState('domcontentloaded');
     }
 
     async checkAutorizationFormIsDisplayed() {
