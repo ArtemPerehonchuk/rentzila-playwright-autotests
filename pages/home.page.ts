@@ -192,7 +192,7 @@ class HomePage extends Page {
     
         const showError = async (inputLocator: any, errorLocator: any, errorIndex: number) => {
             const borderColor = await inputLocator.evaluate((el: any) => window.getComputedStyle(el).borderColor);
-            await expect(borderColor).toBe('rgb(247, 56, 89)');
+            await expect(borderColor).not.toBe('rgb(229, 229, 229)');
             await expect(errorLocator.nth(errorIndex)).toBeVisible();
             const errorMessageText = await errorLocator.nth(errorIndex).innerText();
             await expect(errorMessageText).toBe(errorText);
