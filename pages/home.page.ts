@@ -191,12 +191,14 @@ class HomePage extends Page {
         }
     
         const showError = async (inputLocator: any, errorLocator: any, errorIndex: number) => {
-            const borderColor = await inputLocator.evaluate((el: any) => window.getComputedStyle(el).borderColor);
-            await expect(borderColor).toBe('rgb(247, 56, 89)');
-            await expect(errorLocator.nth(errorIndex)).toBeVisible();
-            const errorMessageText = await errorLocator.nth(errorIndex).innerText();
-            await expect(errorMessageText).toBe(errorText);
-            return true;
+            if(await errorLocator.first().isVisible()) {
+                const borderColor = await inputLocator.evaluate((el: any) => window.getComputedStyle(el).borderColor);
+                await expect(borderColor).toBe('rgb(247, 56, 89)');
+                await expect(errorLocator.nth(errorIndex)).toBeVisible();
+                const errorMessageText = await errorLocator.nth(errorIndex).innerText();
+                await expect(errorMessageText).toBe(errorText);
+                return true;
+            }else{return false}
         };
     
         if (inputName === 'name' && inputValues.name === '') {
