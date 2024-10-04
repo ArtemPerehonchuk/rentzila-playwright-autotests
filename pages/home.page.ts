@@ -231,9 +231,11 @@ class HomePage extends Page {
                     await this.consultationFormPhoneInput.fill(inputValue);
                     break;
                 case 'email':
+                    await this.loginEmailOrPhoneInput.waitFor({ state: 'visible' });
                     await this.loginEmailOrPhoneInput.fill(inputValue, {force: true});
                     break;
                 case 'password':
+                    await this.loginPasswordInput.waitFor({ state: 'visible' });
                     await this.loginPasswordInput.fill(inputValue, {force: true});
                     break;
                 default:
