@@ -229,10 +229,10 @@ class HomePage extends Page {
                     await this.consultationFormPhoneInput.fill(inputValue);
                     break;
                 case 'email':
-                    await this.loginEmailOrPhoneInput.fill(inputValue);
+                    await this.loginEmailOrPhoneInput.fill(inputValue, {force: true});
                     break;
                 case 'password':
-                    await this.loginPasswordInput.fill(inputValue);
+                    await this.loginPasswordInput.fill(inputValue, {force: true});
                     break;
                 default:
                     throw new Error(`Unknown input name: ${inputName}`);
