@@ -31,8 +31,8 @@ jobs:
           echo "VALID_PASSWORD=${{ secrets.VALID_PASSWORD}}" >> .env
           echo "VALID_PHONE=${{ secrets.VALID_PHONE}}" >> .env
           echo "CORRECT_PHONE_NUMBERS_FULL=${{ secrets.CORRECT_PHONE_NUMBERS_FULL }}" >> .env
-          echo "CORRECT_PHONE_NUMBERS_WITHOUT_PLUSL=${{ secrets.CORRECT_PHONE_NUMBERS_WITHOUT_PLUS }}" >> .env
-          echo "CORRECT_PHONE_NUMBERS_WITHOUT_PLUS38L=${{ secrets.CORRECT_PHONE_NUMBERS_WITHOUT_PLUS38 }}" >> .env
+          echo "CORRECT_PHONE_NUMBERS_WITHOUT_PLUS=${{ secrets.CORRECT_PHONE_NUMBERS_WITHOUT_PLUS }}" >> .env
+          echo "CORRECT_PHONE_NUMBERS_WITHOUT_PLUS38=${{ secrets.CORRECT_PHONE_NUMBERS_WITHOUT_PLUS38 }}" >> .env
           echo "HOMEPAGE_URL=${{ secrets.HOMEPAGE_URL }}" >> .env
 
       - name: Run tests
