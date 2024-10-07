@@ -11,10 +11,10 @@ This project contains end-to-end tests for the Rentzila web site using Playwrigh
 
 ## Installation
 
-1. Clone the branch with all tests from the repository:
+1. Clone the repository:
 
    ```bash
-   git clone -b test-cases-for-login https://github.com/ArtemPerehonchuk/rentzila-playwright-tests.git
+   git clone https://github.com/ArtemPerehonchuk/rentzila-playwright-tests.git
 
    ```
 2. Navigate to the project directory:
