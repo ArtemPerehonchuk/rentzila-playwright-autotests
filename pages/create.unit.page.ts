@@ -162,7 +162,7 @@ class CreateUnitPage extends Page {
     }
 
     async clickOnNextBtn() {
-        await this.nextBtn.click();
+        await this.nextBtn.click({force: true});
         await this.page.waitForLoadState('networkidle');
     }
 
