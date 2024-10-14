@@ -25,7 +25,7 @@ class PhotoTab extends Page {
     unitImages = this.page.locator('[data-testid="unitImage"]');
 
 
-    async uploadFoto() {
+    async uploadPhoto() {
         await this.imageBlocks.nth(0).focus();
         await this.uploadFileInput.setInputFiles(path.resolve('data/photo/pexels-mikebirdy-170811.jpg'));
     }
@@ -160,7 +160,6 @@ class PhotoTab extends Page {
         const imagesCount = imageBlockItems.length;
         const maxIndex = imagesCount - 1;
         const firstImageAttrBefore = await this.unitImages.first().getAttribute('src');
-
 
         for(let i = maxIndex; i > 0; i--) {
             let imgSrcAttr = await this.unitImages.nth(i).getAttribute('src');

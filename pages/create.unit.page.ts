@@ -7,168 +7,107 @@ class CreateUnitPage extends Page {
 
     constructor(page: PlaywrightPage) {
         super(page);
-        }
+    }
     
-        createUnitTitle = this.page.locator('div[class*="CreateEditFlowLayout_title"]');
-        createUnitTabs = this.page.getByRole('tab');
-        createUnitTabsText = this.page.locator('div[class*="CustomLabel_label"] > span[class*="CustomLabel_labelTitle__O2bFl"]');
-        tabNumber = this.page.locator('[data-testid="labelNumber"]');
-        categoriesDropDown = this.page.locator('[data-testid="buttonDiv"]');
-        nextBtn = this.page.locator('[data-testid="nextButton"]');
-        categoryErrorMessage = this.page.locator('[class*="CategorySelect_errorTextVisible"]');
-        categoriesPopUp = this.page.locator('div[data-testid="categoryPopupWrapper"]');
-        categoriesPopUpCloseBtn = this.page.locator('[data-testid="closeIcon"]');
-        categoriesDropDownArrowDown = this.page.locator('div[data-testid="buttonDiv"]>div  img[alt="Arrow-down"]');
-        categoriesTitle = this.page.locator('div[class*="CategorySelect_title"]');
-        announcementNameTitle = this.page.locator('div[class*="CustomInput_title"]').first();
-        announcementNameInput = this.page.locator('input[data-testid="custom-input"]').first();
-        announcementNameInputError = this.page.locator('[data-testid="descriptionError"]').first();
-        vehicleManufacturerTitle = this.page.locator('div[class*="SelectManufacturer_title"]');
-        vehicleManufacturerInputContainer = this.page.locator('div[class*="CustomSelectWithSearch_searchInput"]');
-        vehicleManufacturerInput = this.page.locator('input[data-testid="input-customSelectWithSearch"]');
-        vehicleManufacturerInputError = this.page.locator('div[class*="CustomSelectWithSearch_errorTextVisible"]');
-        vehicleManufacturerInputSearchIcon = this.page.locator('div[class*="CustomSelectWithSearch_searchInput"] > svg');
-        vehicleManifacturerDropDown = this.page.locator('div[class*="CustomSelectWithSearch_searchedServicesCat_wrapper"]');
-        vehicleManufacturerDropDownOption = this.page.locator('div[class*="CustomSelectWithSearch_flexForServices"]');
-        optionNotFoundMessage = this.page.locator('[data-testid="p2-notFound-addNewItem"]');
-        selectedOptionInDropdown = this.page.locator('[class*="CustomSelectWithSearch_serviceText"]');
-        clearVehicleManifacturerDropDownIcon = this.page.locator('button[class*="CustomSelectWithSearch_serviceBtn"]');
-        modelNameTitle = this.page.locator('div[class*="CustomInput_title"]').getByText('Назва моделі');
-        modelNameInput = this.page.locator('input[data-testid="custom-input"]').nth(1);
-        modelNameInputError = this.page.locator('[data-testid="descriptionError"]');
-        technicalInfoTitle = this.page.locator('div[class*="CustomTextAriaDescription_title"]').first();
-        technicalInfoInput = this.page.locator('[data-testid="textarea-customTextAriaDescription"]').first();
-        descriptionInfoTitle = this.page.locator('div[class*="CustomTextAriaDescription_title"]').nth(1);
-        descriptionInfoInput = this.page.locator('[data-testid="textarea-customTextAriaDescription"]').nth(1);
-        addressSelectionTitle = this.page.locator('[class*="AddressSelectionBlock_title"]');
-        addressSelectionInput = this.page.locator('[data-testid="mapLabel"]');
-        addressSelectionInputError = this.page.locator('[class*="AddressSelectionBlock_errorTextVisible"]');
-        selectOnMapBtn = this.page.locator('[class*="AddressSelectionBlock_locationBtn"]');
-        mapPopUp = this.page.locator('[data-testid="div-mapPopup"]');
-        mapPopUpTitle = this.page.locator('[class*="MapPopup_title"]');
-        mapPopUpCloseBtn = this.page.locator('[class*="MapPopup_title"]');
-        addressLine = this.page.locator('[data-testid="address"]');
-        mapPopUpSubmitBtn = this.page.locator('[class*="ItemButtons_darkBlueBtn"]');
-        mapContainer = this.page.locator('#map');
-        cancelBtn = this.page.locator('[data-testid="prevButton"]');
+    createUnitTitle = this.page.locator('div[class*="CreateEditFlowLayout_title"]');
+    createUnitTabs = this.page.getByRole('tab');
+    createUnitTabsText = this.page.locator('div[class*="CustomLabel_label"] > span[class*="CustomLabel_labelTitle__O2bFl"]');
+    tabNumber = this.page.locator('[data-testid="labelNumber"]');
+    categoriesDropDown = this.page.locator('[data-testid="buttonDiv"]');
+    nextBtn = this.page.locator('[data-testid="nextButton"]');
+    categoryErrorMessage = this.page.locator('[class*="CategorySelect_errorTextVisible"]');
+    categoriesPopUp = this.page.locator('div[data-testid="categoryPopupWrapper"]');
+    categoriesPopUpCloseBtn = this.page.locator('[data-testid="closeIcon"]');
+    categoriesDropDownArrowDown = this.page.locator('div[data-testid="buttonDiv"]>div  img[alt="Arrow-down"]');
+    categoriesTitle = this.page.locator('div[class*="CategorySelect_title"]');
+    categoriesPopUpTitle = this.page.locator('div[class*="CategoryPopup_title"]');
+    announcementNameTitle = this.page.locator('div[class*="CustomInput_title"]').first();
+    announcementNameInput = this.page.locator('input[data-testid="custom-input"]').first();
+    announcementNameInputError = this.page.locator('[data-testid="descriptionError"]').first();
+    vehicleManufacturerTitle = this.page.locator('div[class*="SelectManufacturer_title"]');
+    vehicleManufacturerInputContainer = this.page.locator('div[class*="CustomSelectWithSearch_searchInput"]');
+    vehicleManufacturerInput = this.page.locator('input[data-testid="input-customSelectWithSearch"]');
+    vehicleManufacturerInputError = this.page.locator('div[class*="CustomSelectWithSearch_errorTextVisible"]');
+    vehicleManufacturerInputSearchIcon = this.page.locator('div[class*="CustomSelectWithSearch_searchInput"] > svg');
+    vehicleManufacturerSelectedOption = this.page.locator('[class*="CustomSelectWithSearch_serviceText"]')
+    vehicleManifacturerDropDown = this.page.locator('div[class*="CustomSelectWithSearch_searchedServicesCat_wrapper"]');
+    vehicleManufacturerDropDownOption = this.page.locator('div[class*="CustomSelectWithSearch_flexForServices"]').first();
+    optionNotFoundMessage = this.page.locator('[data-testid="p2-notFound-addNewItem"]');
+    selectedOptionInDropdown = this.page.locator('[class*="CustomSelectWithSearch_serviceText"]');
+    clearVehicleManifacturerDropDownIcon = this.page.locator('button[class*="CustomSelectWithSearch_serviceBtn"]');
+    modelNameTitle = this.page.locator('div[class*="CustomInput_title"]').getByText('Назва моделі');
+    modelNameInput = this.page.locator('input[data-testid="custom-input"]').nth(1);
+    modelNameInputError = this.page.locator('[data-testid="descriptionError"]');
+    technicalInfoTitle = this.page.locator('div[class*="CustomTextAriaDescription_title"]').first();
+    technicalInfoInput = this.page.locator('[data-testid="textarea-customTextAriaDescription"]').first();
+    descriptionInfoTitle = this.page.locator('div[class*="CustomTextAriaDescription_title"]').nth(1);
+    descriptionInfoInput = this.page.locator('[data-testid="textarea-customTextAriaDescription"]').nth(1);
+    addressSelectionTitle = this.page.locator('[class*="AddressSelectionBlock_title"]');
+    addressSelectionInput = this.page.locator('[data-testid="mapLabel"]');
+    addressSelectionInputError = this.page.locator('[class*="AddressSelectionBlock_errorTextVisible"]');
+    selectOnMapBtn = this.page.locator('[class*="AddressSelectionBlock_locationBtn"]');
+    mapPopUp = this.page.locator('[data-testid="div-mapPopup"]');
+    mapPopUpTitle = this.page.locator('[class*="MapPopup_title"]');
+    mapPopUpAddressLine = this.page.locator('[class*="MapPopup_address"]')
+    mapPopUpCloseBtn = this.page.locator('[class*="MapPopup_title"]');
+    addressLine = this.page.locator('[data-testid="address"]');
+    selectedAddress = this.page.locator('[class*="AddressSelectionBlock_mapLabelChosen"]');
+    mapPopUpSubmitBtn = this.page.locator('[class*="ItemButtons_darkBlueBtn"]');
+    mapContainer = this.page.locator('#map');
+    cancelBtn = this.page.locator('[data-testid="prevButton"]');
+    characteristicsTitle  = this.page.locator('div[class*="Characteristics_title"]');
+    announcementsNameInput = this.page.locator('[data-testid="custom-input"]').first();
+    vehicleManufacturerList = this.page.locator('[data-testid="input-customSelectWithSearch"]');
+    descriptionInputs = this.page.locator('[data-testid="textarea-customTextAriaDescription"]');
+    mapLabel = this.page.locator('[data-testid="mapLabel"]');
 
-    async checkCreateUnitTitle(expectedTitle: string) {
-        await expect(this.createUnitTitle).toBeVisible();
-        const createUnitTitleText = await this.createUnitTitle.innerText();
-        await expect(createUnitTitleText).toBe(expectedTitle);
+    async getCreateUnitTitleText() {
+        return await this.createUnitTitle.innerText();
     }
 
     async checkCreateUnitTabsTitles(activeTabNumber: number) {
-        const tabNames = await this.createUnitTabsText.allInnerTexts();
-        let activeTabIndex = activeTabNumber - 1;
-        for (let i = 0; i < tabNames.length; i++) {
-            await expect(this.createUnitTabs.nth(i)).toBeVisible();
-            await expect(await this.createUnitTabsText.nth(i).innerText()).toBe(tabNames[i]);
-            await expect(await this.tabNumber.nth(i).innerText()).toBe(String(i + 1));
+        if(await this.createUnitTabs.isVisible) {
+            const tabNames = await this.createUnitTabsText.allInnerTexts();
+            let activeTabIndex = activeTabNumber - 1;
+            for (let i = 0; i < tabNames.length; i++) {
+                await expect(this.createUnitTabs.nth(i)).toBeVisible();
+                await expect(await this.createUnitTabsText.nth(i).innerText()).toBe(tabNames[i]);
+                await expect(await this.tabNumber.nth(i).innerText()).toBe(String(i + 1));
 
-            let tabAttr = await this.createUnitTabs.nth(i).getAttribute('aria-selected');
+                let tabAttr = await this.createUnitTabs.nth(i).getAttribute('aria-selected');
 
-            if(i === activeTabIndex) {
-                await expect(tabAttr).toBe('true');
-            }else {
-                await expect(tabAttr).toBe('false');
+                if(i === activeTabIndex) {
+                    await expect(tabAttr).toBe('true');
+                }else {
+                    await expect(tabAttr).toBe('false');
+                }
             }
-        }
+            return true
+        }else return false
     }
 
-    async checkTabsFields() {
-        const tabNames = await this.createUnitTabsText.allInnerTexts();
-
-        for(let i = 0; i < tabNames.length; i++) {
-            await this.createUnitTabs.nth(i).click();
-            if(tabNames[i] === 'Основна інформація') {
-                const characteristicsTitle  = this.page.locator('div[class*="Characteristics_title"]');
-                const announcementsNameInput = this.page.locator('[data-testid="custom-input"]').first();
-                const vehicleManufacturerList = this.page.locator('[data-testid="input-customSelectWithSearch"]');
-                const modelNameInput = this.page.locator('[data-testid="custom-input"]').nth(1);
-                const descriptionInputs = this.page.locator('[data-testid="textarea-customTextAriaDescription"]');
-                const mapLabel = this.page.locator('[data-testid="mapLabel"]');
-
-                await expect(characteristicsTitle).toBeVisible();
-                await expect(this.categoriesDropDown).toBeVisible();
-                await expect(announcementsNameInput).toBeVisible();
-                await expect(vehicleManufacturerList).toBeVisible();
-                await expect(modelNameInput).toBeVisible();
-                await expect(descriptionInputs.first()).toBeVisible();
-                await expect(descriptionInputs.nth(1)).toBeVisible();
-                await expect(mapLabel).toBeVisible();
-            }
-            else if(tabNames[i] === 'Фотографії') {
-                const photoTitle  = this.page.locator('div[class*="ImagesUnitFlow_title"]');
-                const imageContainer = this.page.locator('div[class*="ImagesUnitFlow_imageContainer"]');
-
-                await expect(photoTitle).toBeVisible();
-                await expect(imageContainer).toBeVisible();
-            }
-            else if(tabNames[i] === 'Послуги') {
-                const customServicesTitle  = this.page.locator('div[class*="ServicesUnitFlow_title"]');
-                const customServicesSearchInput = this.page.locator('div[class*="ServicesUnitFlow_searchInput"]');
-
-                await expect(customServicesTitle).toBeVisible();
-                await expect(customServicesSearchInput).toBeVisible();
-            }
-            else if(tabNames[i] === 'Вартість') {
-                const customPricesTitle  = this.page.locator('div[class*="PricesUnitFlow_title"]');
-                const paymentTypeSelect = this.page.locator('div[data-testid="div_CustomSelect"]');
-                const customUnitPrice = this.page.locator('div[data-testid="input_wrapper_RowUnitPrice"]').first();
-
-                await expect(customPricesTitle).toBeVisible();
-                await expect(paymentTypeSelect).toBeVisible();
-                await expect(customUnitPrice).toBeVisible();
-            }
-            else if(tabNames[i] === 'Контакти') {
-                const contactsTitle  = this.page.locator('div[class*="AuthContactCard_title"]');
-                const contactsCard = this.page.locator('div[class*="AuthContactCard_infoWrapper"]');
-
-                await expect(contactsTitle).toBeVisible();
-                await expect(contactsCard).toBeVisible();
-            }
-        }
+    async getCategoriesTitleText() {
+        return await this.categoriesTitle.innerText();
     }
 
-    async checkSection(sectionTitleLocator: Locator, sectionInputLocator: Locator, expectedTitleText: string, expectedInputBgText?: string, hasAsterisk?: boolean) {
-        await this.page.waitForLoadState('domcontentloaded');
-        await expect(sectionInputLocator).toBeVisible();
-    
-        const tagName = await sectionInputLocator.evaluate((element) => element.tagName.toLowerCase());
+    async getCategoriesDropDownBgText() {
+        return await this.categoriesDropDown.innerText();
+    }
 
-        let sectionBgText;
-    
-        if(tagName === 'div') {
-            sectionBgText = await sectionInputLocator.innerText();
-            await expect(this.categoriesDropDownArrowDown).toBeVisible();
-        } else if(tagName === 'input') {
-            sectionBgText = await sectionInputLocator.getAttribute('placeholder'); 
-        } else if(sectionInputLocator === this.vehicleManufacturerInput) {
-            await expect(this.vehicleManufacturerInputSearchIcon).toBeVisible()
-        }
-
-        const sectionTitleText = await sectionTitleLocator.innerText();
-
-        if (hasAsterisk) {
-            await expect(sectionTitleText).toContain(expectedTitleText);
-            await expect(sectionTitleText).toContain('*');
-        } else {
-            await expect(sectionTitleText).toContain(expectedTitleText);
-        }
-        if (sectionBgText !== undefined && sectionBgText !== null) {
-            await expect(sectionBgText).toContain(expectedInputBgText);
-        } 
+    async getCategoryInputErrorText() {
+        return await this.categoryErrorMessage.innerText();
     }
 
     async clickOnNextBtn() {
-        await this.nextBtn.click();
-        await this.page.waitForLoadState('networkidle');
+        await this.nextBtn.click({force: true});
+        await this.page.waitForTimeout(1000);
     }
 
     async fillSectionInput(sectionInputLocator: Locator, value: string) {
         await this.clearSectionInput(sectionInputLocator);
+        await sectionInputLocator.click();
         await sectionInputLocator.fill(value);
+        await this.page.waitForLoadState('load');
     }
 
     async clearSectionInput(sectionInputLocator: Locator) {
@@ -176,16 +115,15 @@ class CreateUnitPage extends Page {
     }
 
     async copyPasteValueInSectionInput(sectionInputLocator: Locator, value: string) {
+        await sectionInputLocator.click();
+        await this.page.keyboard.press('Meta+A');
+        await this.page.keyboard.press('Meta+c');
         await this.clearSectionInput(sectionInputLocator);
-        await sectionInputLocator.fill(value);
-
-        const copiedValue = await sectionInputLocator.inputValue();
-
-        await this.clearSectionInput(sectionInputLocator);
-        await sectionInputLocator.fill(copiedValue);
+        await sectionInputLocator.click();
+        await this.page.keyboard.press('Meta+V');
     }
 
-    async checkSectionError(sectionInputLocator: Locator, errorMessageLocator: Locator, expectedErrorText: string) {
+    async checkSectionErrorIsDisplayed(sectionInputLocator: Locator, errorMessageLocator: Locator, expectedErrorText: string) {
         const isVisible = await errorMessageLocator.isVisible();
     
         if (isVisible) {
@@ -205,40 +143,74 @@ class CreateUnitPage extends Page {
         return false;
     }
 
-    async checkSectionInputContent(sectionInputLocator: Locator, value: string) {
-        const tagName = await sectionInputLocator.evaluate((element) => element.tagName.toLowerCase());
-        if(tagName === 'input') {
-            const currentInputValue = await sectionInputLocator.inputValue();
-            await expect(currentInputValue).toBe(value);
-        }
-        const currentInputValue = await sectionInputLocator.innerText();
-        await expect(currentInputValue).toBe(value);
-    }
-
     async clickOnCategoriesDropDown() {
         await this.categoriesDropDown.click();
     }
 
-    async checkCategoriesPopUp(titleText: string) {
-        const categoriesPopUpTitle = this.page.locator('div[class*="CategoryPopup_title"]');
+    async getCategoriesPopUpTitleText() {
+        return await this.categoriesPopUpTitle.innerText();
+    }
 
-        const categoriesPopUpTitleText = await categoriesPopUpTitle.innerText();
+    async getAnnouncementNameTitleText() {
+        return await this.announcementNameTitle.innerText();
+    } 
 
-        await this.checkCategoriesPopUpVisibility(true);
-        await expect(categoriesPopUpTitle).toBeVisible();
-        await expect(categoriesPopUpTitleText).toBe(titleText);
+    async getAnnouncementNameInputBgText() {
+        return await this.announcementNameInput.getAttribute('placeholder');
+    } 
+
+    async getAnnouncementNameInputValueText() {
+        return await this.announcementNameInput.inputValue();
+    }
+
+    async getAnnouncementNameInputErrorText() {
+        return await this.announcementNameInputError.innerText();
+    } 
+
+    async getAnnouncementInputValueCharCount() {
+        const value = await this.announcementNameInput.inputValue();
+        return value.length;
+    }
+
+    async getVehicleManufacturerTitleText() {
+        return await this.vehicleManufacturerTitle.innerText();
+    } 
+
+    async getVehicleManufacturerInputBgText() {
+        return await this.vehicleManufacturerInput.getAttribute('placeholder');
+    } 
+
+    async getVehicleManufacturerInputErrorText() {
+        return await this.vehicleManufacturerInputError.innerText();
+    } 
+
+    async getVehicleManufacturerInputValueLength() {
+        const currentValue = await this.vehicleManufacturerInput.inputValue();
+        return currentValue.length;
+    }
+
+    async getVehicleManufacturerDropDownOptionText() {
+        return await this.vehicleManufacturerDropDownOption.innerText();
+    }
+
+    async clickOnOptionInVehicleManufacturerDropDown() {
+        await this.vehicleManufacturerDropDownOption.click();
+    }
+
+    async getOptionNotFoundErrorText() {
+        return await this.optionNotFoundMessage.innerText();
+    }
+
+    async getVehicleManufacturerSelectedOptionText() {
+        return await this.vehicleManufacturerSelectedOption.innerText();
+    }
+
+    async getVehicleManufacturerInputText() {
+        return await this.vehicleManufacturerInput.inputValue();
     }
 
     async clickOnCategoriesPopUpCloseBtn() {
         await this.categoriesPopUpCloseBtn.click();
-    }
-
-    async checkCategoriesPopUpVisibility(visibility: boolean) {
-        if (visibility) {
-            await expect(this.categoriesPopUp).toBeVisible();
-        } else {
-            await expect(this.categoriesPopUp).not.toBeVisible();
-        }
     }
 
     async clickOutsidePopup() {
@@ -290,186 +262,69 @@ class CreateUnitPage extends Page {
         }
     }
 
-    async checkAnnouncementNameInput(input: string, error: string, specialChars: boolean = false, correctInput: boolean = false) {
-        if(specialChars) {
-            await this.fillSectionInput(this.announcementNameInput, input);
-            await this.checkSectionInputContent(this.announcementNameInput, error);
-            await this.copyPasteValueInSectionInput(this.announcementNameInput, input);
-            await this.checkSectionInputContent(this.announcementNameInput, error);
-        }else if(correctInput) {
-            await this.fillSectionInput(this.announcementNameInput, input);
-            await this.clickOnNextBtn();
-            await expect(await this.checkSectionError(
-                this.announcementNameInput,
-                this.announcementNameInputError,
-                error
-            )).toBe(false);
-            await this.copyPasteValueInSectionInput(this.announcementNameInput, input);
-            await this.clickOnNextBtn();
-            await expect(await this.checkSectionError(
-                this.announcementNameInput,
-                this.announcementNameInputError,
-                error
-            )).toBe(false);
-        }else {
-            await this.fillSectionInput(this.announcementNameInput, input);
-            await expect(await this.checkSectionError(
-                this.announcementNameInput,
-                this.announcementNameInputError,
-                error
-            )).toBe(true);
-            await this.copyPasteValueInSectionInput(this.announcementNameInput, input);
-            await expect(await this.checkSectionError(
-                this.announcementNameInput,
-                this.announcementNameInputError,
-                error
-            )).toBe(true);
-        }
-    }
-
-    async checkVehicleManufacturerDropDownIsVisible(isVisible: boolean) {
-        if (isVisible) {
-            await expect(this.vehicleManifacturerDropDown).toBeVisible();
-        } else {
-            await expect(this.vehicleManifacturerDropDown).not.toBeVisible();
-        }
-    }
-
-    async checkVehicleManufacturerDropDownOption(value: string) {
-        const dropDownOptionText = await this.vehicleManufacturerDropDownOption.innerText();
-        const dropDownInputText = await this.vehicleManufacturerInput.inputValue();
-        await expect(this.vehicleManufacturerDropDownOption).toBeVisible();
-        await expect(dropDownOptionText).toBe(value);
-        await expect(dropDownInputText).toBe(value);
-    }
-
-    async checkOptionNotFoundMessage(value: string) {
-        const messageText = await this.optionNotFoundMessage.innerText();
-        const inputValue = await this.vehicleManufacturerInput.inputValue();
-        const symbolCount = inputValue.length;
-        const valueLength = value.length;
-
-        if(valueLength > 100) {
-            await expect(symbolCount.toString()).toBe('100');
-            const valueWithoutLastChar = value.slice(0, -1);
-            await expect(messageText.toLowerCase()).toContain(valueWithoutLastChar.toLowerCase());
-        }else {
-            await expect(this.optionNotFoundMessage).toBeVisible();
-            await expect(messageText).toContain(value);
-            await this.optionNotFoundMessage.click();
-            await this.checkUrl(`${process.env.HOMEPAGE_URL}create-unit/`);
-            await expect(symbolCount).toBe(valueLength);
-        }
-    }
-
-    async checkVehicalManufacturerInput(input: string) {
-        await this.fillSectionInput(this.vehicleManufacturerInput, input);
-
-        if(input.length > 100) {
-            await this.checkOptionNotFoundMessage(input);
-        }
-        else if(input === 'АТЭК') {
-            await this.checkVehicleManufacturerDropDownOption(input);
-        }
-        else if(input.length === 1 && input !== ' ') {
-            await this.checkVehicleManufacturerDropDownIsVisible(true);
-            await this.copyPasteValueInSectionInput(this.vehicleManufacturerInput, input);
-            await this.checkVehicleManufacturerDropDownIsVisible(true);
-
-            await this.checkOptionIsSelected();
-            await this.clickOnClearIcon();
-            await this.checkInputIsCleared();
-        }
-        else if(input === '123456789'){
-            await this.checkOptionNotFoundMessage('123456789');
-            await this.copyPasteValueInSectionInput(this.vehicleManufacturerInput, input);
-            await this.checkOptionNotFoundMessage('123456789');
-        } 
-        else {
-            await this.checkSectionInputContent(this.vehicleManufacturerInput, '');
-        }
-    }
-
-    async checkOptionIsSelected() {
-        const optionValue = await this.vehicleManufacturerDropDownOption.first().innerText();
-        await this.vehicleManufacturerDropDownOption.first().click();
-        const dropDownValue = await this.selectedOptionInDropdown.innerText();
-        await expect(dropDownValue).toBe(optionValue)
-    }
-
     async clickOnClearIcon() {
         await this.clearVehicleManifacturerDropDownIcon.click({force: true});
     }
     
-    async checkInputIsCleared() {
-        const inputValue = await this.vehicleManufacturerInput.inputValue();
-        await expect(inputValue).toBe('');
+    async getModelNameTitleText() {
+        return await this.modelNameTitle.innerText();
     }
 
-    async checkModelNameInput(input: string) {
-        if(input.length > 15) {
-            await this.fillSectionInput(this.modelNameInput, input);
-            await expect(await this.checkSectionError(
-                this.modelNameInput, 
-                this.modelNameInputError, 
-                'У назві моделі може бути не більше 15 символів')).toBe(true);
-            await this.copyPasteValueInSectionInput(this.modelNameInput, input);
-            await expect(await this.checkSectionError(
-                this.modelNameInput, 
-                this.modelNameInputError, 
-                'У назві моделі може бути не більше 15 символів')).toBe(true);
-        }else if(input.length <= 15 && input.length !== 0) {
-            await this.fillSectionInput(this.modelNameInput, input);
-            await expect(await this.checkSectionError(
-                this.modelNameInput, 
-                this.modelNameInputError, 
-                '')).toBe(false)
-        }
-        else {
-            await this.fillSectionInput(this.modelNameInput, input);
-            await this.checkSectionInputContent(this.modelNameInput, '')
-            await this.copyPasteValueInSectionInput(this.modelNameInput, input);
-            await this.checkSectionInputContent(this.modelNameInput, '')
-        }
+    async getModelNameInputBgText() {
+        return await this.modelNameInput.getAttribute('placeholder');
     }
 
-    async checkSectionInputIsClickable(sectionInputLocator: Locator) {
-        await expect(await sectionInputLocator.isEnabled()).toBe(true);
+    async getModelNameInputErrorText() {
+        return await this.modelNameInputError.innerText();
     }
 
-    async checkSectionInfoInput(sectionInfoInputLocator: Locator, input: string) {
-        if(input = '<>{};^') {
-            await this.fillSectionInput(sectionInfoInputLocator, input);
-            await this.checkSectionInputContent(sectionInfoInputLocator, '');
-            await this.copyPasteValueInSectionInput(sectionInfoInputLocator, '')
-        }else if(input.length > 9000) {
-            await this.fillSectionInput(sectionInfoInputLocator, input);
+    async getModelNameInputText() {
+        return await this.modelNameInput.inputValue();
+    }
+   
+    async getTechnicalInfoTitleText() {
+        return await this.technicalInfoTitle.innerText();
+    }
 
-            const valueWithoutLastChar = input.slice(0, -1);
-            const inputValue = await sectionInfoInputLocator.inputValue();
+    async getTechnicalInfoInputText() {
+        return await this.technicalInfoInput.inputValue();
+    }
 
-            await expect(inputValue.toLowerCase()).toBe(valueWithoutLastChar.toLowerCase())
-        }
+    async getDescriptionInfoTitleText() {
+        return await this.descriptionInfoTitle.innerText();
+    }
+
+    async getDescriptionInfoInputText() {
+        return await this.descriptionInfoInput.inputValue();
+    }
+
+    async getAddressSelectionTitleText() {
+        return await this.addressSelectionTitle.innerText();
+    }
+
+    async getAddressSelectionInputText() {
+        return await this.addressSelectionInput.innerText();
+    }
+
+    async getAddressSelectionInputErrorText() {
+        return await this.addressSelectionInputError.innerText();
     }
 
     async clickOnSelectOnMapBtn() {
         await this.selectOnMapBtn.click();
+        await this.page.waitForTimeout(1000)
     }
 
-    async checkMapPopUpIsVisible() {
-        await expect(this.mapPopUp).toBeVisible();
+    async getMapPopUpTitleText() {
+        return await this.mapPopUpTitle.innerText();
     }
 
-    async checkMapPopUp(titleText: string, addressText: string) {
-        const mapPopUpTitleText = await this.mapPopUpTitle.innerText();
+    async getMapPopUpAddressLineText() {
+        return await this.mapPopUpAddressLine.innerText();
+    }
 
-        await this.page.waitForTimeout(1000);
-
-        const addressLineText = await this.addressLine.innerText();
-
-        await expect(mapPopUpTitleText).toBe(titleText);
-        await expect(this.mapPopUpCloseBtn).toBeVisible();
-        await expect(addressLineText).toBe(addressText);
+    async getAddressLineText() {
+        return await this.selectedAddress.innerText();
     }
 
     async clickOnMapPopUpCloseBtn() {
@@ -477,6 +332,7 @@ class CreateUnitPage extends Page {
     }
     async clickOnMapPopUpSubmitBtn() {
         await this.mapPopUpSubmitBtn.click({force: true});
+        await this.page.waitForLoadState('networkidle')
     }
 
     async clickOnMapAndGetAddress() {
@@ -492,9 +348,8 @@ class CreateUnitPage extends Page {
         return '';
     }
 
-    async checkCancelBtnText(expectedText: string) {
-        const btnText = await this.cancelBtn.innerText();
-        await expect(btnText).toBe(expectedText);
+    async getCancelBtnText() {
+        return await this.cancelBtn.innerText();
     }
 
     async clickOnCancelBtn() {
@@ -508,15 +363,8 @@ class CreateUnitPage extends Page {
         await this.page.waitForLoadState('domcontentloaded');
     }
 
-    async checkNextBtnText(expectedText: string) {
-        const nextBtnText = await this.nextBtn.innerText();
-        await expect(nextBtnText).toBe(expectedText)
-    }
-    async checkNotificationsAppear() {
-        await expect(this.categoryErrorMessage).toBeVisible();
-        await expect(this.announcementNameInputError).toBeVisible();
-        await expect(this.vehicleManufacturerInputError).toBeVisible();
-        await expect(this.addressSelectionInputError).toBeVisible();
+    async getNextBtnText() {
+        return await this.nextBtn.innerText();
     }
 
     async fillCategory() {

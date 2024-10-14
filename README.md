@@ -6,7 +6,7 @@ This project contains end-to-end tests for the Rentzila application using Playwr
 
 ## Prerequisites
 
-- [Node.js]
+- [Node.js >= 18.0.0]
 - [npm]
 
 ## Installation

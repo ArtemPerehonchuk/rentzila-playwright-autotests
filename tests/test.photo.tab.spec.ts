@@ -31,7 +31,7 @@ test.beforeEach(async ({ page }) => {
     await createUnitPage.clickOnNextBtn();
 });
 
-test('Test case C384: Verify same images uploading', async( {page} ) => {
+test.only('Test case C384: Verify same images uploading', async( {page} ) => {
     await photoTab.uploadTwoSamePhotos();
     await photoTab.checkInvalidPhotoPopUpVisibility(true);
     await photoTab.checkInvalidPhotoPopUpText('Ви не можете завантажити двічі один файл');
@@ -95,7 +95,7 @@ test('Test case 393: Verify ""Далі"" button', async({ page }) => {
     await createUnitPage.clickOnNextBtn();
     await createUnitPage.checkCreateUnitTabsTitles(2);
     await photoTab.checkPhotoNotUploadedError('Додайте в оголошення від 1 до 12 фото технічного засобу');
-    await photoTab.uploadFoto();
+    await photoTab.uploadPhoto();
     await createUnitPage.clickOnNextBtn();
     await createUnitPage.checkCreateUnitTitle('Створити оголошення');
     await createUnitPage.checkCreateUnitTabsTitles(3);

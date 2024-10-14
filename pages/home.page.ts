@@ -42,7 +42,7 @@ class HomePage extends Page {
     loginEmailOrPhoneInput = this.page.locator('#email');
     loginPasswordInput = this.page.locator('#password');
     loginErrorInputsMsg = this.page.locator('p[class*="CustomReactHookInput_error_message"]');
-    autorizationForm = this.page.locator('[data-testid="authorizationContainer"]');
+    autorizationForm = this.page.locator('[class*="LoginForm_form"]');
     submitLoginFormBtn = this.page.locator('[class*="LoginForm_form"] [class*="ItemButtons_darkBlueRoundBtn"]');
     hidePasswordIcon = this.page.locator('div[data-testid="reactHookButton"]');
     userIcon = this.page.locator('div[data-testid="avatarBlock"]');
@@ -53,7 +53,6 @@ class HomePage extends Page {
     invalidEmailOrPasswordError = this.page.locator('div[data-testid="errorMessage"]');
     createUnitBtn = this.page.locator('a[class*="Navbar_addAnnouncement"]');
     closePopUpBtn = this.page.locator('[data-testid="crossButton"]');
-    
 
     async scrollToServicesContainer() {
         await this.servicesContainer.scrollIntoViewIfNeeded();
@@ -63,23 +62,27 @@ class HomePage extends Page {
         await this.specialEquipmentContainer.scrollIntoViewIfNeeded();
     }
 
-    async checkServices() {
-        await expect(this.servicesContainer).toBeVisible();
-        await expect(this.servicesList.first()).toBeVisible();
-        
-        const servicesUnitsCount = await this.servicesUnitsList.count(); 
-        await expect(this.servicesUnitsList.first()).toBeVisible();
-        await expect(servicesUnitsCount).toBe(7);
-    }
+    // async checkServices() {
+    //     if(await this.servicesContainer.isVisible()) {
+    //         await expect(this.servicesList.first()).toBeVisible();
+            
+    //         const servicesUnitsCount = await this.servicesUnitsList.count(); 
+    //         await expect(this.servicesUnitsList.first()).toBeVisible();
+    //         await expect(servicesUnitsCount).toBe(7);
+    //         return true
+    //     }else return false
+    // }
 
-    async checkSpecialEquipments() {
-        await expect(this.specialEquipmentContainer).toBeVisible();
-        await expect(this.specialEquipmentsList.first()).toBeVisible();
-        
-        const specialEquipmentsCount = await this.specialEquipmentsUnitsList.count(); 
-        await expect(this.specialEquipmentsUnitsList.first()).toBeVisible();
-        await expect(specialEquipmentsCount).toBe(7);
-    }
+    // async checkSpecialEquipments() {
+    //     if(await this.specialEquipmentContainer.isVisible()) {
+    //         await expect(this.specialEquipmentsList.first()).toBeVisible();
+            
+    //         const specialEquipmentsCount = await this.specialEquipmentsUnitsList.count(); 
+    //         await expect(this.specialEquipmentsUnitsList.first()).toBeVisible();
+    //         await expect(specialEquipmentsCount).toBe(7);
+    //         return true
+    //     }else return false
+    // }
 
     async clickFirstServicesUnit() {
         await this.servicesUnitsList.first().click();
@@ -308,48 +311,66 @@ class HomePage extends Page {
         await this.enterBtn.click();
     }
 
-    async checkAutorizationFormIsDisplayed() {
-        await expect(this.autorizationForm).toBeVisible();
-    }
+    // async getAutorizationForm() {
+    //    return await this.autorizationForm;
+    // }
 
     async clickOnSubmitLoginFormBtn() {
         await this.submitLoginFormBtn.click();
-        await this.page.waitForLoadState('networkidle');
+        // await this.page.waitForLoadState('networkidle');
+        await this.page.waitForTimeout(500)
     }
 
-    async checkInputValue(inputName: string, inputValue: string) {
-        switch(inputName) {
-            case 'email':
-                await expect(await this.loginEmailOrPhoneInput.inputValue()).toBe(inputValue);
-                break
-
-            case 'password':
-                await expect(await this.loginPasswordInput.inputValue()).toBe(inputValue);
-                break
-        }
+    async getLoginEmailOrPhoneInputValue() {
+        return await this.loginEmailOrPhoneInput.inputValue();
     }
+
+    async getPasswordInputValue() {
+        return await this.loginPasswordInput.inputValue();
+    }
+    // async checkInputValue(inputName: string, inputValue: string) {
+    //     if(await this.autorizationForm.isVisible()) {
+    //         switch(inputName) {
+    //             case 'email':
+    //                 await expect(await this.loginEmailOrPhoneInput.inputValue()).toBe(inputValue);
+    //                 break
+
+    //             case 'password':
+    //                 await expect(await this.loginPasswordInput.inputValue()).toBe(inputValue);
+    //                 break
+    //         }
+    //         return true
+    //     }else return false
+    // }
 
     async clickOnHidePasswordIcon() {
         await this.hidePasswordIcon.click();
     }
 
-    async checkPasswordInputType(typeName: string, typeValue: string) {
-        const passwordInputType = await this.loginPasswordInput.getAttribute('type')
-        switch(typeName){
-            case 'hidden':
-                await expect(passwordInputType).toBe(typeValue);
-                break;
-            
-            case 'shown':
-                await expect(passwordInputType).toBe(typeValue);
-                break;
-        }
+    async getPasswordInputType() {
+        return await this.loginPasswordInput.getAttribute('type')
     }
+    // async checkPasswordInputType(typeName: string, typeValue: string) {
+    //     if(await this.loginPasswordInput.isVisible()) {
+    //         const passwordInputType = await this.loginPasswordInput.getAttribute('type')
+    //         switch(typeName){
+    //             case 'hidden':
+    //                 await expect(passwordInputType).toBe(typeValue);
+    //                 break;
+                
+    //             case 'shown':
+    //                 await expect(passwordInputType).toBe(typeValue);
+    //                 break;
+    //         }
+    //         return true
+    //     }else return false
+    // }
 
-    async checkUserIconIsDisplayed(shouldBeVisible: boolean) {
+    async checkUserIconIsDisplayed(shouldBeVisible: boolean = true) {
         if(shouldBeVisible) {
             await expect(this.userIcon).toBeVisible();
-        }
+            return true
+        }else return false
     }
 
     async clickOnUserIcon() {
@@ -357,14 +378,20 @@ class HomePage extends Page {
         await this.page.waitForLoadState('domcontentloaded');
     }
 
-    async checkProfileDropDownIsDisplayed() {
-        await expect(this.profileDropDown).toBeVisible();
-    }
+    // async getProfileDropDown() {
+    //    return await this.profileDropDown;
+    // }
 
-    async checkProfileDropDownEmail(expectedEmail: string) {
-        const currentEmail = await this.profileDropDownEmail.innerText();
-        await expect(currentEmail).toBe(expectedEmail);
+    async getProfileDropDownEmail() {
+        return await this.profileDropDownEmail.innerText();
     }
+    // async checkProfileDropDownEmail(expectedEmail: string) {
+    //     const currentEmail = await this.profileDropDownEmail.innerText();
+    //         if(currentEmail) {
+    //         await expect(currentEmail).toBe(expectedEmail);
+    //         return true
+    //     }else return false
+    // }
 
     async logout() {
         await this.profileLogoutBtn.click();
@@ -375,25 +402,45 @@ class HomePage extends Page {
         await this.page.waitForTimeout(2000);
     }
     
-    async checkIncorrectEmailOrPhoneInputFormat(expectedText: string) {
-        await this.loginErrorInputsMsg.isVisible();
-        const errorText = await this.loginErrorInputsMsg.innerText();
-        await expect(errorText).toBe(expectedText);
+    async getIncorrectPasswordFormatErrorText() {
+        return await this.loginErrorInputsMsg.innerText();
     }
 
-    async checkIncorrectPasswordInputFormat(incorrectFormatError: string, ivalidCredentialsError: string) {
-        await this.checkAutorizationFormIsDisplayed();
-        await this.checkUserIconIsDisplayed(false);
+    async getIncorrectEmailOrPhoneFormatErrorText() {
+        return await this.loginErrorInputsMsg.innerText();
+    }
+    // async checkIncorrectEmailOrPhoneInputFormat(expectedText: string) {
+    //     if(await this.loginErrorInputsMsg.isVisible()) {
+    //         const errorText = await this.loginErrorInputsMsg.innerText();
+    //         await expect(errorText).toBe(expectedText);
+    //         return true
+    //     }else return false
+    // }
 
+    async getIncorrectPasswordErrorText() {
         if(await this.invalidEmailOrPasswordError.isVisible()) {
-            const errorText = await this.invalidEmailOrPasswordError.innerText()
-            await expect(errorText).toBe(ivalidCredentialsError);
+            return await this.invalidEmailOrPasswordError.innerText()
+        }else if(await this.loginErrorInputsMsg.isVisible()) {
+            return await this.loginErrorInputsMsg.innerText()
         }
-        else if(await this.loginErrorInputsMsg.isVisible()) {
-            const errorText = await this.loginErrorInputsMsg.innerText()
-            await expect(errorText).toContain(incorrectFormatError);
-        }       
     }
+    // async checkIncorrectPasswordInputFormat(incorrectFormatError: string, ivalidCredentialsError: string) {
+    //     // await this.checkAutorizationFormIsDisplayed();
+    //     await this.checkUserIconIsDisplayed(false);
+
+    //     if(await this.invalidEmailOrPasswordError.isVisible()) {
+    //         const errorText = await this.invalidEmailOrPasswordError.innerText()
+    //         await expect(errorText).toBe(ivalidCredentialsError);
+    //         return true
+    //     }
+    //     else if(await this.loginErrorInputsMsg.isVisible()) {
+    //        // await this.page.waitForSelector('p[class*="CustomReactHookInput_error_message"]', {state: 'visible'})
+    //         const errorText = await this.loginErrorInputsMsg.innerText()
+    //         await expect(errorText).toContain(incorrectFormatError);
+    //         return true
+    //     }
+    //     else return false       
+    // }
 
     async clickOnCreateUnitBtn() {
         await this.createUnitBtn.click();
