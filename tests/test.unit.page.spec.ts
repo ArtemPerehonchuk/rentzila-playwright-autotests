@@ -204,14 +204,19 @@ test('test case C326: Verify ""Скасувати"" button', async( {page} ) => 
 })
 
 test('test case C329: Verify ""Далі"" button', async( {page} ) => {
-    await createUnitPage.checkNextBtnText('Далі');
-    await createUnitPage.clickOnNextBtn();
-    await createUnitPage.checkNotificationsAppear();
-    await createUnitPage.fillCategory();
-    await createUnitPage.fillAnnouncementName();
-    await createUnitPage.fillVehicleManufacturer();
-    await createUnitPage.fillAddress();
-    await createUnitPage.clickOnNextBtn();
-    await createUnitPage.checkCreateUnitTitle('Створити оголошення');
-    await createUnitPage.checkCreateUnitTabsTitles(2);
+    try {
+        await createUnitPage.checkNextBtnText('Далі');
+        await createUnitPage.clickOnNextBtn();
+        await createUnitPage.checkNotificationsAppear();
+        await createUnitPage.fillCategory();
+        await createUnitPage.fillAnnouncementName();
+        await createUnitPage.fillVehicleManufacturer();
+        await createUnitPage.fillAddress();
+        await createUnitPage.clickOnNextBtn();
+        await createUnitPage.checkCreateUnitTitle('Створити оголошення');
+        await createUnitPage.checkCreateUnitTabsTitles(2);
+    } catch (error) {
+        await page.screenshot({ path: `test-results/${test.info().title}-error.png`, fullPage: true });
+        throw error;
+    }
 })
