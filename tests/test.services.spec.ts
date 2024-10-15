@@ -23,23 +23,34 @@ test('test case c212: Checking ""Послуги"" section on the main page', asy
 
     for (let i = 0; i < servicesCount; i++) {
         await homepage.scrollToServicesContainer();
+
         await expect(homepage.servicesContainer).toBeVisible();
         await expect(await homepage.servicesUnitsList.count()).toBe(7);
-       // await expect(await homepage.checkServices()).toBe(true);
+
         await servicesList.nth(i).click();
+
         firstServicesUnitName = await homepage.getFirstServicesUnitName();
+
         await homepage.clickFirstServicesUnit();
+
         await expect(await productsPage.productFilterItem).toBeVisible();
         await expect(await productsPage.filtersAreChecked(firstServicesUnitName)).toBe(true);
         await expect(await productsPage.unitsContainer).toBeVisible();
+
         await productsPage.clickFirstProduct();
+
         await expect(await unitPage.checkUnitIsVisible()).toBe(true);
+
         await unitPage.clickOnLogo();
-        await expect(await homepage.getUrl()).toBe(homepageUrl)
+
+        await expect(await homepage.getUrl()).toBe(homepageUrl);
+
         await homepage.clickOnAnnouncementsNavMenuItem();
+
         await expect(await productsPage.productFilterItem).toBeVisible();
         await expect(await productsPage.filtersAreChecked(firstServicesUnitName)).toBe(true);
-        await homepage.clickOnLogo()
+
+        await homepage.clickOnLogo();
     }
 })
 
@@ -49,19 +60,28 @@ test('test case c213: Checking ""Спецтехніка"" section on the main pa
 
     for (let i = 0; i < specialEquipmentsCount; i++) {
         await homepage.scrollToSpecialEquipmentContainer();
+
         await expect(homepage.specialEquipmentContainer).toBeVisible();
         await expect(await homepage.specialEquipmentsUnitsList.count()).toBe(7);
-       // await expect(await homepage.checkSpecialEquipments()).toBe(true);
+
         await specialEquipmentsList.nth(i).click({force: true});
+
         await homepage.clickFirstSpecialEquipmentUnit();
+
         await expect(await productsPage.productFilterItem).toBeVisible();
         await expect(await productsPage.checkCategoriesCheckboxesAreChecked()).toBe(true);
         await expect(await productsPage.unitsContainer).toBeVisible();
+
         await productsPage.clickFirstProduct();
+
         await expect(await unitPage.checkUnitIsVisible()).toBe(true);
+
         await unitPage.clickOnLogo();
-        await expect(await homepage.getUrl()).toBe(homepageUrl)
+
+        await expect(await homepage.getUrl()).toBe(homepageUrl);
+
         await homepage.clickOnAnnouncementsNavMenuItem();
+        
         await expect(await productsPage.checkCategoriesCheckboxesAreChecked()).toBe(true);
     }
 })

@@ -1,7 +1,6 @@
 import { Page as PlaywrightPage, expect } from '@playwright/test';
 import Page from './page';
 
-
 class ProfilePage extends Page {
 
     constructor(page: PlaywrightPage) {
@@ -10,21 +9,11 @@ class ProfilePage extends Page {
 
     profilePhoneInput = this.page.locator('input[data-testid="input_OwnerProfileNumber"]');
     profileLogoutBtn = this.page.locator('div[data-testid="logOut"]');
-    
-    // async getPhoneInput() {
-    //    return await this.profilePhoneInput;
-    // }
+
 
     async getProfilePhoneInputValue() {
         return (await this.profilePhoneInput.inputValue()).split(' ').join('');
     }
-    // async checkPhoneInputValue(expectedPhoneNumber: string) {
-    //     const currentPhoneNumber = (await this.profilePhoneInput.inputValue()).split(' ').join('');
-    //     if(currentPhoneNumber) {
-    //         await expect(currentPhoneNumber).toBe(expectedPhoneNumber);
-    //         return true
-    //     }else return false
-    // }
 
     async clickOnLogoutBtn() {
         await this.profileLogoutBtn.click({force: true});

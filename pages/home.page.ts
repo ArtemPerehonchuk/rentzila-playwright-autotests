@@ -62,28 +62,6 @@ class HomePage extends Page {
         await this.specialEquipmentContainer.scrollIntoViewIfNeeded();
     }
 
-    // async checkServices() {
-    //     if(await this.servicesContainer.isVisible()) {
-    //         await expect(this.servicesList.first()).toBeVisible();
-            
-    //         const servicesUnitsCount = await this.servicesUnitsList.count(); 
-    //         await expect(this.servicesUnitsList.first()).toBeVisible();
-    //         await expect(servicesUnitsCount).toBe(7);
-    //         return true
-    //     }else return false
-    // }
-
-    // async checkSpecialEquipments() {
-    //     if(await this.specialEquipmentContainer.isVisible()) {
-    //         await expect(this.specialEquipmentsList.first()).toBeVisible();
-            
-    //         const specialEquipmentsCount = await this.specialEquipmentsUnitsList.count(); 
-    //         await expect(this.specialEquipmentsUnitsList.first()).toBeVisible();
-    //         await expect(specialEquipmentsCount).toBe(7);
-    //         return true
-    //     }else return false
-    // }
-
     async clickFirstServicesUnit() {
         await this.servicesUnitsList.first().click();
     }
@@ -107,24 +85,6 @@ class HomePage extends Page {
     async scrollToFooter() {
         await this.footerContainer.scrollIntoViewIfNeeded();
     }
-    
-    async checkFooterContainerIsVisible() {
-        await expect(this.footerContainer).toBeVisible();
-    }
-
-    async checkFooterElementsAreDisplayed() {
-        await expect(this.aboutUsTitle).toBeVisible();
-        await expect(this.privacyPolicyLink).toBeVisible();
-        await expect(this.cookiePolicyLink).toBeVisible();
-        await expect(this.termsConditionsLink).toBeVisible();
-        await expect(this.announcementsLink).toBeVisible();
-        await expect(this.tendersLink).toBeVisible();
-        await expect(this.jobRequestsLink).toBeVisible();
-        await expect(this.contactsTitle).toBeVisible();
-        await expect(this.contactsEmail).toBeVisible();
-        await expect(this.footerRentzilaLogo).toBeVisible();
-        await expect(this.copyrightLabel).toBeVisible();
-    }
 
     async clickOnPrivacyPolicyLink() {
         await this.privacyPolicyLink.click();
@@ -146,8 +106,8 @@ class HomePage extends Page {
         await this.page.waitForLoadState('domcontentloaded');
     }
 
-    async checkSearchServiceSpecialEquipmentTitle(expectedTitle: string) {
-        await expect(await this.searchServicesSpecialEquipmentTitle.innerText()).toContain(expectedTitle);
+    async getSearchServiceSpecialEquipmentTitleText() {
+        return await this.searchServicesSpecialEquipmentTitle.innerText();
     }
 
     async clickOnTendersLink() {
@@ -159,17 +119,13 @@ class HomePage extends Page {
         await this.contactsEmail.click();
     }
 
-    async checkContactsEmail(expectedEmail: string) {
+    async getContactsEmail() {
         const emailAttr = await this.contactsEmail.getAttribute('href');
-        await expect(emailAttr).toContain(expectedEmail)
+        return emailAttr
     }
 
     async scrollToConsultationForm() {
         await this.consultationForm.scrollIntoViewIfNeeded();
-    }
-
-    async checkConsultationFormIsVisible() {
-        await expect(this.consultationForm).toBeVisible();
     }
 
     async clickOnSubmitConsultationBtn() {
@@ -247,11 +203,8 @@ class HomePage extends Page {
         await this.consultationFormPhoneInput.click();
     }
 
-    async checkPhoneInputAfterClick(expectedValue: string) {
-        const inputPhoneValue = await this.consultationFormPhoneInput.evaluate((el) => {
-            return (el as HTMLInputElement).value;
-        });
-        await expect(inputPhoneValue).toBe(expectedValue)
+    async getPhoneInputText() {
+        return await this.consultationFormPhoneInput.inputValue();
     }
 
     async clearInput(inputName: string) {
@@ -273,14 +226,8 @@ class HomePage extends Page {
         }
     }
 
-    async checkIncorrectPhoneErrorMsg(expectedText: string) {
-        const phoneBorderColor = await this.consultationFormPhoneInput.evaluate((el) => {
-            return window.getComputedStyle(el).borderColor;
-        });
-        await expect(phoneBorderColor).toBe('rgb(247, 56, 89)');
-        await expect(this.consultationFormErrorMessage.first()).toBeVisible();
-        const consultationFormPhoneErrorMessageText = await this.consultationFormErrorMessage.first().innerText();
-        await expect(consultationFormPhoneErrorMessageText).toBe(expectedText);
+    async getConsultationFormPhoneErrorMessageText() {
+        return await this.consultationFormErrorMessage.first().innerText();
     }
 
     async checkSuccessSubmitConsultationMsg() {
@@ -296,28 +243,12 @@ class HomePage extends Page {
         }
     }
 
-    async checkUserDetailsContainUser(userName: string, userPhone: string) {
-        
-        const userList = await this.getUsersList();
-
-        const containsUser = userList.some((user: any) => {
-            return user.name === userName && user.phone === userPhone
-    });
-
-        await expect(containsUser).toBe(true);
-    }
-
     async clickOnEnterBtn() {
         await this.enterBtn.click();
     }
 
-    // async getAutorizationForm() {
-    //    return await this.autorizationForm;
-    // }
-
     async clickOnSubmitLoginFormBtn() {
         await this.submitLoginFormBtn.click();
-        // await this.page.waitForLoadState('networkidle');
         await this.page.waitForTimeout(500)
     }
 
@@ -328,20 +259,6 @@ class HomePage extends Page {
     async getPasswordInputValue() {
         return await this.loginPasswordInput.inputValue();
     }
-    // async checkInputValue(inputName: string, inputValue: string) {
-    //     if(await this.autorizationForm.isVisible()) {
-    //         switch(inputName) {
-    //             case 'email':
-    //                 await expect(await this.loginEmailOrPhoneInput.inputValue()).toBe(inputValue);
-    //                 break
-
-    //             case 'password':
-    //                 await expect(await this.loginPasswordInput.inputValue()).toBe(inputValue);
-    //                 break
-    //         }
-    //         return true
-    //     }else return false
-    // }
 
     async clickOnHidePasswordIcon() {
         await this.hidePasswordIcon.click();
@@ -350,21 +267,6 @@ class HomePage extends Page {
     async getPasswordInputType() {
         return await this.loginPasswordInput.getAttribute('type')
     }
-    // async checkPasswordInputType(typeName: string, typeValue: string) {
-    //     if(await this.loginPasswordInput.isVisible()) {
-    //         const passwordInputType = await this.loginPasswordInput.getAttribute('type')
-    //         switch(typeName){
-    //             case 'hidden':
-    //                 await expect(passwordInputType).toBe(typeValue);
-    //                 break;
-                
-    //             case 'shown':
-    //                 await expect(passwordInputType).toBe(typeValue);
-    //                 break;
-    //         }
-    //         return true
-    //     }else return false
-    // }
 
     async checkUserIconIsDisplayed(shouldBeVisible: boolean = true) {
         if(shouldBeVisible) {
@@ -378,20 +280,9 @@ class HomePage extends Page {
         await this.page.waitForLoadState('domcontentloaded');
     }
 
-    // async getProfileDropDown() {
-    //    return await this.profileDropDown;
-    // }
-
     async getProfileDropDownEmail() {
         return await this.profileDropDownEmail.innerText();
     }
-    // async checkProfileDropDownEmail(expectedEmail: string) {
-    //     const currentEmail = await this.profileDropDownEmail.innerText();
-    //         if(currentEmail) {
-    //         await expect(currentEmail).toBe(expectedEmail);
-    //         return true
-    //     }else return false
-    // }
 
     async logout() {
         await this.profileLogoutBtn.click();
@@ -409,13 +300,6 @@ class HomePage extends Page {
     async getIncorrectEmailOrPhoneFormatErrorText() {
         return await this.loginErrorInputsMsg.innerText();
     }
-    // async checkIncorrectEmailOrPhoneInputFormat(expectedText: string) {
-    //     if(await this.loginErrorInputsMsg.isVisible()) {
-    //         const errorText = await this.loginErrorInputsMsg.innerText();
-    //         await expect(errorText).toBe(expectedText);
-    //         return true
-    //     }else return false
-    // }
 
     async getIncorrectPasswordErrorText() {
         if(await this.invalidEmailOrPasswordError.isVisible()) {
@@ -424,23 +308,6 @@ class HomePage extends Page {
             return await this.loginErrorInputsMsg.innerText()
         }
     }
-    // async checkIncorrectPasswordInputFormat(incorrectFormatError: string, ivalidCredentialsError: string) {
-    //     // await this.checkAutorizationFormIsDisplayed();
-    //     await this.checkUserIconIsDisplayed(false);
-
-    //     if(await this.invalidEmailOrPasswordError.isVisible()) {
-    //         const errorText = await this.invalidEmailOrPasswordError.innerText()
-    //         await expect(errorText).toBe(ivalidCredentialsError);
-    //         return true
-    //     }
-    //     else if(await this.loginErrorInputsMsg.isVisible()) {
-    //        // await this.page.waitForSelector('p[class*="CustomReactHookInput_error_message"]', {state: 'visible'})
-    //         const errorText = await this.loginErrorInputsMsg.innerText()
-    //         await expect(errorText).toContain(incorrectFormatError);
-    //         return true
-    //     }
-    //     else return false       
-    // }
 
     async clickOnCreateUnitBtn() {
         await this.createUnitBtn.click();

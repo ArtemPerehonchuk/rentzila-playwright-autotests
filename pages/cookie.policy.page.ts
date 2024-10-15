@@ -9,8 +9,8 @@ class CookiePolicyPage extends Page {
 
     cookiePolicyTitle = this.page.locator('h1[class*="Cookies_title"]');
 
-    async checkCookiePolicyTitle() {
-        await expect(this.cookiePolicyTitle).toBeVisible();
+    async getCookiePolicyTitleText() {
+        return await this.cookiePolicyTitle.innerText();
     }
 
 }

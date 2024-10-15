@@ -24,7 +24,7 @@ test.beforeEach(async ({ page }) => {
     await homepage.navigate('/');
 });
 
-test.only('test case C214: Verify that all elements on the footer are displayed and all links are clickable', async ({ page }) => {
+test('test case C214: Verify that all elements on the footer are displayed and all links are clickable', async ({ page }) => {
     const privacyPolicyPage = new PrivacyPolicyPage(page);
     const cookiePolicyPage = new CookiePolicyPage(page);
     const termsConditionsPage = new TermsConditionsPage(page);
@@ -32,38 +32,73 @@ test.only('test case C214: Verify that all elements on the footer are displayed 
     const tendersPage = new TendersPage(page);
     
     await homepage.scrollToFooter();
-    await homepage.checkFooterContainerIsVisible();
+
+    await expect(homepage.footerContainer).toBeVisible();
+
     await homepage.clickOnContactsEmail();
+
     await expect(await homepage.getUrl()).toBe(homepageUrl);
-    await homepage.checkFooterElementsAreDisplayed();
+    await expect(homepage.aboutUsTitle).toBeVisible();
+    await expect(homepage.privacyPolicyLink).toBeVisible();
+    await expect(homepage.cookiePolicyLink).toBeVisible();
+    await expect(homepage.termsConditionsLink).toBeVisible();
+    await expect(homepage.announcementsLink).toBeVisible();
+    await expect(homepage.tendersLink).toBeVisible();
+    await expect(homepage.jobRequestsLink).toBeVisible();
+    await expect(homepage.contactsTitle).toBeVisible();
+    await expect(homepage.contactsEmail).toBeVisible();
+    await expect(homepage.footerRentzilaLogo).toBeVisible();
+    await expect(homepage.copyrightLabel).toBeVisible();
+
     await homepage.clickOnPrivacyPolicyLink();
+
     await expect(await privacyPolicyPage.getUrl()).toContain(pagesUrlPath["privacy-policy"]);
-    await privacyPolicyPage.checkPrivacyPolicyTitle();
+    await expect(privacyPolicyPage.privacyPolicyTitle).toBeVisible()
+    await expect(await privacyPolicyPage.getPrivacyPolicyTitleText()).toBe('Політика конфіденційності');
+
     await homepage.clickOnCookiePolicyLink();
+
     await expect(await cookiePolicyPage.getUrl()).toContain(pagesUrlPath["cookey-policy"]);
-    await cookiePolicyPage.checkCookiePolicyTitle();
+    await expect(cookiePolicyPage.cookiePolicyTitle).toBeVisible()
+    await expect(await cookiePolicyPage.getCookiePolicyTitleText()).toBe('Політика використання файлів cookie');
+
     await homepage.clickOnTermsConditionsLink();
+
     await expect(await termsConditionsPage.getUrl()).toContain(pagesUrlPath["terms-conditions"]);
-    await termsConditionsPage.checkCookiePolicyTitle();
+    await expect(termsConditionsPage.termsConditionsTitle).toBeVisible()
+    await expect(await termsConditionsPage.getCookiePolicyTitleText()).toBe('Угода користувача');
+
     await homepage.clickOnAnnouncementsLink();
-    await expect(productsPage.getUrl()).toContain(pagesUrlPath["products"]);
-    await productsPage.checkSerchInputBgText('Пошук оголошень або послуг');
+
+    await expect(await productsPage.getUrl()).toContain(pagesUrlPath["products"]);
+    await expect(productsPage.searchInput).toBeVisible();
+    await expect(await productsPage.getSearchInputBgText()).toBe('Пошук оголошень або послуг');
+
     await productsPage.clickOnLogo();
+
     await expect(await homepage.getUrl()).toBe(homepageUrl);
-    await homepage.checkSearchServiceSpecialEquipmentTitle('Сервіс пошуку');
+    await expect(await homepage.getSearchServiceSpecialEquipmentTitleText()).toContain('Сервіс пошуку');
+
     await homepage.clickOnTendersLink();
+
     await expect(await tendersPage.getUrl()).toContain(pagesUrlPath["tenders-map"]);
-    await tendersPage.checkSerchInputBgText('Пошук тендера за ключовими словами');
+    await expect(tendersPage.searchInput).toBeVisible();
+    await expect(await tendersPage.getSerchInputBgText()).toBe('Пошук тендера за ключовими словами');
+
     await tendersPage.clickOnLogo();
+
     await expect(await homepage.getUrl()).toBe(homepageUrl);
-    await homepage.checkContactsEmail('info@rentzila.com.ua');
+    await expect(await homepage.getContactsEmail()).toContain('info@rentzila.com.ua');
 });
 
 test('test case C226: Verify "У Вас залишилися питання?" form', async ({ page }) => {
     const userName = faker.person.firstName();
+    const userPhone = contactUsFormInputValues["other correct phone"];
     
     await homepage.scrollToConsultationForm();
-    await homepage.checkConsultationFormIsVisible();
+
+    await expect(await homepage.consultationForm).toBeVisible();
+
     await homepage.clickOnSubmitConsultationBtn();
 
     await expect(await homepage.checkInputErrorIsDisplayed('name', 'Поле не може бути порожнім')).toBe(true);
@@ -76,7 +111,8 @@ test('test case C226: Verify "У Вас залишилися питання?" fo
     await expect(await homepage.checkInputErrorIsDisplayed('phone', 'Поле не може бути порожнім')).toBe(true);
 
     await homepage.clickOnPhoneInput();
-    await homepage.checkPhoneInputAfterClick('+380');
+
+    await expect(await homepage.getPhoneInputText()).toBe('+380');
 
     await homepage.fillInput('phone', contactUsFormInputValues["correct phone"]);
     await homepage.clearInput('name');
@@ -88,13 +124,21 @@ test('test case C226: Verify "У Вас залишилися питання?" fo
     await homepage.fillInput('name', contactUsFormInputValues.test);
     await homepage.fillInput('phone', contactUsFormInputValues["incorrect phone with spaces"]);
     await homepage.clickOnSubmitConsultationBtn();
-    await homepage.checkIncorrectPhoneErrorMsg('Телефон не пройшов валідацію');
+
+    await expect(homepage.consultationFormErrorMessage.first()).toBeVisible();
+    await expect( await homepage.getConsultationFormPhoneErrorMessageText()).toBe('Телефон не пройшов валідацію');
+    await expect(homepage.consultationFormErrorMessage).toHaveCSS('border-color', 'rgb(247, 56, 89)')
+
     await homepage.fillInput('phone', contactUsFormInputValues["incorrect phone same digits and spaces"]);
     await homepage.clickOnSubmitConsultationBtn();
-    await homepage.checkIncorrectPhoneErrorMsg('Телефон не пройшов валідацію');
+
+    await expect(homepage.consultationFormErrorMessage.first()).toBeVisible();
+    await expect( await homepage.getConsultationFormPhoneErrorMessageText()).toBe('Телефон не пройшов валідацію');
+    await expect(homepage.consultationFormErrorMessage).toHaveCSS('border-color', 'rgb(247, 56, 89)')
 
     await homepage.fillInput('phone', contactUsFormInputValues["other correct phone"]);
     await homepage.clickOnSubmitConsultationBtn();
+
     await homepage.checkSuccessSubmitConsultationMsg();
 
     await homepage.clearInput('name');
@@ -102,6 +146,14 @@ test('test case C226: Verify "У Вас залишилися питання?" fo
     await homepage.fillInput('name', userName);
     await homepage.fillInput('phone', contactUsFormInputValues["other correct phone"]);
     await homepage.clickOnSubmitConsultationBtn();
+
     await homepage.checkSuccessSubmitConsultationMsg();
-    await homepage.checkUserDetailsContainUser(userName, contactUsFormInputValues["other correct phone"]);
+        
+    const userList = await homepage.getUsersList();
+
+    const containsUser = userList.some((user: any) => {
+        return user.name === userName && user.phone === userPhone
+    });
+
+    await expect(containsUser).toBe(true);
 });

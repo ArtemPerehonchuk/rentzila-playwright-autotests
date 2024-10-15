@@ -9,10 +9,9 @@ class TendersPage extends Page {
 
     searchInput = this.page.getByTestId('search');
 
-    async checkSerchInputBgText(expectedText: string) {
-        await expect(this.searchInput).toBeVisible();
+    async getSerchInputBgText() {
         const searchInputText = await this.searchInput.getAttribute('placeholder');
-        await expect(searchInputText).toBe(expectedText);
+        return await searchInputText;
     }
 
 }

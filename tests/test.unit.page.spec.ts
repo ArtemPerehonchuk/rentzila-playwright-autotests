@@ -145,8 +145,8 @@ test('test case C297: Verify unit name section', async( {page} ) => {
                 await expect(await createUnitPage.announcementNameInput).toHaveCSS('border-color', 'rgb(247, 56, 89)');
 
                 await createUnitPage.copyPasteValueInSectionInput(createUnitPage.announcementNameInput, value);
-                await expect(createUnitPage.announcementNameInputError).toBeVisible();
 
+                await expect(createUnitPage.announcementNameInputError).toBeVisible();
                 await expect(await createUnitPage.getAnnouncementNameInputErrorText()).toBe('У назві оголошення повинно бути не менше 10 символів');
                 await expect(await createUnitPage.announcementNameInput).toHaveCSS('border-color', 'rgb(247, 56, 89)');
                 break
@@ -262,6 +262,7 @@ test('test case C298: Verify vehicle manufacturer section', async( {page} ) => {
     await createUnitPage.clickOnOptionInVehicleManufacturerDropDown();
 
     await expect(await createUnitPage.getVehicleManufacturerSelectedOptionText()).toBe(optionText);
+
     await createUnitPage.clickOnClearIcon();
 
     await expect(await createUnitPage.getVehicleManufacturerInputText()).toBe('');
@@ -297,6 +298,7 @@ test('test case C299: Verify model name input field', async( {page} ) => {
             await expect(createUnitPage.modelNameInputError).toBeVisible();
             await expect(await createUnitPage.getModelNameInputErrorText()).toBe('У назві моделі може бути не більше 15 символів');
             await expect(createUnitPage.modelNameInput).toHaveCSS('border-color', 'rgb(247, 56, 89)');
+
             await createUnitPage.clearSectionInput(createUnitPage.modelNameInput);
         }
         else if(input === ' ' || input === '<>{};^') {
@@ -358,6 +360,7 @@ test('test case C318: Verify description section', async( {page} ) => {
                     break
                 case random9000CharStr:
                     await createUnitPage.descriptionInfoInput.type(randomOneCharStr);
+
                     await expect((await createUnitPage.getDescriptionInfoInputText()).length).toBe(9000);
                     break
         }
@@ -400,8 +403,10 @@ test('test case C319: Verify vehicle location division', async( {page} ) => {
 
 test('test case C326: Verify ""Скасувати"" button', async( {page} ) => {
     await expect(await createUnitPage.getCancelBtnText()).toBe('Скасувати');
+
     await createUnitPage.clickOnCancelBtn();
     await createUnitPage.acceptAlert();
+
     await expect(await createUnitPage.getUrl()).toBe(homepageUrl);
 })
 
@@ -419,7 +424,6 @@ test('test case C329: Verify ""Далі"" button', async( {page} ) => {
     await createUnitPage.fillAnnouncementName();
     await createUnitPage.fillVehicleManufacturer();
     await createUnitPage.fillAddress();
-
     await createUnitPage.clickOnNextBtn();
 
     await expect(await createUnitPage.getCreateUnitTitleText()).toBe('Створити оголошення');

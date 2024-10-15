@@ -31,10 +31,6 @@ class ProductsPage extends Page {
         return true
     }
 
-    // async getProductsFilter() {
-    //     return await this.productFilterItem;
-    // }
-
     async clickOnDropdownArrow() {
         await this.dropdownArrow.click();
     }
@@ -47,14 +43,9 @@ class ProductsPage extends Page {
         }else return false
     }
 
-    // async getUnitsContainer() {
-    //    return await this.unitsContainer;
-    // }
-
-    async checkSerchInputBgText(expectedText: string) {
-        await expect(this.searchInput).toBeVisible();
+    async getSearchInputBgText() {
         const searchInputText = await this.searchInput.getAttribute('placeholder');
-        await expect(searchInputText).toBe(expectedText);
+        return searchInputText;
     }
 }
 

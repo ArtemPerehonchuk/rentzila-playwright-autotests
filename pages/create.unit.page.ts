@@ -330,6 +330,7 @@ class CreateUnitPage extends Page {
     async clickOnMapPopUpCloseBtn() {
         await this.mapPopUpCloseBtn.click();
     }
+    
     async clickOnMapPopUpSubmitBtn() {
         await this.mapPopUpSubmitBtn.click({force: true});
         await this.page.waitForLoadState('networkidle')
@@ -394,16 +395,6 @@ class CreateUnitPage extends Page {
         await this.selectOnMapBtn.click();
         await this.clickOnMapAndGetAddress();
         await this.clickOnMapPopUpSubmitBtn();
-    }
-
-    async checkFieldsVisibility() {
-        await expect(this.categoriesDropDown).toBeVisible();
-        await expect(this.announcementNameInput).toBeVisible();
-        await expect(this.vehicleManufacturerTitle).toBeVisible();
-        await expect(this.modelNameInput).toBeVisible();
-        await expect(this.technicalInfoInput).toBeVisible();
-        await expect(this.descriptionInfoInput).toBeVisible();
-        await expect(this.addressSelectionInput).toBeVisible();
     }
 }
 
