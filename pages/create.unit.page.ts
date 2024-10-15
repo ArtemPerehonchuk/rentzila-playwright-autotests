@@ -163,7 +163,8 @@ class CreateUnitPage extends Page {
 
     async clickOnNextBtn() {
         await this.nextBtn.click();
-        await this.page.waitForTimeout(500);
+        // await this.page.waitForTimeout(500);
+        await this.page.waitForSelector('[class*="MuiTabs-flexContainer"]', {state: 'visible'});
     }
 
     async fillSectionInput(sectionInputLocator: Locator, value: string) {

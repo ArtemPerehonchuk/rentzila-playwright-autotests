@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - general-info-tab-tests
   pull_request:
     branches:
       - main
