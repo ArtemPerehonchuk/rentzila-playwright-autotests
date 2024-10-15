@@ -203,20 +203,31 @@ test('test case C326: Verify ""Скасувати"" button', async( {page} ) => 
     await createUnitPage.checkUrl(homepageUrl);
 })
 
-test('test case C329: Verify Далі button', async( {page} ) => {
-    try {
-        await createUnitPage.checkNextBtnText('Далі');
-        await createUnitPage.clickOnNextBtn();
-        await createUnitPage.checkNotificationsAppear();
-        await createUnitPage.fillCategory();
-        await createUnitPage.fillAnnouncementName();
-        await createUnitPage.fillVehicleManufacturer();
-        await createUnitPage.fillAddress();
-        await createUnitPage.clickOnNextBtn();
-        await createUnitPage.checkCreateUnitTitle('Створити оголошення');
-        await createUnitPage.checkCreateUnitTabsTitles(2);
-    } catch (error) {
-        await page.screenshot({ path: `test-results/onfailure-error.png`, fullPage: true });
-        throw error;
-    }
+test.only('test case C329: Verify ""Далі"" button', async( {page} ) => {
+    await createUnitPage.checkNextBtnText('Далі');
+    await createUnitPage.clickOnNextBtn();
+    await createUnitPage.checkNotificationsAppear();
+    await createUnitPage.fillCategory();
+    await createUnitPage.fillAnnouncementName();
+    await createUnitPage.fillVehicleManufacturer();
+    await createUnitPage.fillAddress();
+    await createUnitPage.clickOnNextBtn();
+    await createUnitPage.checkCreateUnitTitle('Створити оголошення');
+
+    const tabNames = await createUnitPage.createUnitTabsText.allInnerTexts();
+
+        for (let i = 0; i < tabNames.length; i++) {
+            await expect(createUnitPage.createUnitTabs.nth(i)).toBeVisible();
+            await expect(await createUnitPage.createUnitTabsText.nth(i).innerText()).toBe(tabNames[i]);
+            await expect(await createUnitPage.tabNumber.nth(i).innerText()).toBe(String(i + 1));
+
+            let tabAttr = await createUnitPage.createUnitTabs.nth(i).getAttribute('aria-selected');
+            console.log('attribute is : ', tabAttr)
+
+            if(i !== 1) {
+                await expect(tabAttr).toBe('false');
+            }else {
+                await expect(tabAttr).toBe('true');
+            }
+        }
 })
