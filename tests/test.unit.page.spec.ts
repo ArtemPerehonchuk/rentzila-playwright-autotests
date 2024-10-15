@@ -203,7 +203,7 @@ test('test case C326: Verify ""Скасувати"" button', async( {page} ) => 
     await createUnitPage.checkUrl(homepageUrl);
 })
 
-test('test case C329: Verify ""Далі"" button', async( {page} ) => {
+test('test case C329: Verify Далі button', async( {page} ) => {
     try {
         await createUnitPage.checkNextBtnText('Далі');
         await createUnitPage.clickOnNextBtn();
@@ -216,7 +216,7 @@ test('test case C329: Verify ""Далі"" button', async( {page} ) => {
         await createUnitPage.checkCreateUnitTitle('Створити оголошення');
         await createUnitPage.checkCreateUnitTabsTitles(2);
     } catch (error) {
-        await page.screenshot({ path: `test-results/${test.info().title}-error.png`, fullPage: true });
+        await page.screenshot({ path: `test-results/onfailure-error.png`, fullPage: true });
         throw error;
     }
 })
