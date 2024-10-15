@@ -203,7 +203,7 @@ test('test case C326: Verify ""Скасувати"" button', async( {page} ) => 
     await createUnitPage.checkUrl(homepageUrl);
 })
 
-test('test case C329: Verify ""Далі"" button', async( {page} ) => {
+test.only('test case C329: Verify ""Далі"" button', async( {page} ) => {
     await createUnitPage.checkNextBtnText('Далі');
     await createUnitPage.clickOnNextBtn();
     await createUnitPage.checkNotificationsAppear();

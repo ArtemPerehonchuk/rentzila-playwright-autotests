@@ -163,7 +163,7 @@ class CreateUnitPage extends Page {
 
     async clickOnNextBtn() {
         await this.nextBtn.click();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForTimeout(500);
     }
 
     async fillSectionInput(sectionInputLocator: Locator, value: string) {
