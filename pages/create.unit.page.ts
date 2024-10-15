@@ -164,7 +164,7 @@ class CreateUnitPage extends Page {
     async clickOnNextBtn() {
         await this.nextBtn.waitFor({ state: 'visible', timeout: 5000 });
         await this.nextBtn.click({force: true});
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForTimeout(1000);
     }
 
     async fillSectionInput(sectionInputLocator: Locator, value: string) {
@@ -478,6 +478,7 @@ class CreateUnitPage extends Page {
     }
     async clickOnMapPopUpSubmitBtn() {
         await this.mapPopUpSubmitBtn.click({force: true});
+        await this.page.waitForLoadState('networkidle');
     }
 
     async clickOnMapAndGetAddress() {
@@ -487,6 +488,7 @@ class CreateUnitPage extends Page {
             const randomY = mapContainerSize.y + Math.random() * mapContainerSize.height;
     
             await this.page.mouse.click(randomX, randomY);
+            await this.page.waitForLoadState('networkidle');
             const address = await this.addressLine.innerText();
             return address
         }
