@@ -162,6 +162,7 @@ class CreateUnitPage extends Page {
     }
 
     async clickOnNextBtn() {
+        await this.nextBtn.waitFor({ state: 'visible', timeout: 5000 });
         await this.nextBtn.click({force: true});
         await this.page.waitForTimeout(1000);
     }
