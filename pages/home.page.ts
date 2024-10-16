@@ -42,7 +42,7 @@ class HomePage extends Page {
     loginEmailOrPhoneInput = this.page.locator('#email');
     loginPasswordInput = this.page.locator('#password');
     loginErrorInputsMsg = this.page.locator('p[class*="CustomReactHookInput_error_message"]');
-    autorizationForm = this.page.locator('[data-testid="authorizationContainer"]');
+    autorizationForm = this.page.locator('[class*="LoginForm_form"]');
     submitLoginFormBtn = this.page.locator('[class*="LoginForm_form"] [class*="ItemButtons_darkBlueRoundBtn"]');
     hidePasswordIcon = this.page.locator('div[data-testid="reactHookButton"]');
     userIcon = this.page.locator('div[data-testid="avatarBlock"]');
@@ -53,7 +53,6 @@ class HomePage extends Page {
     invalidEmailOrPasswordError = this.page.locator('div[data-testid="errorMessage"]');
     createUnitBtn = this.page.locator('a[class*="Navbar_addAnnouncement"]');
     closePopUpBtn = this.page.locator('[data-testid="crossButton"]');
-    
 
     async scrollToServicesContainer() {
         await this.servicesContainer.scrollIntoViewIfNeeded();
@@ -61,24 +60,6 @@ class HomePage extends Page {
 
     async scrollToSpecialEquipmentContainer() {
         await this.specialEquipmentContainer.scrollIntoViewIfNeeded();
-    }
-
-    async checkServices() {
-        await expect(this.servicesContainer).toBeVisible();
-        await expect(this.servicesList.first()).toBeVisible();
-        
-        const servicesUnitsCount = await this.servicesUnitsList.count(); 
-        await expect(this.servicesUnitsList.first()).toBeVisible();
-        await expect(servicesUnitsCount).toBe(7);
-    }
-
-    async checkSpecialEquipments() {
-        await expect(this.specialEquipmentContainer).toBeVisible();
-        await expect(this.specialEquipmentsList.first()).toBeVisible();
-        
-        const specialEquipmentsCount = await this.specialEquipmentsUnitsList.count(); 
-        await expect(this.specialEquipmentsUnitsList.first()).toBeVisible();
-        await expect(specialEquipmentsCount).toBe(7);
     }
 
     async clickFirstServicesUnit() {
@@ -104,24 +85,6 @@ class HomePage extends Page {
     async scrollToFooter() {
         await this.footerContainer.scrollIntoViewIfNeeded();
     }
-    
-    async checkFooterContainerIsVisible() {
-        await expect(this.footerContainer).toBeVisible();
-    }
-
-    async checkFooterElementsAreDisplayed() {
-        await expect(this.aboutUsTitle).toBeVisible();
-        await expect(this.privacyPolicyLink).toBeVisible();
-        await expect(this.cookiePolicyLink).toBeVisible();
-        await expect(this.termsConditionsLink).toBeVisible();
-        await expect(this.announcementsLink).toBeVisible();
-        await expect(this.tendersLink).toBeVisible();
-        await expect(this.jobRequestsLink).toBeVisible();
-        await expect(this.contactsTitle).toBeVisible();
-        await expect(this.contactsEmail).toBeVisible();
-        await expect(this.footerRentzilaLogo).toBeVisible();
-        await expect(this.copyrightLabel).toBeVisible();
-    }
 
     async clickOnPrivacyPolicyLink() {
         await this.privacyPolicyLink.click();
@@ -143,8 +106,8 @@ class HomePage extends Page {
         await this.page.waitForLoadState('domcontentloaded');
     }
 
-    async checkSearchServiceSpecialEquipmentTitle(expectedTitle: string) {
-        await expect(await this.searchServicesSpecialEquipmentTitle.innerText()).toContain(expectedTitle);
+    async getSearchServiceSpecialEquipmentTitleText() {
+        return await this.searchServicesSpecialEquipmentTitle.innerText();
     }
 
     async clickOnTendersLink() {
@@ -156,17 +119,13 @@ class HomePage extends Page {
         await this.contactsEmail.click();
     }
 
-    async checkContactsEmail(expectedEmail: string) {
+    async getContactsEmail() {
         const emailAttr = await this.contactsEmail.getAttribute('href');
-        await expect(emailAttr).toContain(expectedEmail)
+        return emailAttr
     }
 
     async scrollToConsultationForm() {
         await this.consultationForm.scrollIntoViewIfNeeded();
-    }
-
-    async checkConsultationFormIsVisible() {
-        await expect(this.consultationForm).toBeVisible();
     }
 
     async clickOnSubmitConsultationBtn() {
@@ -244,11 +203,8 @@ class HomePage extends Page {
         await this.consultationFormPhoneInput.click();
     }
 
-    async checkPhoneInputAfterClick(expectedValue: string) {
-        const inputPhoneValue = await this.consultationFormPhoneInput.evaluate((el) => {
-            return (el as HTMLInputElement).value;
-        });
-        await expect(inputPhoneValue).toBe(expectedValue)
+    async getPhoneInputText() {
+        return await this.consultationFormPhoneInput.inputValue();
     }
 
     async clearInput(inputName: string) {
@@ -270,14 +226,8 @@ class HomePage extends Page {
         }
     }
 
-    async checkIncorrectPhoneErrorMsg(expectedText: string) {
-        const phoneBorderColor = await this.consultationFormPhoneInput.evaluate((el) => {
-            return window.getComputedStyle(el).borderColor;
-        });
-        await expect(phoneBorderColor).toBe('rgb(247, 56, 89)');
-        await expect(this.consultationFormErrorMessage.first()).toBeVisible();
-        const consultationFormPhoneErrorMessageText = await this.consultationFormErrorMessage.first().innerText();
-        await expect(consultationFormPhoneErrorMessageText).toBe(expectedText);
+    async getConsultationFormPhoneErrorMessageText() {
+        return await this.consultationFormErrorMessage.first().innerText();
     }
 
     async checkSuccessSubmitConsultationMsg() {
@@ -293,63 +243,36 @@ class HomePage extends Page {
         }
     }
 
-    async checkUserDetailsContainUser(userName: string, userPhone: string) {
-        
-        const userList = await this.getUsersList();
-
-        const containsUser = userList.some((user: any) => {
-            return user.name === userName && user.phone === userPhone
-    });
-
-        await expect(containsUser).toBe(true);
-    }
-
     async clickOnEnterBtn() {
         await this.enterBtn.click();
     }
 
-    async checkAutorizationFormIsDisplayed() {
-        await expect(this.autorizationForm).toBeVisible();
-    }
-
     async clickOnSubmitLoginFormBtn() {
         await this.submitLoginFormBtn.click();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForTimeout(500)
     }
 
-    async checkInputValue(inputName: string, inputValue: string) {
-        switch(inputName) {
-            case 'email':
-                await expect(await this.loginEmailOrPhoneInput.inputValue()).toBe(inputValue);
-                break
+    async getLoginEmailOrPhoneInputValue() {
+        return await this.loginEmailOrPhoneInput.inputValue();
+    }
 
-            case 'password':
-                await expect(await this.loginPasswordInput.inputValue()).toBe(inputValue);
-                break
-        }
+    async getPasswordInputValue() {
+        return await this.loginPasswordInput.inputValue();
     }
 
     async clickOnHidePasswordIcon() {
         await this.hidePasswordIcon.click();
     }
 
-    async checkPasswordInputType(typeName: string, typeValue: string) {
-        const passwordInputType = await this.loginPasswordInput.getAttribute('type')
-        switch(typeName){
-            case 'hidden':
-                await expect(passwordInputType).toBe(typeValue);
-                break;
-            
-            case 'shown':
-                await expect(passwordInputType).toBe(typeValue);
-                break;
-        }
+    async getPasswordInputType() {
+        return await this.loginPasswordInput.getAttribute('type')
     }
 
-    async checkUserIconIsDisplayed(shouldBeVisible: boolean) {
+    async checkUserIconIsDisplayed(shouldBeVisible: boolean = true) {
         if(shouldBeVisible) {
             await expect(this.userIcon).toBeVisible();
-        }
+            return true
+        }else return false
     }
 
     async clickOnUserIcon() {
@@ -357,13 +280,8 @@ class HomePage extends Page {
         await this.page.waitForLoadState('domcontentloaded');
     }
 
-    async checkProfileDropDownIsDisplayed() {
-        await expect(this.profileDropDown).toBeVisible();
-    }
-
-    async checkProfileDropDownEmail(expectedEmail: string) {
-        const currentEmail = await this.profileDropDownEmail.innerText();
-        await expect(currentEmail).toBe(expectedEmail);
+    async getProfileDropDownEmail() {
+        return await this.profileDropDownEmail.innerText();
     }
 
     async logout() {
@@ -375,24 +293,20 @@ class HomePage extends Page {
         await this.page.waitForTimeout(2000);
     }
     
-    async checkIncorrectEmailOrPhoneInputFormat(expectedText: string) {
-        await this.loginErrorInputsMsg.isVisible();
-        const errorText = await this.loginErrorInputsMsg.innerText();
-        await expect(errorText).toBe(expectedText);
+    async getIncorrectPasswordFormatErrorText() {
+        return await this.loginErrorInputsMsg.innerText();
     }
 
-    async checkIncorrectPasswordInputFormat(incorrectFormatError: string, ivalidCredentialsError: string) {
-        await this.checkAutorizationFormIsDisplayed();
-        await this.checkUserIconIsDisplayed(false);
+    async getIncorrectEmailOrPhoneFormatErrorText() {
+        return await this.loginErrorInputsMsg.innerText();
+    }
 
+    async getIncorrectPasswordErrorText() {
         if(await this.invalidEmailOrPasswordError.isVisible()) {
-            const errorText = await this.invalidEmailOrPasswordError.innerText()
-            await expect(errorText).toBe(ivalidCredentialsError);
+            return await this.invalidEmailOrPasswordError.innerText()
+        }else if(await this.loginErrorInputsMsg.isVisible()) {
+            return await this.loginErrorInputsMsg.innerText()
         }
-        else if(await this.loginErrorInputsMsg.isVisible()) {
-            const errorText = await this.loginErrorInputsMsg.innerText()
-            await expect(errorText).toContain(incorrectFormatError);
-        }       
     }
 
     async clickOnCreateUnitBtn() {

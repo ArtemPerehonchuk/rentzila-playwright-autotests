@@ -1,23 +1,21 @@
-import { Page as PlaywrightPage, Locator, expect } from '@playwright/test';
+import { Page as PlaywrightPage, expect } from '@playwright/test';
 import Page from './page';
 
 class UnitPage extends Page {
-    public locators: { [key: string]: Locator};
     
     constructor(page: PlaywrightPage) {
         super(page);
-
-        this.locators = {
-            unitSrvicesTitle: this.page.getByText('Послуги, які надає технічний засіб:'),
-            unitServicesTypesContainer: this.page.locator('[itemprop="services"]')
-        }
     }
 
-    async checkUnit() {
-        if(await this.locators.unitSrvicesTitle.isVisible()) {
-            await expect(this.locators.unitSrvicesTitle).toBeVisible()
-            await expect(this.locators.unitServicesTypesContainer).toBeVisible()
-        }
+    unitSrvicesTitle = this.page.locator('[class*="UnitCharacteristics_services"] [class*="UnitCharacteristics_title"]');
+    unitServicesTypesContainer = this.page.locator('[itemprop="services"]');
+
+    async checkUnitIsVisible(isExist: boolean = true) {
+        if(isExist) {
+            await expect(this.unitSrvicesTitle).toBeVisible()
+            await expect(this.unitServicesTypesContainer).toBeVisible()
+            return true
+        }else return false
     }
 }
 

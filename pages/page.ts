@@ -3,9 +3,7 @@ import { Page as PlaywrightPage, Locator, expect } from '@playwright/test';
 class Page {
     public page: PlaywrightPage;
     public logo: Locator;
-    /**
-     * @param {PlaywrightPage} page
-     */
+   
     constructor(page: PlaywrightPage) {
       this.page = page;
 
@@ -13,12 +11,12 @@ class Page {
     }
 
     async navigate(path = '') {
-        await this.page.goto(path);
-        await this.page.waitForLoadState('domcontentloaded');
+      await this.page.goto(path);
     }
 
-    async checkUrl(expectedUrl: string) {
-        await expect(this.page.url()).toContain(expectedUrl)
+    async getUrl() {
+      await this.page.waitForLoadState('load')
+      return await this.page.url()
     }
 
     async clickOnLogo() {

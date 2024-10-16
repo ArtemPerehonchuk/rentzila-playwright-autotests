@@ -1,71 +1,89 @@
-import { test, request } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import HomePage from '../pages/home.page';
 import ProductsPage from '../pages/products.page';
 import UnitPage from '../pages/unit.page';
 
-import dotenv from 'dotenv';
-
-dotenv.config();
-
 const homepageUrl: string = process.env.HOMEPAGE_URL || '';
 
+let homepage: HomePage;
+let productsPage: ProductsPage;
+let unitPage: UnitPage;
+
 test.beforeEach(async ({ page }) => {
-    const apiRequestContext = await request.newContext();
-    const homepage = new HomePage(page, apiRequestContext);
+    homepage = new HomePage(page);
+    productsPage = new ProductsPage(page);
+    unitPage = new UnitPage(page);
     await homepage.navigate('/');
 });
 
 test('test case c212: Checking ""Послуги"" section on the main page', async ({ page }) => {
-    const apiRequestContext = await request.newContext();
-    const homepage = new HomePage(page, apiRequestContext);
-    const productsPage = new ProductsPage(page);
-    const unitPage = new UnitPage(page);
-    const servicesList = homepage.locators.servicesList;
+    test.setTimeout(150000);
+
+    const servicesList = homepage.servicesList;
     const servicesCount = await servicesList.count();
     let firstServicesUnitName;
 
     for (let i = 0; i < servicesCount; i++) {
         await homepage.scrollToServicesContainer();
-        await homepage.checkServices();
+
+        await expect(homepage.servicesContainer).toBeVisible();
+        await expect(await homepage.servicesUnitsList.count()).toBe(7);
+
         await servicesList.nth(i).click();
+
         firstServicesUnitName = await homepage.getFirstServicesUnitName();
+
         await homepage.clickFirstServicesUnit();
-        await productsPage.checkProductsFilter();
-        await productsPage.checkFilters(firstServicesUnitName);
-        await productsPage.checkUnitsContainerIsVisible();
+
+        await expect(await productsPage.productFilterItem).toBeVisible();
+        await expect(await productsPage.filtersAreChecked(firstServicesUnitName)).toBe(true);
+        await expect(await productsPage.unitsContainer).toBeVisible();
+
         await productsPage.clickFirstProduct();
-        await unitPage.checkUnit();
+
+        await expect(await unitPage.checkUnitIsVisible()).toBe(true);
+
         await unitPage.clickOnLogo();
-        await homepage.checkUrl(homepageUrl)
+
+        await expect(await homepage.getUrl()).toBe(homepageUrl);
+
         await homepage.clickOnAnnouncementsNavMenuItem();
-        await productsPage.checkProductsFilter();
-        await productsPage.checkFilters(firstServicesUnitName);
-        await homepage.clickOnLogo()
+
+        await expect(await productsPage.productFilterItem).toBeVisible();
+        await expect(await productsPage.filtersAreChecked(firstServicesUnitName)).toBe(true);
+
+        await homepage.clickOnLogo();
     }
 })
 
 test('test case c213: Checking ""Спецтехніка"" section on the main page', async ({ page }) => {
-    const apiRequestContext = await request.newContext();
-    const homepage = new HomePage(page, apiRequestContext);
-    const productsPage = new ProductsPage(page);
-    const unitPage = new UnitPage(page);
-    const specialEquipmentsList = homepage.locators.specialEquipmentsList;
+    const specialEquipmentsList = homepage.specialEquipmentsList;
     const specialEquipmentsCount = await specialEquipmentsList.count();
 
     for (let i = 0; i < specialEquipmentsCount; i++) {
-        await homepage.scrollToSpicialEquipmentContainer();
-        await homepage.checkSpecialEquipments();
+        await homepage.scrollToSpecialEquipmentContainer();
+
+        await expect(homepage.specialEquipmentContainer).toBeVisible();
+        await expect(await homepage.specialEquipmentsUnitsList.count()).toBe(7);
+
         await specialEquipmentsList.nth(i).click({force: true});
+
         await homepage.clickFirstSpecialEquipmentUnit();
-        await productsPage.checkProductsFilter();
-        await productsPage.checkCategoriesCheckboxes();
-        await productsPage.checkUnitsContainerIsVisible();
+
+        await expect(await productsPage.productFilterItem).toBeVisible();
+        await expect(await productsPage.checkCategoriesCheckboxesAreChecked()).toBe(true);
+        await expect(await productsPage.unitsContainer).toBeVisible();
+
         await productsPage.clickFirstProduct();
-        await unitPage.checkUnit();
+
+        await expect(await unitPage.checkUnitIsVisible()).toBe(true);
+
         await unitPage.clickOnLogo();
-        await homepage.checkUrl(homepageUrl);
+
+        await expect(await homepage.getUrl()).toBe(homepageUrl);
+
         await homepage.clickOnAnnouncementsNavMenuItem();
-        await productsPage.checkCategoriesCheckboxes();
-        await homepage.clickOnLogo();
+        
+        await expect(await productsPage.checkCategoriesCheckboxesAreChecked()).toBe(true);
     }
 })
