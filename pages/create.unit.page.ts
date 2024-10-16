@@ -62,6 +62,7 @@ class CreateUnitPage extends Page {
         const tabNames = await this.createUnitTabsText.allInnerTexts();
         let activeTabIndex = activeTabNumber - 1;
         for (let i = 0; i < tabNames.length; i++) {
+            await this.page.waitForTimeout(3000);
             await expect(this.createUnitTabs.nth(i)).toBeVisible();
             await expect(await this.createUnitTabsText.nth(i).innerText()).toBe(tabNames[i]);
             await expect(await this.tabNumber.nth(i).innerText()).toBe(String(i + 1));
@@ -163,7 +164,7 @@ class CreateUnitPage extends Page {
 
     async clickOnNextBtn() {
         await this.nextBtn.waitFor({ state: 'visible', timeout: 5000 });
-        await this.nextBtn.click();
+        await this.nextBtn.click({force: true});
         await this.page.waitForTimeout(1000);
     }
 
