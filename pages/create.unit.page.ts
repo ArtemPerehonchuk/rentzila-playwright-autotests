@@ -478,7 +478,7 @@ class CreateUnitPage extends Page {
     }
     async clickOnMapPopUpSubmitBtn() {
         await this.mapPopUpSubmitBtn.click({force: true});
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForLoadState('load');
     }
 
     async clickOnMapAndGetAddress() {
@@ -488,7 +488,7 @@ class CreateUnitPage extends Page {
             const randomY = mapContainerSize.y + Math.random() * mapContainerSize.height;
     
             await this.page.mouse.click(randomX, randomY);
-            await this.page.waitForLoadState('networkidle');
+            await this.page.waitForLoadState('load');
             const address = await this.addressLine.innerText();
             return address
         }
