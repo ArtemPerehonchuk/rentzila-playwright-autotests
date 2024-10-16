@@ -214,9 +214,4 @@ test('test case C329: Verify ""Далі"" button', async( {page} ) => {
     await createUnitPage.clickOnNextBtn();
     await createUnitPage.checkCreateUnitTitle('Створити оголошення');
     await createUnitPage.checkCreateUnitTabsTitles(2);
-
-    // await expect(createUnitPage.createUnitTabs.nth(1)).toBeVisible();
-    // await expect(await createUnitPage.createUnitTabsText.nth(1).innerText()).toBe('Фотографії');
-    // await expect(await createUnitPage.tabNumber.nth(1).innerText()).toBe('2');
-    // await expect(createUnitPage.createUnitTabs.nth(1)).toHaveAttribute('aria-selected', 'true')
 })
