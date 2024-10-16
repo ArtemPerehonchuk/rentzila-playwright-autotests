@@ -477,9 +477,13 @@ class CreateUnitPage extends Page {
     async clickOnMapPopUpCloseBtn() {
         await this.mapPopUpCloseBtn.click();
     }
+
     async clickOnMapPopUpSubmitBtn() {
         await this.mapPopUpSubmitBtn.click({force: true});
-        await this.page.waitForLoadState('load');
+        // await this.page.waitForTimeout(3000);
+        await this.page.waitForResponse(response => 
+        response.url().includes('SubscribedButtonClick&dl') && response.status() === 200
+);
     }
 
     async clickOnMapAndGetAddress() {
