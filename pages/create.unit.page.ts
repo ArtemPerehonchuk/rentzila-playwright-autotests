@@ -9,7 +9,7 @@ class CreateUnitPage extends Page {
         super(page);
         }
     
-        getCreateUnitTitle(): Locator {return  this.page.locator('div[class*="CreateEditFlowLayout_title"]')};
+        getCreateUnitTitle() {return  this.page.locator('div[class*="CreateEditFlowLayout_title"]')};
         getCreateUnitTabs() {return  this.page.getByRole('tab')};
         getCreateUnitTabsText() {return  this.page.locator('div[class*="CustomLabel_label"] > span[class*="CustomLabel_labelTitle__O2bFl"]')};
         getTabNumber() {return  this.page.locator('[data-testid="labelNumber"]')};

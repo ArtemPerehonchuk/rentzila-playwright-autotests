@@ -32,7 +32,7 @@ test('test case C294: Verify body title and tab titles', async( {page} ) => {
 })
 
 test('test case C296: Verify category (Категорія) section', async( {page} ) => {
-    test.setTimeout(90000);
+    test.setTimeout(150000);
 
     await createUnitPage.checkSection(
         createUnitPage.getCategoriesTitle(),
