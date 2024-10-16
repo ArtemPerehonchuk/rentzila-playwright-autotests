@@ -35,15 +35,15 @@ test('test case C296: Verify category (Категорія) section', async( {pag
     test.setTimeout(90000);
 
     await createUnitPage.checkSection(
-        createUnitPage.categoriesTitle,
-        createUnitPage.categoriesDropDown,
+        createUnitPage.getCategoriesTitle(),
+        createUnitPage.getCategoriesDropDown(),
         'Категорія',
         'Виберіть категорію'
     );
     await createUnitPage.clickOnNextBtn();
     await expect(await createUnitPage.checkSectionError(
-        createUnitPage.categoriesDropDown,
-        createUnitPage.categoryErrorMessage,
+        createUnitPage.getCategoriesDropDown(),
+        createUnitPage.getCategoryErrorMessage(),
         'Це поле обов’язкове'
     )).toBe(true);
     await createUnitPage.clickOnCategoriesDropDown();
@@ -57,10 +57,10 @@ test('test case C296: Verify category (Категорія) section', async( {pag
     await createUnitPage.checkOptionsInCategoriesPopUp();
 })
 
-test('test case C297: Verify unit name section', async( {page} ) => {
+test.only('test case C297: Verify unit name section', async( {page} ) => {
     await createUnitPage.checkSection(
-        createUnitPage.announcementNameTitle,
-        createUnitPage.announcementNameInput,
+        createUnitPage.getAnnouncementNameTitle(),
+        createUnitPage.getAnnouncementNameInput(),
         'Назва оголошення',
         'Введіть назву оголошення'
     );
@@ -81,15 +81,15 @@ test('test case C297: Verify unit name section', async( {page} ) => {
 
 test('test case C298: Verify vehicle manufacturer section', async( {page} ) => {
     await createUnitPage.checkSection(
-        createUnitPage.vehicleManufacturerTitle,
-        createUnitPage.vehicleManufacturerInput,
+        createUnitPage.getVehicleManufacturerTitle(),
+        createUnitPage.getVehicleManufacturerInput(),
         'Виробник транспортного засобу',
         'Введіть виробника транспортного засобу'
     );
     await createUnitPage.clickOnNextBtn();
     await expect(await createUnitPage.checkSectionError(
-                createUnitPage.announcementNameInput,
-                createUnitPage.announcementNameInputError,
+                createUnitPage.getAnnouncementNameInput(),
+                createUnitPage.getAnnouncementNameInputError(),
                 'Це поле обов’язкове'
             )).toBe(true);
 
@@ -109,8 +109,8 @@ test('test case C298: Verify vehicle manufacturer section', async( {page} ) => {
 
 test('test case C299: Verify model name input field', async( {page} ) => {
     await createUnitPage.checkSection(
-        createUnitPage.modelNameTitle,
-        createUnitPage.modelNameInput,
+        createUnitPage.getModelNameTitle(),
+        createUnitPage.getModelNameInput(),
         'Назва моделі',
         'Введіть назву моделі',
         false
@@ -132,12 +132,12 @@ test('test case C299: Verify model name input field', async( {page} ) => {
 
 test('test case C317: Verify technical characteristics section', async( {page} ) => {
     await createUnitPage.checkSection(
-        createUnitPage.technicalInfoTitle,
-        createUnitPage.technicalInfoInput,
+        createUnitPage.getTechnicalInfoTitle(),
+        createUnitPage.getTechnicalInfoInput(),
         'Технічні характеристики'
     );
-    await createUnitPage.checkSectionInputContent(createUnitPage.technicalInfoInput, '');
-    await createUnitPage.checkSectionInputIsClickable(createUnitPage.technicalInfoInput);
+    await createUnitPage.checkSectionInputContent(createUnitPage.getTechnicalInfoInput(), '');
+    await createUnitPage.checkSectionInputIsClickable(createUnitPage.getTechnicalInfoInput());
 
     const inputValues = [
         '<>{};^',
@@ -145,18 +145,18 @@ test('test case C317: Verify technical characteristics section', async( {page} )
     ]
 
     for(const input of inputValues) {
-        await createUnitPage.checkSectionInfoInput(createUnitPage.technicalInfoInput, input);
+        await createUnitPage.checkSectionInfoInput(createUnitPage.getTechnicalInfoInput(), input);
     }
 })
 
 test('test case C318: Verify description section', async( {page} ) => {
     await createUnitPage.checkSection(
-        createUnitPage.descriptionInfoTitle,
-        createUnitPage.descriptionInfoInput,
+        createUnitPage.getDescriptionInfoTitle(),
+        createUnitPage.getDescriptionInfoInput(),
         'Детальний опис'
     );
-    await createUnitPage.checkSectionInputContent(createUnitPage.descriptionInfoInput, '');
-    await createUnitPage.checkSectionInputIsClickable(createUnitPage.descriptionInfoInput);
+    await createUnitPage.checkSectionInputContent(createUnitPage.getDescriptionInfoInput(), '');
+    await createUnitPage.checkSectionInputIsClickable(createUnitPage.getDescriptionInfoInput());
 
     const inputValues = [
         '<>{};^',
@@ -164,35 +164,35 @@ test('test case C318: Verify description section', async( {page} ) => {
     ]
 
     for(const input of inputValues) {
-        await createUnitPage.checkSectionInfoInput(createUnitPage.descriptionInfoInput, input);
+        await createUnitPage.checkSectionInfoInput(createUnitPage.getDescriptionInfoInput(), input);
     }
 })
 
 test('test case C319: Verify vehicle location division', async( {page} ) => {
     await createUnitPage.checkSection(
-        createUnitPage.addressSelectionTitle,
-        createUnitPage.addressSelectionInput,
+        createUnitPage.getAddressSelectionTitle(),
+        createUnitPage.getAddressSelectionInput(),
         'Місце розташування технічного засобу',
         'Виберіть на мапі',
         true
     );
     await createUnitPage.clickOnNextBtn();
     await createUnitPage.checkSectionError(
-        createUnitPage.addressSelectionInput,
-        createUnitPage.addressSelectionInputError,
+        createUnitPage.getAddressSelectionInput(),
+        createUnitPage.getAddressSelectionInputError(),
         'Виберіть коректне місце на мапі України'
     );
     await createUnitPage.clickOnSelectOnMapBtn();
     await createUnitPage.checkMapPopUpIsVisible();
     await createUnitPage.checkMapPopUp('Техніка на мапі', 'Київ, вулиця Володимирська 21/20 Україна, Київська область');
     await createUnitPage.clickOnMapPopUpSubmitBtn();
-    await createUnitPage.checkSectionInputContent(createUnitPage.addressSelectionInput, 'Київ, вулиця Володимирська 21/20 Україна, Київська область');
+    await createUnitPage.checkSectionInputContent(createUnitPage.getAddressSelectionInput(), 'Київ, вулиця Володимирська 21/20 Україна, Київська область');
     await createUnitPage.clickOnSelectOnMapBtn();
 
     const newAddress: string = await createUnitPage.clickOnMapAndGetAddress();
 
     await createUnitPage.clickOutsidePopup();
-    await createUnitPage.checkSectionInputContent(createUnitPage.addressSelectionInput, newAddress)
+    await createUnitPage.checkSectionInputContent(createUnitPage.getAddressSelectionInput(), newAddress)
 
 })
 
