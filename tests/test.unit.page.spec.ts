@@ -57,7 +57,7 @@ test('test case C296: Verify category (Категорія) section', async( {pag
     await createUnitPage.checkOptionsInCategoriesPopUp();
 })
 
-test.only('test case C297: Verify unit name section', async( {page} ) => {
+test('test case C297: Verify unit name section', async( {page} ) => {
     await createUnitPage.checkSection(
         createUnitPage.getAnnouncementNameTitle(),
         createUnitPage.getAnnouncementNameInput(),
