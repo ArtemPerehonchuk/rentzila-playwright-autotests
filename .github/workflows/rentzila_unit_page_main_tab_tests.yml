@@ -39,3 +39,10 @@ jobs:
         with:
           name: test-results
           path: test-results/
+
+      - name: Upload videos
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-videos
+          path: test-results/videos/
