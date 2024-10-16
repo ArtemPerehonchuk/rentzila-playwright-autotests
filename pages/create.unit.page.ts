@@ -479,7 +479,7 @@ class CreateUnitPage extends Page {
     }
     async clickOnMapPopUpSubmitBtn() {
         await this.mapPopUpSubmitBtn.click({force: true});
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForLoadState('load');
     }
 
     async clickOnMapAndGetAddress() {
