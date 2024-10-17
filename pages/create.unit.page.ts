@@ -116,13 +116,13 @@ class CreateUnitPage extends Page {
         await sectionInputLocator.click();
         await this.page.keyboard.press('Meta+A');
         await this.page.keyboard.press('Meta+c');
-        // await this.page.waitForTimeout(2000)
+        await this.page.waitForTimeout(2000)
         await this.clearSectionInput(sectionInputLocator);
-        // await this.page.waitForTimeout(2000)
+        await this.page.waitForTimeout(2000)
         await sectionInputLocator.click();
-        // await this.page.waitForTimeout(2000)
+        await this.page.waitForTimeout(2000)
         await this.page.keyboard.press('Meta+V');
-        // await this.page.waitForTimeout(2000)
+        await this.page.waitForTimeout(2000)
     }
 
     async checkSectionErrorIsDisplayed(sectionInputLocator: Locator, errorMessageLocator: Locator, expectedErrorText: string) {

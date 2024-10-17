@@ -125,12 +125,12 @@ test('test case C297: Verify unit name section', async( {page} ) => {
     await expect(await createUnitPage.getAnnouncementNameInput()).toHaveCSS('border-color', 'rgb(247, 56, 89)');
 
     const randomToNineCharNumber = String(faker.number.int({min: 1, max: 999999999}));
-    const random100CharString = faker.string.alpha({ length: 101 });
+    const random101CharString = faker.string.alpha({ length: 101 });
     const randomTenCharString = faker.string.alpha({ length: 10 });
     const randomOneCharString = faker.string.alpha({ length: 1 });
     const inputValues = [
         randomToNineCharNumber, 
-        random100CharString,
+        random101CharString,
         '<>{};^',
         randomTenCharString
     ]
@@ -153,7 +153,7 @@ test('test case C297: Verify unit name section', async( {page} ) => {
                 await expect(await createUnitPage.getAnnouncementNameInput()).toHaveCSS('border-color', 'rgb(247, 56, 89)');
                 break
             
-            case random100CharString:
+            case random101CharString:
                 // await createUnitPage.getAnnouncementNameInput().click();
                 // await createUnitPage.getAnnouncementNameInput().type(randomOneCharString);
 
