@@ -105,21 +105,24 @@ class CreateUnitPage extends Page {
         await this.clearSectionInput(sectionInputLocator);
         await sectionInputLocator.click();
         await sectionInputLocator.fill(value);
-        await this.page.waitForTimeout(2000)
+        // await this.page.waitForTimeout(2000)
     }
 
     async clearSectionInput(sectionInputLocator: Locator) {
         await sectionInputLocator.clear();
     }
 
-    async copyPasteValueInSectionInput(sectionInputLocator: Locator, value: string) {
+    async copyPasteValueInSectionInput(sectionInputLocator: Locator) {
         await sectionInputLocator.click();
         await this.page.keyboard.press('Meta+A');
         await this.page.keyboard.press('Meta+c');
+        // await this.page.waitForTimeout(2000)
         await this.clearSectionInput(sectionInputLocator);
+        // await this.page.waitForTimeout(2000)
         await sectionInputLocator.click();
+        // await this.page.waitForTimeout(2000)
         await this.page.keyboard.press('Meta+V');
-        await this.page.waitForTimeout(2000)
+        // await this.page.waitForTimeout(2000)
     }
 
     async checkSectionErrorIsDisplayed(sectionInputLocator: Locator, errorMessageLocator: Locator, expectedErrorText: string) {

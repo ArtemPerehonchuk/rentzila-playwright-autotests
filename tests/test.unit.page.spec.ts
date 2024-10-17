@@ -125,7 +125,7 @@ test('test case C297: Verify unit name section', async( {page} ) => {
     await expect(await createUnitPage.getAnnouncementNameInput()).toHaveCSS('border-color', 'rgb(247, 56, 89)');
 
     const randomToNineCharNumber = String(faker.number.int({min: 1, max: 999999999}));
-    const random100CharString = faker.string.alpha({ length: 100 });
+    const random100CharString = faker.string.alpha({ length: 101 });
     const randomTenCharString = faker.string.alpha({ length: 10 });
     const randomOneCharString = faker.string.alpha({ length: 1 });
     const inputValues = [
@@ -136,7 +136,9 @@ test('test case C297: Verify unit name section', async( {page} ) => {
     ]
 
     for (const value of inputValues) {
-        await createUnitPage.fillSectionInput(createUnitPage.getAnnouncementNameInput(), value);
+        //await createUnitPage.fillSectionInput(createUnitPage.getAnnouncementNameInput(), value);
+        await createUnitPage.clearSectionInput(createUnitPage.getAnnouncementNameInput())
+        await createUnitPage.getAnnouncementNameInput().type(value)
 
         switch(value) {
             case randomToNineCharNumber:
@@ -144,7 +146,7 @@ test('test case C297: Verify unit name section', async( {page} ) => {
                 await expect(await createUnitPage.getAnnouncementNameInputErrorText()).toBe('У назві оголошення повинно бути не менше 10 символів');
                 await expect(await createUnitPage.getAnnouncementNameInput()).toHaveCSS('border-color', 'rgb(247, 56, 89)');
 
-                await createUnitPage.copyPasteValueInSectionInput(createUnitPage.getAnnouncementNameInput(), value);
+                await createUnitPage.copyPasteValueInSectionInput(createUnitPage.getAnnouncementNameInput());
 
                 await expect(createUnitPage.getAnnouncementNameInputError()).toBeVisible();
                 await expect(await createUnitPage.getAnnouncementNameInputErrorText()).toBe('У назві оголошення повинно бути не менше 10 символів');
@@ -152,16 +154,16 @@ test('test case C297: Verify unit name section', async( {page} ) => {
                 break
             
             case random100CharString:
-                await createUnitPage.getAnnouncementNameInput().click();
-                await createUnitPage.getAnnouncementNameInput().type(randomOneCharString);
+                // await createUnitPage.getAnnouncementNameInput().click();
+                // await createUnitPage.getAnnouncementNameInput().type(randomOneCharString);
 
                 await expect(createUnitPage.getAnnouncementNameInputError()).toBeVisible();
                 await expect(await createUnitPage.getAnnouncementNameInputErrorText()).toBe('У назві оголошення може бути не більше 100 символів');
                 await expect(await createUnitPage.getAnnouncementNameInput()).toHaveCSS('border-color', 'rgb(247, 56, 89)');
                 await expect(await createUnitPage.getAnnouncementInputValueCharCount()).toBe(100);
 
-                await createUnitPage.copyPasteValueInSectionInput(createUnitPage.getAnnouncementNameInput(), value);
-                await createUnitPage.getAnnouncementNameInput().click();
+                await createUnitPage.copyPasteValueInSectionInput(createUnitPage.getAnnouncementNameInput());
+                // await createUnitPage.getAnnouncementNameInput().click();
                 await createUnitPage.getAnnouncementNameInput().type(randomOneCharString);
 
                 await expect(createUnitPage.getAnnouncementNameInputError()).toBeVisible();
@@ -180,7 +182,7 @@ test('test case C297: Verify unit name section', async( {page} ) => {
                 await expect(createUnitPage.getAnnouncementNameInputError()).not.toBeVisible();
                 await expect(await createUnitPage.getAnnouncementNameInput()).toHaveCSS('border-color', 'rgb(229, 229, 229)');
 
-                await createUnitPage.copyPasteValueInSectionInput(createUnitPage.getAnnouncementNameInput(), value);
+                await createUnitPage.copyPasteValueInSectionInput(createUnitPage.getAnnouncementNameInput());
 
                 await expect(createUnitPage.getAnnouncementNameInputError()).not.toBeVisible();
                 await expect(await createUnitPage.getAnnouncementNameInput()).toHaveCSS('border-color', 'rgb(229, 229, 229)');
@@ -217,7 +219,7 @@ test('test case C298: Verify vehicle manufacturer section', async( {page} ) => {
     await expect(createUnitPage.getVehicleManifacturerDropDown()).toBeVisible();
     await expect(createUnitPage.getVehicleManufacturerDropDownOption()).toBeVisible();
 
-    await createUnitPage.copyPasteValueInSectionInput(createUnitPage.getVehicleManufacturerInput(), randomOneCharString);
+    await createUnitPage.copyPasteValueInSectionInput(createUnitPage.getVehicleManufacturerInput());
 
     await expect(createUnitPage.getVehicleManifacturerDropDown()).toBeVisible();
     await expect(createUnitPage.getVehicleManufacturerDropDownOption()).toBeVisible();
@@ -276,24 +278,28 @@ test('test case C299: Verify model name input field', async( {page} ) => {
 
     const random16CharStr = faker.string.alpha({ length: 16 });
     const random10To15CharStr = faker.string.alpha({ length: {min: 10, max: 15} });
+    const randomStrWithSpaceInEnd = getStringWithSpaceInEnd();
+    const randomStrWithSpaceIncide = getStringWithSpaceIncide();
     const InputValues = [
         random16CharStr,
-        getStringWithSpaceInEnd(),
-        getStringWithSpaceIncide(),
+        randomStrWithSpaceInEnd,
+        randomStrWithSpaceIncide,
         ' ',
         '<>{};^',
         random10To15CharStr
     ]
 
     for(const input of InputValues) {
-        await createUnitPage.fillSectionInput(createUnitPage.getModelNameInput(), input);
+        // await createUnitPage.fillSectionInput(createUnitPage.getModelNameInput(), input);
+        await createUnitPage.clearSectionInput(createUnitPage.getModelNameInput())
+        await createUnitPage.getModelNameInput().type(input)
 
-        if(input === random16CharStr || input === getStringWithSpaceInEnd() || input === getStringWithSpaceIncide()) {
+        if(input === random16CharStr || input === randomStrWithSpaceInEnd || input === randomStrWithSpaceIncide) {
             await expect(createUnitPage.getModelNameInputError()).toBeVisible();
             await expect(await createUnitPage.getModelNameInputErrorText()).toBe('У назві моделі може бути не більше 15 символів');
             await expect(createUnitPage.getModelNameInput()).toHaveCSS('border-color', 'rgb(247, 56, 89)');
 
-            await createUnitPage.copyPasteValueInSectionInput(createUnitPage.getModelNameInput(), input);
+            await createUnitPage.copyPasteValueInSectionInput(createUnitPage.getModelNameInput());
 
             await expect(createUnitPage.getModelNameInputError()).toBeVisible();
             await expect(await createUnitPage.getModelNameInputErrorText()).toBe('У назві моделі може бути не більше 15 символів');
