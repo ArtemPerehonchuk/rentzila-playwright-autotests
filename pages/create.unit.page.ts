@@ -105,7 +105,7 @@ class CreateUnitPage extends Page {
         await this.clearSectionInput(sectionInputLocator);
         await sectionInputLocator.click();
         await sectionInputLocator.fill(value);
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForTimeout(2000)
     }
 
     async clearSectionInput(sectionInputLocator: Locator) {
@@ -119,6 +119,7 @@ class CreateUnitPage extends Page {
         await this.clearSectionInput(sectionInputLocator);
         await sectionInputLocator.click();
         await this.page.keyboard.press('Meta+V');
+        await this.page.waitForTimeout(2000)
     }
 
     async checkSectionErrorIsDisplayed(sectionInputLocator: Locator, errorMessageLocator: Locator, expectedErrorText: string) {
