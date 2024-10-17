@@ -105,7 +105,7 @@ class CreateUnitPage extends Page {
         await this.clearSectionInput(sectionInputLocator);
         await sectionInputLocator.click();
         await sectionInputLocator.fill(value);
-        await this.page.waitForLoadState('load');
+        await this.page.waitForLoadState('networkidle');
     }
 
     async clearSectionInput(sectionInputLocator: Locator) {
