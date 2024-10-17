@@ -136,9 +136,9 @@ test('test case C297: Verify unit name section', async( {page} ) => {
     ]
 
     for (const value of inputValues) {
-        //await createUnitPage.fillSectionInput(createUnitPage.getAnnouncementNameInput(), value);
-        await createUnitPage.clearSectionInput(createUnitPage.getAnnouncementNameInput())
-        await createUnitPage.getAnnouncementNameInput().type(value)
+        await createUnitPage.fillSectionInput(createUnitPage.getAnnouncementNameInput(), value);
+        // await createUnitPage.clearSectionInput(createUnitPage.getAnnouncementNameInput())
+        // await createUnitPage.getAnnouncementNameInput().type(value)
 
         switch(value) {
             case randomToNineCharNumber:
@@ -290,9 +290,9 @@ test('test case C299: Verify model name input field', async( {page} ) => {
     ]
 
     for(const input of InputValues) {
-        // await createUnitPage.fillSectionInput(createUnitPage.getModelNameInput(), input);
-        await createUnitPage.clearSectionInput(createUnitPage.getModelNameInput())
-        await createUnitPage.getModelNameInput().type(input)
+        await createUnitPage.fillSectionInput(createUnitPage.getModelNameInput(), input);
+        // await createUnitPage.clearSectionInput(createUnitPage.getModelNameInput())
+        // await createUnitPage.getModelNameInput().type(input)
 
         if(input === random16CharStr || input === randomStrWithSpaceInEnd || input === randomStrWithSpaceIncide) {
             await expect(createUnitPage.getModelNameInputError()).toBeVisible();
