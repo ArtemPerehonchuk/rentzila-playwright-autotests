@@ -136,9 +136,9 @@ test('test case C297: Verify unit name section', async( {page} ) => {
     ]
 
     for (const value of inputValues) {
-        await createUnitPage.fillSectionInput(createUnitPage.getAnnouncementNameInput(), value);
-        // await createUnitPage.clearSectionInput(createUnitPage.getAnnouncementNameInput())
-        // await createUnitPage.getAnnouncementNameInput().type(value)
+        // await createUnitPage.fillSectionInput(createUnitPage.getAnnouncementNameInput(), value);
+        await createUnitPage.clearSectionInput(createUnitPage.getAnnouncementNameInput())
+        await createUnitPage.getAnnouncementNameInput().type(value)
 
         switch(value) {
             case randomToNineCharNumber:
