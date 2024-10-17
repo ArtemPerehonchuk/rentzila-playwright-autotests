@@ -116,13 +116,13 @@ test('Test case 390: Verify ""Назад"" button', async({ page }) => {
     await photoTab.clickOnPrevBtn();
 
     await createUnitPage.checkCreateUnitTabsTitles(1);
-    await expect(createUnitPage.categoriesDropDown).toBeVisible();
-    await expect(createUnitPage.announcementNameInput).toBeVisible();
-    await expect(createUnitPage.vehicleManufacturerTitle).toBeVisible();
-    await expect(createUnitPage.modelNameInput).toBeVisible();
-    await expect(createUnitPage.technicalInfoInput).toBeVisible();
-    await expect(createUnitPage.descriptionInfoInput).toBeVisible();
-    await expect(createUnitPage.addressSelectionInput).toBeVisible();
+    await expect(createUnitPage.getCategoriesDropDown()).toBeVisible();
+    await expect(createUnitPage.getAnnouncementNameInput()).toBeVisible();
+    await expect(createUnitPage.getVehicleManufacturerTitle()).toBeVisible();
+    await expect(createUnitPage.getModelNameInput()).toBeVisible();
+    await expect(createUnitPage.getTechnicalInfoInput()).toBeVisible();
+    await expect(createUnitPage.getDescriptionInfoInput()).toBeVisible();
+    await expect(createUnitPage.getAddressSelectionInput()).toBeVisible();
 })
 
 test('Test case 393: Verify ""Далі"" button', async({ page }) => {
