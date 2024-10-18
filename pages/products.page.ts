@@ -27,9 +27,6 @@ class ProductsPage extends Page {
         
             await this.produtsList.first().click({force: true});
             await navigationPromise;
-            
-            // await this.page.waitForTimeout(2000)
-            // await this.page.waitForLoadState('load');
         }else {}
     }
 
