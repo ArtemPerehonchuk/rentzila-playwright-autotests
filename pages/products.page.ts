@@ -7,7 +7,7 @@ class ProductsPage extends Page {
         super(page);
     }
     
-    produtsList = this.page.locator('div[class*="UnitCard_cardWrapper"]>a');
+    produtsList = this.page.locator('[data-testid="cardWrapper"]');
     productFilterItem = this.page.locator('div[class*="ResetFilters_selectedCategory"]');
     dropdownArrow = this.page.locator('[data-testid="rightArrow"]').first();
     unitsContainer = this.page.locator('div[class*="MapPagination_units_container"]');
@@ -17,8 +17,16 @@ class ProductsPage extends Page {
 
     async clickFirstProduct() {
         if(await this.produtsList.first().isVisible()) {
+            const navigationPromise = new Promise<void>(resolve => {
+                this.page.on('framenavigated', frame => {
+                    if (frame === this.page.mainFrame()) { 
+                        resolve();
+                    }
+                });
+            });
+        
             await this.produtsList.first().click({force: true});
-            await this.page.waitForLoadState('load');
+            await navigationPromise;
         }else {}
     }
 
