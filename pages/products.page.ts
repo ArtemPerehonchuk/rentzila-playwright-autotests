@@ -17,8 +17,18 @@ class ProductsPage extends Page {
 
     async clickFirstProduct() {
         if(await this.produtsList.first().isVisible()) {
+            const navigationPromise = new Promise<void>(resolve => {
+                this.page.on('framenavigated', frame => {
+                    if (frame === this.page.mainFrame()) { 
+                        resolve();
+                    }
+                });
+            });
+        
             await this.produtsList.first().click({force: true});
-            await this.page.waitForTimeout(2000)
+            await navigationPromise;
+            
+            // await this.page.waitForTimeout(2000)
             // await this.page.waitForLoadState('load');
         }else {}
     }
