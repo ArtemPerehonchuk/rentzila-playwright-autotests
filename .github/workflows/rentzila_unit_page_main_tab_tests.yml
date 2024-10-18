@@ -1,4 +1,4 @@
-name: Rentzila Create Unit Main Info Tab Tests
+name: Rentzila Playwright Tests
 
 on:
   push:
@@ -26,12 +26,18 @@ jobs:
 
       - name: Set up environment variables
         run: |
+          echo "ADMIN_EMAIL=${{secrets.ADMIN_EMAIL}}" >> .env
+          echo "ADMIN_PASSWORD=${{secrets.ADMIN_PASSWORD}}" >> .env
           echo "VALID_EMAIL=${{ secrets.VALID_EMAIL}}" >> .env
           echo "VALID_PASSWORD=${{ secrets.VALID_PASSWORD}}" >> .env
+          echo "VALID_PHONE=${{ secrets.VALID_PHONE}}" >> .env
+          echo "CORRECT_PHONE_NUMBERS_FULL=${{ secrets.CORRECT_PHONE_NUMBERS_FULL }}" >> .env
+          echo "CORRECT_PHONE_NUMBERS_WITHOUT_PLUS=${{ secrets.CORRECT_PHONE_NUMBERS_WITHOUT_PLUS }}" >> .env
+          echo "CORRECT_PHONE_NUMBERS_WITHOUT_PLUS38=${{ secrets.CORRECT_PHONE_NUMBERS_WITHOUT_PLUS38 }}" >> .env
           echo "HOMEPAGE_URL=${{ secrets.HOMEPAGE_URL }}" >> .env
 
       - name: Run tests
-        run: npx playwright test tests/test.unit.page.spec.ts --config=playwright.config.chrome.ts
+        run: npm run test:chrome
 
       - name: Upload test results
         if: failure()

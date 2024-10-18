@@ -9,70 +9,70 @@ class CreateUnitPage extends Page {
         super(page);
     }
     
-    getCreateUnitTitle() {return this.page.locator('div[class*="CreateEditFlowLayout_title"]')};
-    getCreateUnitTabs() {return this.page.getByRole('tab')};
-    getCreateUnitTabsText() {return this.page.locator('div[class*="CustomLabel_label"] > span[class*="CustomLabel_labelTitle__O2bFl"]')};
-    getTabNumber() {return this.page.locator('[data-testid="labelNumber"]')};
-    getCategoriesDropDown() {return this.page.locator('[data-testid="buttonDiv"]')};
-    getNextBtn() {return this.page.locator('[data-testid="nextButton"]')};
-    getCategoryErrorMessage() {return this.page.locator('[class*="CategorySelect_errorTextVisible"]')};
-    getCategoriesPopUp() {return this.page.locator('div[data-testid="categoryPopupWrapper"]')};
-    getCategoriesPopUpCloseBtn() {return this.page.locator('[data-testid="closeIcon"]')};
-    getCategoriesDropDownArrowDown() {return this.page.locator('div[data-testid="buttonDiv"]>div  img[alt="Arrow-down"]')};
-    getCategoriesTitle() {return this.page.locator('div[class*="CategorySelect_title"]')};
-    getCategoriesPopUpTitle() {return this.page.locator('div[class*="CategoryPopup_title"]')};
-    getAnnouncementNameTitle() {return this.page.locator('div[class*="CustomInput_title"]').first()};
-    getAnnouncementNameInput() {return this.page.locator('input[data-testid="custom-input"]').first()};
-    getAnnouncementNameInputError() {return this.page.locator('[data-testid="descriptionError"]').first()};
-    getVehicleManufacturerTitle() {return this.page.locator('div[class*="SelectManufacturer_title"]')};
-    getVehicleManufacturerInputContainer() {return this.page.locator('div[class*="CustomSelectWithSearch_searchInput"]')};
-    getVehicleManufacturerInput() {return this.page.locator('input[data-testid="input-customSelectWithSearch"]')};
-    getVehicleManufacturerInputError() {return this.page.locator('div[class*="CustomSelectWithSearch_errorTextVisible"]')};
-    getVehicleManufacturerInputSearchIcon() {return this.page.locator('div[class*="CustomSelectWithSearch_searchInput"] > svg')};
-    getVehicleManufacturerSelectedOption() {return this.page.locator('[class*="CustomSelectWithSearch_serviceText"]')}
-    getVehicleManifacturerDropDown() {return this.page.locator('div[class*="CustomSelectWithSearch_searchedServicesCat_wrapper"]')};
-    getVehicleManufacturerDropDownOption() {return this.page.locator('div[class*="CustomSelectWithSearch_flexForServices"]').first()};
-    getOptionNotFoundMessage() {return this.page.locator('[data-testid="p2-notFound-addNewItem"]')};
-    getSelectedOptionInDropdown() {return this.page.locator('[class*="CustomSelectWithSearch_serviceText"]')};
-    getClearVehicleManifacturerDropDownIcon() {return this.page.locator('button[class*="CustomSelectWithSearch_serviceBtn"]')};
-    getModelNameTitle() {return this.page.locator('div[class*="CustomInput_title"]').getByText('Назва моделі')};
-    getModelNameInput() {return this.page.locator('input[data-testid="custom-input"]').nth(1)};
-    getModelNameInputError() {return this.page.locator('[data-testid="descriptionError"]')};
-    getTechnicalInfoTitle() {return this.page.locator('div[class*="CustomTextAriaDescription_title"]').first()};
-    getTechnicalInfoInput() {return this.page.locator('[data-testid="textarea-customTextAriaDescription"]').first()};
-    getDescriptionInfoTitle() {return this.page.locator('div[class*="CustomTextAriaDescription_title"]').nth(1)};
-    getDescriptionInfoInput() {return this.page.locator('[data-testid="textarea-customTextAriaDescription"]').nth(1)};
-    getAddressSelectionTitle() {return this.page.locator('[class*="AddressSelectionBlock_title"]')};
-    getAddressSelectionInput() {return this.page.locator('[data-testid="mapLabel"]')};
-    getAddressSelectionInputError() {return this.page.locator('[class*="AddressSelectionBlock_errorTextVisible"]')};
-    getSelectOnMapBtn() {return this.page.locator('[class*="AddressSelectionBlock_locationBtn"]')};
-    getMapPopUp() {return this.page.locator('[data-testid="div-mapPopup"]')};
-    getMapPopUpTitle() {return this.page.locator('[class*="MapPopup_title"]')};
-    getMapPopUpAddressLine() {return this.page.locator('[class*="MapPopup_address"]')}
-    getMapPopUpCloseBtn() {return this.page.locator('[class*="MapPopup_title"]')};
-    getAddressLine() {return this.page.locator('[data-testid="address"]')};
-    getSelectedAddress() {return this.page.locator('[class*="AddressSelectionBlock_mapLabelChosen"]')};
-    getMapPopUpSubmitBtn() {return this.page.locator('[class*="ItemButtons_darkBlueBtn"]')};
-    getMapContainer() {return this.page.locator('#map')};
-    getCancelBtn() {return this.page.locator('[data-testid="prevButton"]')};
-    getCharacteristicsTitle () {return this.page.locator('div[class*="Characteristics_title"]')};
-    getVehicleManufacturerList() {return this.page.locator('[data-testid="input-customSelectWithSearch"]')};
-    getMapLabel() {return this.page.locator('[data-testid="mapLabel"]')};
+    createUnitTitle = this.page.locator('div[class*="CreateEditFlowLayout_title"]');
+    createUnitTabs = this.page.getByRole('tab');
+    createUnitTabsText = this.page.locator('div[class*="CustomLabel_label"] > span[class*="CustomLabel_labelTitle__O2bFl"]');
+    tabNumber = this.page.locator('[data-testid="labelNumber"]');
+    categoriesDropDown = this.page.locator('[data-testid="buttonDiv"]');
+    nextBtn = this.page.locator('[data-testid="nextButton"]');
+    categoryErrorMessage = this.page.locator('[class*="CategorySelect_errorTextVisible"]');
+    categoriesPopUp = this.page.locator('div[data-testid="categoryPopupWrapper"]');
+    categoriesPopUpCloseBtn = this.page.locator('[data-testid="closeIcon"]');
+    categoriesDropDownArrowDown = this.page.locator('div[data-testid="buttonDiv"]>div  img[alt="Arrow-down"]');
+    categoriesTitle = this.page.locator('div[class*="CategorySelect_title"]');
+    categoriesPopUpTitle = this.page.locator('div[class*="CategoryPopup_title"]');
+    announcementNameTitle = this.page.locator('div[class*="CustomInput_title"]').first();
+    announcementNameInput = this.page.locator('input[data-testid="custom-input"]').first();
+    announcementNameInputError = this.page.locator('[data-testid="descriptionError"]').first();
+    vehicleManufacturerTitle = this.page.locator('div[class*="SelectManufacturer_title"]');
+    vehicleManufacturerInputContainer = this.page.locator('div[class*="CustomSelectWithSearch_searchInput"]');
+    vehicleManufacturerInput = this.page.locator('input[data-testid="input-customSelectWithSearch"]');
+    vehicleManufacturerInputError = this.page.locator('div[class*="CustomSelectWithSearch_errorTextVisible"]');
+    vehicleManufacturerInputSearchIcon = this.page.locator('div[class*="CustomSelectWithSearch_searchInput"] > svg');
+    vehicleManufacturerSelectedOption = this.page.locator('[class*="CustomSelectWithSearch_serviceText"]')
+    vehicleManifacturerDropDown = this.page.locator('div[class*="CustomSelectWithSearch_searchedServicesCat_wrapper"]');
+    vehicleManufacturerDropDownOption = this.page.locator('div[class*="CustomSelectWithSearch_flexForServices"]').first();
+    optionNotFoundMessage = this.page.locator('[data-testid="p2-notFound-addNewItem"]');
+    selectedOptionInDropdown = this.page.locator('[class*="CustomSelectWithSearch_serviceText"]');
+    clearVehicleManifacturerDropDownIcon = this.page.locator('button[class*="CustomSelectWithSearch_serviceBtn"]');
+    modelNameTitle = this.page.locator('div[class*="CustomInput_title"]').getByText('Назва моделі')
+    modelNameInput = this.page.locator('input[data-testid="custom-input"]').nth(1);
+    modelNameInputError = this.page.locator('[data-testid="descriptionError"]');
+    technicalInfoTitle = this.page.locator('div[class*="CustomTextAriaDescription_title"]').first();
+    technicalInfoInput = this.page.locator('[data-testid="textarea-customTextAriaDescription"]').first();
+    descriptionInfoTitle = this.page.locator('div[class*="CustomTextAriaDescription_title"]').nth(1);
+    descriptionInfoInput = this.page.locator('[data-testid="textarea-customTextAriaDescription"]').nth(1);
+    addressSelectionTitle = this.page.locator('[class*="AddressSelectionBlock_title"]');
+    addressSelectionInput = this.page.locator('[data-testid="mapLabel"]');
+    addressSelectionInputError = this.page.locator('[class*="AddressSelectionBlock_errorTextVisible"]');
+    selectOnMapBtn = this.page.locator('[class*="AddressSelectionBlock_locationBtn"]');
+    mapPopUp = this.page.locator('[data-testid="div-mapPopup"]');
+    mapPopUpTitle = this.page.locator('[class*="MapPopup_title"]');
+    mapPopUpAddressLine = this.page.locator('[class*="MapPopup_address"]')
+    mapPopUpCloseBtn = this.page.locator('[class*="MapPopup_title"]');
+    addressLine = this.page.locator('[data-testid="address"]');
+    selectedAddress = this.page.locator('[class*="AddressSelectionBlock_mapLabelChosen"]');
+    mapPopUpSubmitBtn = this.page.locator('[class*="ItemButtons_darkBlueBtn"]');
+    mapContainer = this.page.locator('#map');
+    cancelBtn = this.page.locator('[data-testid="prevButton"]');
+    characteristicsTitle  = this.page.locator('div[class*="Characteristics_title"]');
+    vehicleManufacturerList = this.page.locator('[data-testid="input-customSelectWithSearch"]');
+    mapLabel = this.page.locator('[data-testid="mapLabel"]');
 
     async getCreateUnitTitleText() {
-        return await this.getCreateUnitTitle().innerText();
+        return await this.createUnitTitle.innerText();
     }
 
     async checkCreateUnitTabsTitles(activeTabNumber: number) {
-        if(await this.getCreateUnitTabs().isVisible) {
-            const tabNames = await this.getCreateUnitTabsText().allInnerTexts();
+        if(await this.createUnitTabs.isVisible) {
+            const tabNames = await this.createUnitTabsText.allInnerTexts();
             let activeTabIndex = activeTabNumber - 1;
             for (let i = 0; i < tabNames.length; i++) {
-                await expect(this.getCreateUnitTabs().nth(i)).toBeVisible();
-                await expect(await this.getCreateUnitTabsText().nth(i).innerText()).toBe(tabNames[i]);
-                await expect(await this.getTabNumber().nth(i).innerText()).toBe(String(i + 1));
+                await expect(this.createUnitTabs.nth(i)).toBeVisible();
+                await expect(await this.createUnitTabsText.nth(i).innerText()).toBe(tabNames[i]);
+                await expect(await this.tabNumber.nth(i).innerText()).toBe(String(i + 1));
 
-                let tabAttr = await this.getCreateUnitTabs().nth(i).getAttribute('aria-selected');
+                let tabAttr = await this.createUnitTabs.nth(i).getAttribute('aria-selected');
 
                 if(i === activeTabIndex) {
                     await expect(tabAttr).toBe('true');
@@ -85,19 +85,19 @@ class CreateUnitPage extends Page {
     }
 
     async getCategoriesTitleText() {
-        return await this.getCategoriesTitle().innerText();
+        return await this.categoriesTitle.innerText();
     }
 
     async getCategoriesDropDownBgText() {
-        return await this.getCategoriesDropDown().innerText();
+        return await this.categoriesDropDown.innerText();
     }
 
     async getCategoryInputErrorText() {
-        return await this.getCategoryErrorMessage().innerText();
+        return await this.categoryErrorMessage.innerText();
     }
 
     async clickOnNextBtn() {
-        await this.getNextBtn().click({force: true});
+        await this.nextBtn.click({force: true});
         await this.page.waitForTimeout(1000);
     }
 
@@ -127,7 +127,7 @@ class CreateUnitPage extends Page {
             const borderColor = await sectionInputLocator.evaluate((el: any) => window.getComputedStyle(el).borderColor);
             const errorMessageText = await errorMessageLocator.innerText();
 
-            if (sectionInputLocator === this.getVehicleManufacturerInputContainer()) {
+            if (sectionInputLocator === this.vehicleManufacturerInputContainer) {
                 await expect(borderColor).toBe('rgb(40, 49, 73)');
             } else {
                 await expect(borderColor).toBe('rgb(247, 56, 89)');
@@ -141,73 +141,73 @@ class CreateUnitPage extends Page {
     }
 
     async clickOnCategoriesDropDown() {
-        await this.getCategoriesDropDown().click();
+        await this.categoriesDropDown.click();
     }
 
     async getCategoriesPopUpTitleText() {
-        return await this.getCategoriesPopUpTitle().innerText();
+        return await this.categoriesPopUpTitle.innerText();
     }
 
     async getAnnouncementNameTitleText() {
-        return await this.getAnnouncementNameTitle().innerText();
+        return await this.announcementNameTitle.innerText();
     } 
 
     async getAnnouncementNameInputBgText() {
-        return await this.getAnnouncementNameInput().getAttribute('placeholder');
+        return await this.announcementNameInput.getAttribute('placeholder');
     } 
 
     async getAnnouncementNameInputValueText() {
-        return await this.getAnnouncementNameInput().inputValue();
+        return await this.announcementNameInput.inputValue();
     }
 
     async getAnnouncementNameInputErrorText() {
-        return await this.getAnnouncementNameInputError().innerText();
+        return await this.announcementNameInputError.innerText();
     } 
 
     async getAnnouncementInputValueCharCount() {
-        const value = await this.getAnnouncementNameInput().inputValue();
+        const value = await this.announcementNameInput.inputValue();
         return value.length;
     }
 
     async getVehicleManufacturerTitleText() {
-        return await this.getVehicleManufacturerTitle().innerText();
+        return await this.vehicleManufacturerTitle.innerText();
     } 
 
     async getVehicleManufacturerInputBgText() {
-        return await this.getVehicleManufacturerInput().getAttribute('placeholder');
+        return await this.vehicleManufacturerInput.getAttribute('placeholder');
     } 
 
     async getVehicleManufacturerInputErrorText() {
-        return await this.getVehicleManufacturerInputError().innerText();
+        return await this.vehicleManufacturerInputError.innerText();
     } 
 
     async getVehicleManufacturerInputValueLength() {
-        const currentValue = await this.getVehicleManufacturerInput().inputValue();
+        const currentValue = await this.vehicleManufacturerInput.inputValue();
         return currentValue.length;
     }
 
     async getVehicleManufacturerDropDownOptionText() {
-        return await this.getVehicleManufacturerDropDownOption().innerText();
+        return await this.vehicleManufacturerDropDownOption.innerText();
     }
 
     async clickOnOptionInVehicleManufacturerDropDown() {
-        await this.getVehicleManufacturerDropDownOption().click();
+        await this.vehicleManufacturerDropDownOption.click();
     }
 
     async getOptionNotFoundErrorText() {
-        return await this.getOptionNotFoundMessage().innerText();
+        return await this.optionNotFoundMessage.innerText();
     }
 
     async getVehicleManufacturerSelectedOptionText() {
-        return await this.getVehicleManufacturerSelectedOption().innerText();
+        return await this.vehicleManufacturerSelectedOption.innerText();
     }
 
     async getVehicleManufacturerInputText() {
-        return await this.getVehicleManufacturerInput().inputValue();
+        return await this.vehicleManufacturerInput.inputValue();
     }
 
     async clickOnCategoriesPopUpCloseBtn() {
-        await this.getCategoriesPopUpCloseBtn().click();
+        await this.categoriesPopUpCloseBtn.click();
     }
 
     async clickOutsidePopup() {
@@ -247,9 +247,9 @@ class CreateUnitPage extends Page {
                     await thirdCategoryItems.nth(k).click({force: true});
                     await this.page.waitForLoadState('domcontentloaded');
 
-                    await expect(this.getCategoriesDropDown()).toBeEnabled();
+                    await expect(this.categoriesDropDown).toBeEnabled();
 
-                    const categoriesDropDownValue = await this.getCategoriesDropDown().innerText();
+                    const categoriesDropDownValue = await this.categoriesDropDown.innerText();
 
                     await expect(categoriesDropDownValue.toLowerCase()).toBe(thirdCategoryItemsNames[k].toLowerCase());
 
@@ -260,99 +260,99 @@ class CreateUnitPage extends Page {
     }
 
     async clickOnClearIcon() {
-        await this.getClearVehicleManifacturerDropDownIcon().click({force: true});
+        await this.clearVehicleManifacturerDropDownIcon.click({force: true});
     }
     
     async getModelNameTitleText() {
-        return await this.getModelNameTitle().innerText();
+        return await this.modelNameTitle.innerText();
     }
 
     async getModelNameInputBgText() {
-        return await this.getModelNameInput().getAttribute('placeholder');
+        return await this.modelNameInput.getAttribute('placeholder');
     }
 
     async getModelNameInputErrorText() {
-        return await this.getModelNameInputError().innerText();
+        return await this.modelNameInputError.innerText();
     }
 
     async getModelNameInputText() {
-        return await this.getModelNameInput().inputValue();
+        return await this.modelNameInput.inputValue();
     }
    
     async getTechnicalInfoTitleText() {
-        return await this.getTechnicalInfoTitle().innerText();
+        return await this.technicalInfoTitle.innerText();
     }
 
     async getTechnicalInfoInputText() {
-        return await this.getTechnicalInfoInput().inputValue();
+        return await this.technicalInfoInput.inputValue();
     }
 
     async getDescriptionInfoTitleText() {
-        return await this.getDescriptionInfoTitle().innerText();
+        return await this.descriptionInfoTitle.innerText();
     }
 
     async getDescriptionInfoInputText() {
-        return await this.getDescriptionInfoInput().inputValue();
+        return await this.descriptionInfoInput.inputValue();
     }
 
     async getAddressSelectionTitleText() {
-        return await this.getAddressSelectionTitle().innerText();
+        return await this.addressSelectionTitle.innerText();
     }
 
     async getAddressSelectionInputText() {
-        return await this.getAddressSelectionInput().innerText();
+        return await this.addressSelectionInput.innerText();
     }
 
     async getAddressSelectionInputErrorText() {
-        return await this.getAddressSelectionInputError().innerText();
+        return await this.addressSelectionInputError.innerText();
     }
 
     async clickOnSelectOnMapBtn() {
-        await this.getSelectOnMapBtn().click();
+        await this.selectOnMapBtn.click();
         await this.page.waitForTimeout(1000)
     }
 
     async getMapPopUpTitleText() {
-        return await this.getMapPopUpTitle().innerText();
+        return await this.mapPopUpTitle.innerText();
     }
 
     async getMapPopUpAddressLineText() {
-        return await this.getMapPopUpAddressLine().innerText();
+        return await this.mapPopUpAddressLine.innerText();
     }
 
     async getAddressLineText() {
-        return await this.getSelectedAddress().innerText();
+        return await this.selectedAddress.innerText();
     }
 
     async clickOnMapPopUpCloseBtn() {
-        await this.getMapPopUpCloseBtn().click();
+        await this.mapPopUpCloseBtn.click();
     }
     
     async clickOnMapPopUpSubmitBtn() {
-        await this.getMapPopUpSubmitBtn().click({force: true});
+        await this.mapPopUpSubmitBtn.click({force: true});
         await this.page.waitForTimeout(2000)
     }
 
     async clickOnMapAndGetAddress() {
-        const mapContainerSize = await this.getMapContainer().boundingBox();
+        const mapContainerSize = await this.mapContainer.boundingBox();
         if (mapContainerSize) {
             const randomX = mapContainerSize.x + Math.random() * mapContainerSize.width;
             const randomY = mapContainerSize.y + Math.random() * mapContainerSize.height;
     
             await this.page.mouse.click(randomX, randomY);
             await this.page.waitForLoadState('load');
-            const address = await this.getAddressLine().innerText();
+            const address = await this.addressLine.innerText();
             return address
         }
         return '';
     }
 
     async getCancelBtnText() {
-        return await this.getCancelBtn().innerText();
+        return await this.cancelBtn.innerText();
     }
 
     async clickOnCancelBtn() {
-        await this.getCancelBtn().click();
+        await this.cancelBtn.click();
     }
     
     async acceptAlert() {
@@ -363,7 +363,7 @@ class CreateUnitPage extends Page {
     }
 
     async getNextBtnText() {
-        return await this.getNextBtn().innerText();
+        return await this.nextBtn.innerText();
     }
 
     async fillCategory() {
@@ -371,7 +371,7 @@ class CreateUnitPage extends Page {
         const secondCategoryItem = await this.page.locator('[class*="SecondCategory_check_label"]').first();
         const thirdCategoryItem = await this.page.locator('[data-testid="thirdCategoryLabel"]').first();
 
-        await this.getCategoriesDropDown().click();
+        await this.categoriesDropDown.click();
         await firstCategoryItem.click();
         await secondCategoryItem.click();
         await thirdCategoryItem.click();
@@ -379,18 +379,18 @@ class CreateUnitPage extends Page {
 
     async fillAnnouncementName() {
         const inputValue = faker.lorem.sentence()
-        await this.getAnnouncementNameInput().fill(inputValue);
+        await this.announcementNameInput.fill(inputValue);
     }
 
     async fillVehicleManufacturer() {
         const inputValue = faker.string.alpha({length: 1});
 
-        await this.getVehicleManufacturerInput().fill(inputValue);
-        await this.getVehicleManufacturerDropDownOption().first().click();
+        await this.vehicleManufacturerInput.fill(inputValue);
+        await this.vehicleManufacturerDropDownOption.first().click();
     }
 
     async fillAddress() {
-        await this.getSelectOnMapBtn().click();
+        await this.selectOnMapBtn.click();
         await this.clickOnMapAndGetAddress();
         await this.clickOnMapPopUpSubmitBtn();
     }
