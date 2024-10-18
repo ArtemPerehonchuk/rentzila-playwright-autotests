@@ -88,8 +88,16 @@ class HomePage extends Page {
     }
 
     async clickOnPrivacyPolicyLink() {
-        await this.privacyPolicyLink.click();
-        await this.page.waitForLoadState('domcontentloaded');
+        const navigationPromise = new Promise<void>(resolve => {
+            this.page.on('framenavigated', frame => {
+                if (frame === this.page.mainFrame()) { 
+                    resolve();
+                }
+            });
+        });
+    
+        await this.privacyPolicyLink.click(); 
+        await navigationPromise;              
     }
 
     async clickOnCookiePolicyLink() {
