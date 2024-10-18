@@ -7,12 +7,12 @@ class UnitPage extends Page {
         super(page);
     }
 
-    unitSrvicesTitle = this.page.locator('[class*="UnitCharacteristics_services"] [class*="UnitCharacteristics_title"]');
+    unitServicesTitle = this.page.locator('[class*="UnitCharacteristics_services"] [class*="UnitCharacteristics_title"]');
     unitServicesTypesContainer = this.page.locator('[itemprop="services"]');
 
     async checkUnitIsVisible(isExist: boolean = true) {
         if(isExist) {
-            await expect(this.unitSrvicesTitle).toBeVisible()
+            await expect(this.unitServicesTitle).toBeVisible()
             await expect(this.unitServicesTypesContainer).toBeVisible()
             return true
         }else return false

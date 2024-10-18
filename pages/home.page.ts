@@ -64,6 +64,7 @@ class HomePage extends Page {
 
     async clickFirstServicesUnit() {
         await this.servicesUnitsList.first().click();
+        await this.page.waitForLoadState('load');
     }
 
     async clickFirstSpecialEquipmentUnit() {
