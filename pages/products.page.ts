@@ -18,7 +18,8 @@ class ProductsPage extends Page {
     async clickFirstProduct() {
         if(await this.produtsList.first().isVisible()) {
             await this.produtsList.first().click({force: true});
-            await this.page.waitForLoadState('load');
+            await this.page.waitForTimeout(1500)
+            // await this.page.waitForLoadState('load');
         }else {}
     }
 
