@@ -63,18 +63,18 @@ class HomePage extends Page {
     }
 
     async clickFirstServicesUnit() {
-        const navigationPromise = new Promise<void>(resolve => {
-            this.page.on('framenavigated', frame => {
-                if (frame === this.page.mainFrame()) { 
-                    resolve();
-                }
-            });
-        });
+        // const navigationPromise = new Promise<void>(resolve => {
+        //     this.page.on('framenavigated', frame => {
+        //         if (frame === this.page.mainFrame()) { 
+        //             resolve();
+        //         }
+        //     });
+        // });
     
-        await this.servicesUnitsList.first().click();
-        await navigationPromise;
         // await this.servicesUnitsList.first().click();
-        // await this.page.waitForTimeout(5000)
+        // await navigationPromise;
+        await this.servicesUnitsList.first().click();
+        await this.page.waitForTimeout(3000)
        // await this.page.waitForLoadState('load');
     }
 
