@@ -20,7 +20,7 @@ const correctPhoneNumbers: string[] = [
         process.env.CORRECT_PHONE_NUMBERS_WITHOUT_PLUS38 || ''
     ];
 
-describe('Negative test cases for login form', () => {
+test.describe('Negative test cases for login form', () => {
     test.beforeEach(async ({ page }) => {
         homepage = new HomePage(page);
         await homepage.navigate('/');
@@ -98,7 +98,7 @@ describe('Negative test cases for login form', () => {
     });
 });
 
-describe('Positive test cases for login form', () => {
+test.describe('Positive test cases for login form', () => {
     test.beforeEach(async ({ page }) => {
         homepage = new HomePage(page);
         await homepage.navigate('/');
