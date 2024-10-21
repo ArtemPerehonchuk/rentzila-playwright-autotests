@@ -1,18 +1,16 @@
-import { Page as PlaywrightPage, Locator, expect } from '@playwright/test';
+import { Page as PlaywrightPage, expect } from '@playwright/test';
 import Page from './page';
 
-class PrivacyPolicyPage extends Page {
-    public locators: { [key:string]: Locator};   
+class PrivacyPolicyPage extends Page {  
 
     constructor(page: PlaywrightPage) {
         super(page);
-        this.locators = {
-            privacyPolicyTitle: this.page.getByRole('heading', { name: 'Політика конфіденційності' })
-        }
     }
 
-    async checkPrivacyPolicyTitle() {
-        await expect(this.locators.privacyPolicyTitle).toBeVisible();
+    privacyPolicyTitle = this.page.locator('h1[class*="PrivacyPolicy_title"]');
+
+    async getPrivacyPolicyTitleText() {
+        return await this.privacyPolicyTitle.innerText();
     }
 
 }

@@ -14,7 +14,7 @@ This project contains end-to-end tests for the Rentzila application using Playwr
 1. Clone the branch with all tests from the repository:
 
    ```bash
-   git clone -b prices-tab-tests https://github.com/ArtemPerehonchuk/rentzila-playwright-tests.git
+   git clone https://github.com/ArtemPerehonchuk/rentzila-playwright-tests.git
 
    ```
 2. Navigate to the project directory:

@@ -25,7 +25,7 @@ class PhotoTab extends Page {
     unitImages = this.page.locator('[data-testid="unitImage"]');
 
 
-    async uploadFoto() {
+    async uploadPhoto() {
         await this.imageBlocks.nth(0).focus();
         await this.uploadFileInput.setInputFiles(path.resolve('data/photo/pexels-mikebirdy-170811.jpg'));
     }
@@ -37,33 +37,12 @@ class PhotoTab extends Page {
         }
     }
 
-    async checkInvalidPhotoPopUpVisibility(visibility: boolean) {
-        if(visibility !== true) {
-            await expect(this.invalidPhotoPopUp).not.toBeVisible();
-        }else {
-            await expect(this.invalidPhotoPopUp).toBeVisible();
-        }
-    }
-
-    async checkInvalidPhotoPopUpText(expectedText: string) {
-        const currentText = await this.invalidPhotoPopUp.innerText();
-        await expect(currentText).toContain(expectedText);
+    async getInvalidPhotoPopUpText() {
+        return await this.invalidPhotoPopUp.innerText();
     }
 
     async clickOnClosePopUpBtn() {
         await this.closePopUpBtn.click();
-    }
-
-    async checkOneImgUploaded() {
-        let imageUploaded;
-        for(let i = 0; i < 2; i++) {
-            imageUploaded = await this.imageBlocks.nth(i).getAttribute('draggable');
-            if(i === 0) {
-                await expect(imageUploaded).toBe('true');
-            }else {
-                await  expect(imageUploaded).toBe('false');
-            }
-        }
     }
 
     async clickOnSubmitPopUpBtn() {
@@ -79,14 +58,8 @@ class PhotoTab extends Page {
             await this.uploadFileInput.setInputFiles(path.resolve('data/test.txt'));
     }
 
-    async checkIncorectFileNotUploaded() {
-       let imageUploaded = await this.imageBlocks.nth(0).getAttribute('draggable');
-       await expect(imageUploaded).toBe('false');
-    }
-
-    async checkSubmitPopUpBtnText(expectedText: string) {
-        const currentText = await this.submitPopUpBtn.textContent();
-        await expect(currentText).toBe(expectedText);
+    async getSubmitPopUpBtnText() {
+        return await this.submitPopUpBtn.textContent();
     }
 
     async uploadIncorrectFileSize() {
@@ -94,35 +67,20 @@ class PhotoTab extends Page {
         await this.uploadFileInput.setInputFiles(path.resolve('data/photo/21mb.jpg'));
     }
 
-    async checkPrevBtnText(expectedText: string) {
-        const currentText = await this.prevBtn.innerText();
-        await expect(currentText).toBe(expectedText);
+    async getPrevBtnText() {
+        return await this.prevBtn.innerText();
     }
     
     async clickOnPrevBtn() {
         await this.prevBtn.click();
     }
-    
-    async checkPhotoNotUploadedError(expectedText: string) {
-        const borderColor = await this.uploadPhotoClueLine.evaluate((el: any) => window.getComputedStyle(el).borderColor);
-        const currentText = await this.uploadPhotoClueLine.innerText();
 
-        await expect(this.uploadPhotoClueLine).toBeVisible();
-        await expect(borderColor).toBe('rgb(247, 56, 89)');
-        await expect(currentText).toContain(expectedText);
+    async getPhotoTabTitleText() {
+        return await this.photoTabTitle.innerText();
     }
 
-    async checkPhotoTabTitle(expectedText: string) {
-        const currentText = await this.photoTabTitle.innerText();
-        await expect(this.photoTabTitle).toBeVisible();
-        await expect(currentText).toContain(expectedText);
-        await expect(currentText).toContain('*');
-    }
-
-    async checkUploadPhotoClueLine(expectedText: string) {
-        const currentText = await this.uploadPhotoClueLine.innerText();
-
-        await expect(currentText).toContain(expectedText);
+    async getUploadPhotoClueLineText() {
+       return await this.uploadPhotoClueLine.innerText();
     }
 
     async clickOnImageBlock() {
@@ -149,61 +107,16 @@ class PhotoTab extends Page {
         }
     }
 
-    async checkFirstImgLable(expectedText: string) {
-        const currentText = await this.firstImgLable.innerText();
-        await expect(this.firstImgLable).toBeVisible();
-        await expect(currentText).toBe(expectedText);
+    async getFirstImgLableText() {
+        return await this.firstImgLable.innerText();
     }
 
-    async checkSwitchingImages() {
-        const imageBlockItems = await this.imageBlocks.all();
-        const imagesCount = imageBlockItems.length;
-        const maxIndex = imagesCount - 1;
-        const firstImageAttrBefore = await this.unitImages.first().getAttribute('src');
-
-
-        for(let i = maxIndex; i > 0; i--) {
-            let imgSrcAttr = await this.unitImages.nth(i).getAttribute('src');
-            if(imgSrcAttr !== '') {
-                await this.imageBlocks.nth(i).dragTo(this.imageBlocks.first());
-                await this.page.waitForLoadState('load');
-
-                const firstImageAttrAfter = await this.unitImages.first().getAttribute('src');
-
-                await expect(firstImageAttrBefore).not.toBe(firstImageAttrAfter);
-            }
-        }
-    }
-
-    async checkDeleteImgIconAppears() {
-        const imageBlockItems = await this.imageBlocks.all();
-        const imagesCount = imageBlockItems.length;
-        const maxIndex = imagesCount - 1;
-
-        for(let i = maxIndex; i >= 0; i--) {
-            let imgSrcAttr = await this.unitImages.nth(i).getAttribute('src');
-            if(imgSrcAttr !== '') {
-                await this.imageBlocks.nth(i).hover();
-                await expect(this.deleteImgIcons.nth(i)).toBeVisible();
-            }
-        }
-    }
-
-    async checkDeletingImages() {
-        const imageBlockItems = await this.imageBlocks.all();
-        const maxIndex = imageBlockItems.length - 1;
-        let imgSrcAttr;
-
-        for(let i = maxIndex; i >= 0; i--) {
-            imgSrcAttr = await this.unitImages.nth(i).getAttribute('src');
-
-            if(imgSrcAttr !== '') {
+    async deleteUploadedImg(itemsLength: number) {
+        for(let i =0; i < itemsLength; i++) {
+            const imageBlockAttr = await this.imageBlocks.nth(i).getAttribute('dragable');
+            if(imageBlockAttr === 'true') {
                 await this.imageBlocks.nth(i).hover();
                 await this.deleteImgIcons.nth(i).click();
-
-                imgSrcAttr = await this.unitImages.nth(i).getAttribute('src');
-                
-                await expect(imgSrcAttr).toBe('');
             }
         }
     }

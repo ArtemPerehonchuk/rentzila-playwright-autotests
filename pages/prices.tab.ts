@@ -39,100 +39,44 @@ class PricesTab extends Page {
     priceOfMinOrderInputError = this.page.locator('[class*="RowUnitPrice_error"]');
     serviceInAddPriceSection = this.page.locator('[class*="ServicePrice_service"] > span')
 
-    async checkPaymentMethodSection(expectedTitleText: string, expectedDropDownBgText: string) {
-        const currentTitleText = await this.paymentMethodTitle.innerText();
-        const currentDropDownBgText = await this.paymentMethodDropDown.innerText();
+    async getDropDownBgText() {
+        return await this.paymentMethodDropDown.innerText();
+    }
 
-        await expect(this.paymentMethodTitle.first()).toBeVisible();
-        await expect(currentTitleText).toContain(expectedTitleText);
-        await expect(currentTitleText).toContain('*');
-        await expect(currentDropDownBgText).toBe(expectedDropDownBgText);
+    async getPaymentMethodTitleText() {
+        return await this.paymentMethodTitle.innerText();
     }
 
     async clickOnPaymentMethodDropDown() {
         await this.paymentMethodDropDown.click();
     }
 
-    async checkPaymentMethodDropDownOptions(firstOption: string, secondOption: string, thirdOption: string) {
-        await expect(await this.paymentMethodDropDownOptions.first().innerText()).toBe(firstOption);
-        await expect(await this.paymentMethodDropDownOptions.nth(1).innerText()).toBe(secondOption);
-        await expect(await this.paymentMethodDropDownOptions.nth(2).innerText()).toBe(thirdOption);
+    async getPaymentMethodDropDownOptionsText() {
+        return await this.paymentMethodDropDownOptions.allInnerTexts()
     }
 
-    async checkPaymentMethodOptionSelection() {
-        const paymentMethodOptions = await this.paymentMethodDropDownOptions.all();
-        for(let i = paymentMethodOptions.length -1; i >= 0; i--) {
-            let paymentOptionText = await paymentMethodOptions[i].innerText();
-            await paymentMethodOptions[i].click();
-            let displayedText = await this.paymentMethodDropDown.innerText();
-            await expect(displayedText).toBe(paymentOptionText);
-            await this.paymentMethodDropDown.click()
-        }
+    async getPaymentMethodDropDownOptions() {
+        return await this.paymentMethodDropDownOptions.all();
     }
 
-    async checkPriceOfMinOrderSection(expectedTitleText: string, expectedInputBgText: string) {
-        const currentTitleText = await this.priceOfMinOrderTitle.innerText();
-        const currentInputBgText = await this.priceOfMinOrderInput.getAttribute('placeholder');
-
-        await expect(this.priceOfMinOrderTitle).toBeVisible();
-        await expect(currentTitleText).toContain(expectedTitleText);
-        await expect(currentTitleText).toContain('*');
-        await expect(currentInputBgText).toBe(expectedInputBgText);
+    async getpriceOfMinOrderTitleText() {
+        return await this.priceOfMinOrderTitle.innerText();
     }
 
-    async checkPriceOfMinOrderInputWithTenNumbers() {
-        const tenDigitNumber = (faker.number.int({ min: 1000000000, max: 9999999999 })).toString();
-
-        await this.priceOfMinOrderInput.fill(tenDigitNumber);
-        let currentInputValue = await this.priceOfMinOrderInput.inputValue();
-
-        await expect(currentInputValue.length).toBe(9);
-        await expect(currentInputValue).toBe(tenDigitNumber.slice(0, tenDigitNumber.length -1));
-
-        await this.copyPasteValue(this.priceOfMinOrderInput);
-
-        currentInputValue = await this.priceOfMinOrderInput.inputValue();
-
-        await expect(currentInputValue.length).toBe(9);
-        await expect(currentInputValue).toBe(tenDigitNumber.slice(0, tenDigitNumber.length -1));
+    async getpriceOfMinOrderInputBgText() {
+        return await this.priceOfMinOrderInput.getAttribute('placeholder');
     }
 
-    async checkPriceOfMinOrderWithIncorrectPrices() {
-        for(const incorrectPrice of incorrectPrices) {
-            await this.priceOfMinOrderInput.clear();
-            await this.priceOfMinOrderInput.fill(incorrectPrice);
-            const inputValue = await this.priceOfMinOrderInput.inputValue();
-
-            if(incorrectPrice.includes('1')) {
-                await expect(inputValue).toBe(incorrectPrice.split(' ').join(''));
-            }else {
-                await expect(inputValue).toBe('');
-            }
-
-            await this.copyPasteValue(this.priceOfMinOrderInput)
-
-            if(incorrectPrice.includes('1')) {
-                await expect(inputValue).toBe(incorrectPrice.split(' ').join(''));
-            }else {
-                await expect(inputValue).toBe('');
-            }
-        }
+    async clearInput(inputLocator: Locator) {
+        await inputLocator.clear();
     }
 
-    async checkPriceOfMinOrderInputWithNineNumbers() {
-        const nineDigitNumber = (faker.number.int({ min: 100000000, max: 999999999 })).toString();
-        await this.priceOfMinOrderInput.fill(nineDigitNumber);
-        let currentInputValue = await this.priceOfMinOrderInput.inputValue();
+    async fillInput(inputLocator: Locator, value: any) {
+        await inputLocator.fill(value)
+    }
 
-        await expect(currentInputValue.length).toBe(9);
-        await expect(currentInputValue).toBe(nineDigitNumber);
-
-        await this.copyPasteValue(this.priceOfMinOrderInput);
-
-        currentInputValue = await this.priceOfMinOrderInput.inputValue();
-
-        await expect(currentInputValue.length).toBe(9);
-        await expect(currentInputValue).toBe(nineDigitNumber);
+    async getInputValue(inputLocator: Locator) {
+        return await inputLocator.inputValue();
     }
 
     async copyPasteValue(inputLocator: Locator) {
@@ -145,112 +89,36 @@ class PricesTab extends Page {
         await this.page.keyboard.press('Meta+V');
     }
 
-    async verifyCurrencyField(expectedText: string) {
-        const currentText = await this.currencyField.inputValue();
-        await expect(this.currencyField).toBeVisible();
-        await expect(currentText).toBe(expectedText);
+    async getCurrencyFieldText() {
+        return await this.currencyField.inputValue();
     }
 
-    async checkServicePriceSection(expectedTitleText: string, expectedClueText: string) {
-        const currentTitleText = await this.servicePriseTitle.innerText();
-        const currentClueText = await this.servicePriceClue.innerText();
-
-        await expect(this.servicePriseTitle).toBeVisible();
-        await expect(currentTitleText).toContain(expectedTitleText);
-        await expect(currentTitleText).toContain('*');
-        await expect(currentClueText).toContain(expectedClueText);
+    async getAddPriceCurrencyFieldText() {
+        return await this.addPriceCurrency.inputValue();
     }
 
-    async checkAddPriceBtn(expectedText: string) {
-        const currentText = await this.addPriceBtn.innerText();
-        await expect(currentText).toBe(expectedText);
-        await expect(this.addBtnIcon).toBeVisible();
+    async getServicePriceTitleText() {
+        return await this.servicePriseTitle.innerText();
+    }
+
+    async getServicePriceClueText() {
+        return await this.servicePriceClue.innerText();
+    }
+
+    async getAddPriceBtnText() {
+        return await this.addPriceBtn.innerText();
     }
 
     async clickOnAddPriceBtn() {
         await this.addPriceBtn.click();
     }
 
-    async checkAddPriceBtnNotVisible() {
-        await expect(this.addPriceBtn).not.toBeVisible();
+    async getAddPriceInputBgText() {
+       return await this.addPriceInput.getAttribute('placeholder');
     }
 
-    async checkAddPriceSectionVisibility() {
-        await expect(this.addPriceInput).toBeVisible();
-        await expect(this.addPriceCurrency).toBeVisible();
-        await expect(this.selectAddPriceOptionDropDown).toBeVisible();
-    }
-
-    async checkAddPriceInputWithTenNumbers() {
-        const tenDigitNumber = (faker.number.int({ min: 1000000000, max: 9999999999 })).toString();
-        await this.addPriceInput.fill(tenDigitNumber);
-        let currentInputValue = await this.addPriceInput.inputValue();
-
-        await expect(currentInputValue.length).toBe(9);
-        await expect(currentInputValue).toBe(tenDigitNumber.slice(0, tenDigitNumber.length -1));
-
-        await this.copyPasteValue(this.addPriceInput);
-
-        currentInputValue = await this.addPriceInput.inputValue();
-
-        await expect(currentInputValue.length).toBe(9);
-        await expect(currentInputValue).toBe(tenDigitNumber.slice(0, tenDigitNumber.length -1));
-    }
-
-    async checkAddPriceInputWithIncorrectPrices() {
-        for(const incorrectPrice of incorrectPrices) {
-            await this.addPriceInput.clear();
-            await this.addPriceInput.fill(incorrectPrice);
-            const inputValue = await this.addPriceInput.inputValue();
-
-            if(incorrectPrice.includes('1')) {
-                await expect(inputValue).toBe(incorrectPrice.split(' ').join(''));
-            }else {
-                await expect(inputValue).toBe('');
-            }
-
-            await this.copyPasteValue(this.addPriceInput)
-
-            if(incorrectPrice.includes('1')) {
-                await expect(inputValue).toBe(incorrectPrice.split(' ').join(''));
-            }else {
-                await expect(inputValue).toBe('');
-            }
-        }
-    }
-
-    async checkAddPriceInputWithNineNumbers() {
-        const nineDigitNumber = (faker.number.int({ min: 100000000, max: 999999999 })).toString();
-        await this.addPriceInput.fill(nineDigitNumber);
-        let currentInputValue = await this.addPriceInput.inputValue();
-
-        await expect(currentInputValue.length).toBe(9);
-        await expect(currentInputValue).toBe(nineDigitNumber);
-
-        await this.copyPasteValue(this.addPriceInput);
-
-        currentInputValue = await this.addPriceInput.inputValue();
-
-        await expect(currentInputValue.length).toBe(9);
-        await expect(currentInputValue).toBe(nineDigitNumber);
-    }
-
-    async checkAddPriceInputBgText(expectedText: string) {
-       const currentText =  await this.addPriceInput.getAttribute('placeholder');
-       await expect(currentText).toBe(expectedText);
-    }
-
-    async checkAddPriceCurrencyInput(expectedBgText: string) {
-        const currentBgText = await this.addPriceCurrency.inputValue();
-        await expect(this.addPriceCurrency).toBeVisible();
-        await expect(currentBgText).toBe(expectedBgText);
-    }
-
-    async checkSelectAddPriceOptionDropDown(expectedBgText: string) {
-        const currentBgText = await this.selectAddPriceOptionDropDown.innerText();
-        await expect(this.selectAddPriceOptionDropDown).toBeVisible();
-        await expect(currentBgText).toBe(expectedBgText);
-        await expect(this.selectAddPriceOptionDropDownArrow).toBeVisible();
+    async getSelectAddPriceOptionDropDownBgText() {
+        return this.selectAddPriceOptionDropDown.innerText();
     }
 
     async checkOptionSelectionInAddPriceDropDown() {
@@ -288,10 +156,6 @@ class PricesTab extends Page {
         await this.removePriceBtn.click();
     }
 
-    async checkServicePriceSectionNotVisible() {
-        await expect(this.additionalServicePriceSection).not.toBeVisible();
-    }
-
     async checkPrevBtnText(expectedText: string) {
         const currentText = await this.prevBtn.innerText();
         await expect(currentText).toBe(expectedText);
@@ -301,39 +165,13 @@ class PricesTab extends Page {
         await this.prevBtn.click();
     }
 
-    async checkPriceOfMinOrderInputError(expectedText: string) {
-        const currentText = await this.priceOfMinOrderInputError.innerText();
-        const borderColor = await this.priceOfMinOrderInputContainer.evaluate((el: any) => window.getComputedStyle(el).borderColor)
-        await expect(this.priceOfMinOrderInputError).toBeVisible();
-        await expect(currentText).toBe(expectedText);
-        await expect(borderColor).toBe('rgb(247, 56, 89)');
-    }
-
-    async fillPriceOfMinOrderInput(value: string) {
-        await this.priceOfMinOrderInput.fill(value);
-    }
-
-    async checkValueInPriceOfMinOrderInput(expectedValue: string) {
-        const currentValue = await this.priceOfMinOrderInput.inputValue();
-        await expect(currentValue).toBe(expectedValue);
-    }
-
-    async clearPriceOfMinOrderInput() {
-        await this.priceOfMinOrderInput.clear();
-    }
-
-    async checkPriceOfMinOrderInpuErrorNotVisible() {
-        await expect(this.priceOfMinOrderInputContainer).toHaveCSS('border-color', 'rgb(229, 229, 229)')
-        await expect(this.priceOfMinOrderInputError).not.toBeVisible();
+    async getPriceOfMinOrderInputErrorText() {
+        return await this.priceOfMinOrderInputError.innerText();
     }
 
     async getServiceFromAddPriceSection() {
         const service = await this.serviceInAddPriceSection.innerText();
         return service;
-    }
-
-    async checkRemovePriceBtnIsVisible() {
-        await expect(this.removePriceBtn).toBeVisible();
     }
 }
 

@@ -1,20 +1,17 @@
-import { Page as PlaywrightPage, Locator, expect } from '@playwright/test';
+import { Page as PlaywrightPage, expect } from '@playwright/test';
 import Page from './page';
 
-class TendersPage extends Page {
-    public locators: { [key: string]: Locator};   
+class TendersPage extends Page {  
 
     constructor(page: PlaywrightPage) {
         super(page);
-        this.locators = {
-            searchInput: this.page.getByTestId('search')
-        }
     }
 
-    async checkSerchInput() {
-        await expect(this.locators.searchInput).toBeVisible();
-        const searchInputText = await this.locators.searchInput.getAttribute('placeholder');
-        await expect(searchInputText).toBe('Пошук тендера за ключовими словами');
+    searchInput = this.page.getByTestId('search');
+
+    async getSerchInputBgText() {
+        const searchInputText = await this.searchInput.getAttribute('placeholder');
+        return await searchInputText;
     }
 
 }

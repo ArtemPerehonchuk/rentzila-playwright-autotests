@@ -1,18 +1,16 @@
-import { Page as PlaywrightPage, Locator, expect } from '@playwright/test';
+import { Page as PlaywrightPage, expect } from '@playwright/test';
 import Page from './page';
 
-class TermsConditionsPage extends Page {
-    public locators: { [key: string]: Locator};   
+class TermsConditionsPage extends Page { 
 
     constructor(page: PlaywrightPage) {
         super(page);
-        this.locators = {
-            termsConditionsTitle: this.page.getByRole('heading', { name: 'Угода користувача' })
-        }
     }
 
-    async checkCookiePolicyTitle() {
-        await expect(this.locators.termsConditionsTitle).toBeVisible();
+    termsConditionsTitle = this.page.locator('h1[class*="TermsConditions_title"]');
+
+    async getCookiePolicyTitleText() {
+        return await this.termsConditionsTitle.innerText();
     }
 
 }
