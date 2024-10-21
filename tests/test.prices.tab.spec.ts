@@ -9,8 +9,8 @@ import testData from '../data/test_data.json' assert {type: 'json'};
 
 const incorrectPrices = Object.values(testData['incorrect prices']);
 
-const validEmail: string = process.env.VALID_EMAIL || '';
-const validPassword: string = process.env.VALID_PASSWORD || '';
+const VALID_EMAIL: string = process.env.VALID_EMAIL || '';
+const VALIR_PASSWORD: string = process.env.VALID_PASSWORD || '';
 
 let selectedService: string;
 
@@ -30,8 +30,8 @@ test.beforeEach(async ({ page }) => {
     await homepage.navigate('/');
     await homepage.clickOnClosePopUpBtn();
     await homepage.clickOnCreateUnitBtn();
-    await homepage.fillInput('email', validEmail);
-    await homepage.fillInput('password', validPassword);
+    await homepage.fillInput('email', VALID_EMAIL);
+    await homepage.fillInput('password', VALIR_PASSWORD);
     await homepage.clickOnSubmitLoginFormBtn();
     await createUnitPage.fillCategory();
     await createUnitPage.fillAnnouncementName();
