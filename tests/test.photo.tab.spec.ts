@@ -4,8 +4,8 @@ import CreateUnitPage from '../pages/create.unit.page';
 import PhotoTab from '../pages/photo.tab';
 import ServicesTab from '../pages/services.tab'
 
-const validEmail: string = process.env.VALID_EMAIL || '';
-const validPassword: string = process.env.VALID_PASSWORD || '';
+const VALID_EMAIL: string = process.env.VALID_EMAIL || '';
+const VALID_PASSWORD: string = process.env.VALID_PASSWORD || '';
 
 let createUnitPage: CreateUnitPage;
 let homepage: HomePage;
@@ -21,8 +21,8 @@ test.beforeEach(async ({ page }) => {
     await homepage.navigate('/');
     await homepage.clickOnClosePopUpBtn();
     await homepage.clickOnCreateUnitBtn();
-    await homepage.fillInput('email', validEmail);
-    await homepage.fillInput('password', validPassword);
+    await homepage.fillInput('email', VALID_EMAIL);
+    await homepage.fillInput('password', VALID_PASSWORD);
     await homepage.clickOnSubmitLoginFormBtn();
     await createUnitPage.fillCategory();
     await createUnitPage.fillAnnouncementName();
@@ -139,7 +139,7 @@ test('Test case 393: Verify ""Далі"" button', async({ page }) => {
     await expect(await createUnitPage.getCreateUnitTitleText()).toBe('Створити оголошення');
     await createUnitPage.checkCreateUnitTabsTitles(3);
     await expect(servicesTab.servicesTabTitle).toBeVisible();
-    await expect(servicesTab.servucesTabInput).toBeVisible();
+    await expect(servicesTab.servicesTabInput).toBeVisible();
 })
 
 test('Test case C593: Verify image uploading', async( {page}) => {

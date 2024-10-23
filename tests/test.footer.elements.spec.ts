@@ -13,7 +13,7 @@ let apiRequestContext: APIRequestContext;
 
 let homepage: HomePage;
 
-const homepageUrl: string = process.env.HOMEPAGE_URL || '';
+const HOMEPAGE_URL: string = process.env.HOMEPAGE_URL || '';
 const pagesUrlPath = testData["pages URL path"];
 const contactUsFormInputValues = testData["contuct us form inputs"];
 
@@ -37,7 +37,7 @@ test('test case C214: Verify that all elements on the footer are displayed and a
 
     await homepage.clickOnContactsEmail();
 
-    await expect(await homepage.getUrl()).toBe(homepageUrl);
+    await expect(await homepage.getUrl()).toBe(HOMEPAGE_URL);
     await expect(homepage.aboutUsTitle).toBeVisible();
     await expect(homepage.privacyPolicyLink).toBeVisible();
     await expect(homepage.cookiePolicyLink).toBeVisible();
@@ -76,7 +76,7 @@ test('test case C214: Verify that all elements on the footer are displayed and a
 
     await productsPage.clickOnLogo();
 
-    await expect(await homepage.getUrl()).toBe(homepageUrl);
+    await expect(await homepage.getUrl()).toBe(HOMEPAGE_URL);
     await expect(await homepage.getSearchServiceSpecialEquipmentTitleText()).toContain('Сервіс пошуку');
 
     await homepage.clickOnTendersLink();
@@ -87,7 +87,7 @@ test('test case C214: Verify that all elements on the footer are displayed and a
 
     await tendersPage.clickOnLogo();
 
-    await expect(await homepage.getUrl()).toBe(homepageUrl);
+    await expect(await homepage.getUrl()).toBe(HOMEPAGE_URL);
     await expect(await homepage.getContactsEmail()).toContain('info@rentzila.com.ua');
 });
 
