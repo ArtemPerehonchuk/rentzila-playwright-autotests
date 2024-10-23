@@ -6,10 +6,10 @@ import { describe } from "node:test";
 
 let homepage: HomePage;
 
-const validEmail: string = process.env.VALID_EMAIL || '';
-const validPassword: string = process.env.VALID_PASSWORD || '';
-const validPhone: string = process.env.VALID_PHONE || '';
-const homepageUrl: string = process.env.HOMEPAGE_URL || '';
+const VALID_EMAIL: string = process.env.VALID_EMAIL || '';
+const VALID_PASSWORD: string = process.env.VALID_PASSWORD || '';
+const VALID_PHONE: string = process.env.VALID_PHONE || '';
+const HOMEPAGE_URL: string = process.env.HOMEPAGE_URL || '';
 const incorrectPhoneNumbers = Object.values(testData["incorrect-phone-numbers"]);
 const incorrectEmails = Object.values(testData["incorrect-emails"]);
 const incorrectPasswords = Object.values(testData["incorrect-passwords"]);
@@ -35,7 +35,7 @@ test.describe('Negative test cases for login form', () => {
         await expect(await homepage.checkInputErrorIsDisplayed('email', 'Поле не може бути порожнім')).toBe(true);
         await expect(await homepage.checkInputErrorIsDisplayed('password', 'Поле не може бути порожнім')).toBe(true);
     
-        await homepage.fillInput('email', validEmail);
+        await homepage.fillInput('email', VALID_EMAIL);
         await homepage.clickOnSubmitLoginFormBtn();
 
         await expect(await homepage.autorizationForm).toBeVisible();
@@ -48,7 +48,7 @@ test.describe('Negative test cases for login form', () => {
         await expect(await homepage.checkInputErrorIsDisplayed('email', 'Поле не може бути порожнім')).toBe(true);
         await expect(await homepage.checkInputErrorIsDisplayed('password', 'Поле не може бути порожнім')).toBe(true);
     
-        await homepage.fillInput('password', validPassword);
+        await homepage.fillInput('password', VALID_PASSWORD);
         await homepage.clickOnSubmitLoginFormBtn();
 
         await expect(await homepage.autorizationForm).toBeVisible();
@@ -58,9 +58,9 @@ test.describe('Negative test cases for login form', () => {
 
     test('test case C207: Authorization with invalid phone', async( { page } ) => {
 
-        await homepage.fillInput('password', validPassword);
+        await homepage.fillInput('password', VALID_PASSWORD);
 
-        await expect(await homepage.getPasswordInputValue()).toBe(validPassword);
+        await expect(await homepage.getPasswordInputValue()).toBe(VALID_PASSWORD);
     
         for (const phoneNumber of incorrectPhoneNumbers) {
             await homepage.fillInput('email', phoneNumber);
@@ -72,9 +72,9 @@ test.describe('Negative test cases for login form', () => {
 
     test('test case C576: Authorization with invalid email', async( { page } ) => {
 
-        await homepage.fillInput('password', validPassword);
+        await homepage.fillInput('password', VALID_PASSWORD);
 
-        await expect(await homepage.getPasswordInputValue()).toBe(validPassword);
+        await expect(await homepage.getPasswordInputValue()).toBe(VALID_PASSWORD);
     
         for (const email of incorrectEmails) {
             await homepage.fillInput('email', email);
@@ -85,9 +85,9 @@ test.describe('Negative test cases for login form', () => {
     });
 
     test('test case C577: Authorization with invalid password', async( { page } ) => {
-        await homepage.fillInput('email', validEmail);
+        await homepage.fillInput('email', VALID_EMAIL);
 
-        await expect(await homepage.getLoginEmailOrPhoneInputValue()).toBe(validEmail);
+        await expect(await homepage.getLoginEmailOrPhoneInputValue()).toBe(VALID_EMAIL);
     
         for (const password of incorrectPasswords) {
             await homepage.fillInput('password', password);
@@ -106,13 +106,13 @@ test.describe('Positive test cases for login form', () => {
     });
 
     test('test case C201: Authorization with valid email and password', async( {page} ) => {
-        await homepage.fillInput('email', validEmail);
+        await homepage.fillInput('email', VALID_EMAIL);
 
-        await expect(await homepage.getLoginEmailOrPhoneInputValue()).toBe(validEmail);
+        await expect(await homepage.getLoginEmailOrPhoneInputValue()).toBe(VALID_EMAIL);
 
-        await homepage.fillInput('password', validPassword);
+        await homepage.fillInput('password', VALID_PASSWORD);
 
-        await expect(await homepage.getLoginEmailOrPhoneInputValue()).toBe(validEmail);
+        await expect(await homepage.getLoginEmailOrPhoneInputValue()).toBe(VALID_EMAIL);
     
         await homepage.clickOnHidePasswordIcon();
 
@@ -126,11 +126,11 @@ test.describe('Positive test cases for login form', () => {
 
 
         await expect(await homepage.checkUserIconIsDisplayed()).toBe(true);
-        await expect(await homepage.getUrl()).toBe(homepageUrl);
+        await expect(await homepage.getUrl()).toBe(HOMEPAGE_URL);
     
         await homepage.clickOnUserIcon();
         await expect(await homepage.profileDropDown).toBeVisible();
-        await expect(await homepage.getProfileDropDownEmail()).toBe(validEmail);
+        await expect(await homepage.getProfileDropDownEmail()).toBe(VALID_EMAIL);
 
         await homepage.logout();
 
@@ -145,25 +145,25 @@ test.describe('Positive test cases for login form', () => {
 
             await expect(await homepage.checkInputErrorIsDisplayed('email', 'Поле не може бути порожнім')).toBe(false);
 
-            await homepage.fillInput('password', validPassword);
+            await homepage.fillInput('password', VALID_PASSWORD);
 
             await expect(await homepage.checkInputErrorIsDisplayed('password', 'Поле не може бути порожнім')).toBe(false);
     
             await homepage.clickOnSubmitLoginFormBtn();
 
             await expect(await homepage.checkUserIconIsDisplayed()).toBe(true);
-            await expect(await homepage.getUrl()).toBe(homepageUrl);
+            await expect(await homepage.getUrl()).toBe(HOMEPAGE_URL);
     
             await homepage.clickOnUserIcon();
             await homepage.clickOnMyProfileMenuItem();
 
             await expect(await profilePage.getUrl()).toContain(pagesUrlPath["owner-cabinet"]);
             await expect(await profilePage.profilePhoneInput).toBeVisible();
-            await expect(await profilePage.getProfilePhoneInputValue()).toBe(validPhone);
+            await expect(await profilePage.getProfilePhoneInputValue()).toBe(VALID_PHONE);
 
             await profilePage.clickOnLogoutBtn();
             
-            await expect(await homepage.getUrl()).toContain(homepageUrl);
+            await expect(await homepage.getUrl()).toContain(HOMEPAGE_URL);
     
             await homepage.clickOnEnterBtn();
         }

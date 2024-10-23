@@ -5,9 +5,9 @@ import CreateUnitPage from '../pages/create.unit.page'
 import { faker } from '@faker-js/faker';
 import { getStringWithSpaceIncide, getStringWithSpaceInEnd } from '../helpers/random_values';
 
-const validEmail: string = process.env.VALID_EMAIL || '';
-const validPassword: string = process.env.VALID_PASSWORD || '';
-const homepageUrl: string = process.env.HOMEPAGE_URL || '';
+const VALID_EMAIL: string = process.env.VALID_EMAIL || '';
+const VALID_PASSWORD: string = process.env.VALID_PASSWORD || '';
+const HOMEPAGE_URL: string = process.env.HOMEPAGE_URL || '';
 
 let createUnitPage: CreateUnitPage;
 let homepage: HomePage;
@@ -19,8 +19,8 @@ test.beforeEach(async ({ page }) => {
     await homepage.navigate('/');
     await homepage.clickOnClosePopUpBtn();
     await homepage.clickOnCreateUnitBtn();
-    await homepage.fillInput('email', validEmail);
-    await homepage.fillInput('password', validPassword);
+    await homepage.fillInput('email', VALID_EMAIL);
+    await homepage.fillInput('password', VALID_PASSWORD);
     await homepage.clickOnSubmitLoginFormBtn();
 });
 
@@ -406,7 +406,7 @@ test('test case C326: Verify ""Скасувати"" button', async( {page} ) => 
     await createUnitPage.clickOnCancelBtn();
     await createUnitPage.acceptAlert();
 
-    await expect(await createUnitPage.getUrl()).toBe(homepageUrl);
+    await expect(await createUnitPage.getUrl()).toBe(HOMEPAGE_URL);
 })
 
 test('test case C329: Verify ""Далі"" button', async( {page} ) => {

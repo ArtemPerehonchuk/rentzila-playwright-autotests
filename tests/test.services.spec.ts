@@ -3,7 +3,7 @@ import HomePage from '../pages/home.page';
 import ProductsPage from '../pages/products.page';
 import UnitPage from '../pages/unit.page';
 
-const homepageUrl: string = process.env.HOMEPAGE_URL || '';
+const HOMEPAGE_URL: string = process.env.HOMEPAGE_URL || '';
 
 let homepage: HomePage;
 let productsPage: ProductsPage;
@@ -43,7 +43,7 @@ test('test case c212: Checking ""Послуги"" section on the main page', asy
 
         await unitPage.clickOnLogo();
 
-        await expect(await homepage.getUrl()).toBe(homepageUrl);
+        await expect(await homepage.getUrl()).toBe(HOMEPAGE_URL);
 
         await homepage.clickOnAnnouncementsNavMenuItem();
 
@@ -78,7 +78,7 @@ test('test case c213: Checking ""Спецтехніка"" section on the main pa
 
         await unitPage.clickOnLogo();
 
-        await expect(await homepage.getUrl()).toBe(homepageUrl);
+        await expect(await homepage.getUrl()).toBe(HOMEPAGE_URL);
 
         await homepage.clickOnAnnouncementsNavMenuItem();
         
