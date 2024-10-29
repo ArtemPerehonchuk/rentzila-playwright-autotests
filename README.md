@@ -2,7 +2,7 @@
 
 ## Description
 
-This project contains end-to-end tests for the Rentzila application using Playwright. It ensures the functionality and quality of the Rentzila web application through automated browser testing.
+This project contains end-to-end tests for the Rentzila web site using Playwright. It ensures the functionality and quality of the Rentzila web site through automated browser testing.
 
 ## Prerequisites
 

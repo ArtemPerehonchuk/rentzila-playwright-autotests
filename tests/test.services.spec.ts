@@ -9,7 +9,14 @@ let homepage: HomePage;
 let productsPage: ProductsPage;
 let unitPage: UnitPage;
 
+let homepage: HomePage;
+let productsPage: ProductsPage;
+let unitPage: UnitPage;
+
 test.beforeEach(async ({ page }) => {
+    homepage = new HomePage(page);
+    productsPage = new ProductsPage(page);
+    unitPage = new UnitPage(page);
     homepage = new HomePage(page);
     productsPage = new ProductsPage(page);
     unitPage = new UnitPage(page);
@@ -57,6 +64,7 @@ test('test case c212: Checking ""Послуги"" section on the main page', asy
 })
 
 test('test case c213: Checking ""Спецтехніка"" section on the main page', async ({ page }) => {
+    const specialEquipmentsList = homepage.specialEquipmentsList;
     const specialEquipmentsList = homepage.specialEquipmentsList;
     const specialEquipmentsCount = await specialEquipmentsList.count();
 

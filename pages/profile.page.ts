@@ -1,4 +1,5 @@
 import { Page as PlaywrightPage, expect } from '@playwright/test';
+import { Page as PlaywrightPage, expect } from '@playwright/test';
 import Page from './page';
 
 class ProfilePage extends Page {

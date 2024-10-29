@@ -1,4 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default defineConfig({
   testDir: './tests',
@@ -14,7 +17,7 @@ export default defineConfig({
     timeout: 10000 
   },
   use: {
-    baseURL: 'https://dev.rentzila.com.ua/',
+    baseURL: process.env.HOMEPAGE_URL,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     ...devices['Desktop Chrome'],
