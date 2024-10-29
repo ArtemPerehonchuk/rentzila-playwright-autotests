@@ -8,6 +8,7 @@ import TendersPage from '../pages/tenders.page';
 import { faker } from '@faker-js/faker';
 import testData from '../data/test_data.json' assert {type: 'json'}
 
+
 let apiRequestContext: APIRequestContext;
 
 let homepage: HomePage;
@@ -16,9 +17,8 @@ const homepageUrl: string = process.env.HOMEPAGE_URL || '';
 const pagesUrlPath = testData["pages URL path"];
 const contactUsFormInputValues = testData["contuct us form inputs"];
 
+
 test.beforeEach(async ({ page }) => {
-    apiRequestContext = await request.newContext(); 
-    homepage = new HomePage(page, apiRequestContext);
     apiRequestContext = await request.newContext(); 
     homepage = new HomePage(page, apiRequestContext);
     await homepage.navigate('/');
@@ -103,14 +103,10 @@ test('test case C226: Verify "У Вас залишилися питання?" fo
 
     await expect(await homepage.checkInputErrorIsDisplayed('name', 'Поле не може бути порожнім')).toBe(true);
     await expect(await homepage.checkInputErrorIsDisplayed('phone', 'Поле не може бути порожнім')).toBe(true);
-    await expect(await homepage.checkInputErrorIsDisplayed('name', 'Поле не може бути порожнім')).toBe(true);
-    await expect(await homepage.checkInputErrorIsDisplayed('phone', 'Поле не може бути порожнім')).toBe(true);
 
     await homepage.fillInput('name', 'test');
     await homepage.clickOnSubmitConsultationBtn();
 
-    await expect(await homepage.checkInputErrorIsDisplayed('name', 'Поле не може бути порожнім')).toBe(false);
-    await expect(await homepage.checkInputErrorIsDisplayed('phone', 'Поле не може бути порожнім')).toBe(true);
     await expect(await homepage.checkInputErrorIsDisplayed('name', 'Поле не може бути порожнім')).toBe(false);
     await expect(await homepage.checkInputErrorIsDisplayed('phone', 'Поле не може бути порожнім')).toBe(true);
 
@@ -119,17 +115,12 @@ test('test case C226: Verify "У Вас залишилися питання?" fo
     await expect(await homepage.getPhoneInputText()).toBe('+380');
 
     await homepage.fillInput('phone', contactUsFormInputValues["correct phone"]);
-    await homepage.fillInput('phone', contactUsFormInputValues["correct phone"]);
     await homepage.clearInput('name');
     await homepage.clickOnSubmitConsultationBtn();
 
     await expect(await homepage.checkInputErrorIsDisplayed('name', 'Поле не може бути порожнім')).toBe(true);
     await expect(await homepage.checkInputErrorIsDisplayed('phone', 'Поле не може бути порожнім')).toBe(false);
-    await expect(await homepage.checkInputErrorIsDisplayed('name', 'Поле не може бути порожнім')).toBe(true);
-    await expect(await homepage.checkInputErrorIsDisplayed('phone', 'Поле не може бути порожнім')).toBe(false);
 
-    await homepage.fillInput('name', contactUsFormInputValues.test);
-    await homepage.fillInput('phone', contactUsFormInputValues["incorrect phone with spaces"]);
     await homepage.fillInput('name', contactUsFormInputValues.test);
     await homepage.fillInput('phone', contactUsFormInputValues["incorrect phone with spaces"]);
     await homepage.clickOnSubmitConsultationBtn();
@@ -146,7 +137,6 @@ test('test case C226: Verify "У Вас залишилися питання?" fo
     await expect(homepage.consultationFormErrorMessage).toHaveCSS('border-color', 'rgb(247, 56, 89)')
 
     await homepage.fillInput('phone', contactUsFormInputValues["other correct phone"]);
-    await homepage.fillInput('phone', contactUsFormInputValues["other correct phone"]);
     await homepage.clickOnSubmitConsultationBtn();
 
     await homepage.checkSuccessSubmitConsultationMsg();
@@ -154,7 +144,6 @@ test('test case C226: Verify "У Вас залишилися питання?" fo
     await homepage.clearInput('name');
     await homepage.clearInput('phone');
     await homepage.fillInput('name', userName);
-    await homepage.fillInput('phone', contactUsFormInputValues["other correct phone"]);
     await homepage.fillInput('phone', contactUsFormInputValues["other correct phone"]);
     await homepage.clickOnSubmitConsultationBtn();
 
