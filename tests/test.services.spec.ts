@@ -9,14 +9,7 @@ let homepage: HomePage;
 let productsPage: ProductsPage;
 let unitPage: UnitPage;
 
-let homepage: HomePage;
-let productsPage: ProductsPage;
-let unitPage: UnitPage;
-
 test.beforeEach(async ({ page }) => {
-    homepage = new HomePage(page);
-    productsPage = new ProductsPage(page);
-    unitPage = new UnitPage(page);
     homepage = new HomePage(page);
     productsPage = new ProductsPage(page);
     unitPage = new UnitPage(page);
@@ -24,8 +17,6 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('test case c212: Checking ""Послуги"" section on the main page', async ({ page }) => {
-    test.setTimeout(150000);
-
     const servicesList = homepage.servicesList;
     const servicesCount = await servicesList.count();
     let firstServicesUnitName;
@@ -64,7 +55,6 @@ test('test case c212: Checking ""Послуги"" section on the main page', asy
 })
 
 test('test case c213: Checking ""Спецтехніка"" section on the main page', async ({ page }) => {
-    const specialEquipmentsList = homepage.specialEquipmentsList;
     const specialEquipmentsList = homepage.specialEquipmentsList;
     const specialEquipmentsCount = await specialEquipmentsList.count();
 
