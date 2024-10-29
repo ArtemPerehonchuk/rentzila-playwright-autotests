@@ -101,8 +101,16 @@ class HomePage extends Page {
     }
 
     async clickOnCookiePolicyLink() {
-        await this.cookiePolicyLink.click();
-        await this.page.waitForLoadState('domcontentloaded');
+        const navigationPromise = new Promise<void>(resolve => {
+            this.page.on('framenavigated', frame => {
+                if (frame === this.page.mainFrame()) { 
+                    resolve();
+                }
+            });
+        });
+    
+        await this.cookiePolicyLink.click(); 
+        await navigationPromise; 
     }
 
     async clickOnTermsConditionsLink() {

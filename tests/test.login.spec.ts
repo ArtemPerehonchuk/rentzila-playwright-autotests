@@ -84,7 +84,7 @@ test.describe('Negative test cases for login form', () => {
         }
     });
 
-    test('test case C577: Authorization with invalid password', async( { page } ) => {
+    test.only('test case C577: Authorization with invalid password', async( { page } ) => {
         await homepage.fillInput('email', validEmail);
 
         await expect(await homepage.getLoginEmailOrPhoneInputValue()).toBe(validEmail);
