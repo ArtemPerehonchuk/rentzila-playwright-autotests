@@ -1,5 +1,4 @@
 import { Page as PlaywrightPage, expect } from '@playwright/test';
-import { Page as PlaywrightPage, expect } from '@playwright/test';
 import Page from './page';
 
 class UnitPage extends Page {

@@ -1,5 +1,4 @@
 import { Page as PlaywrightPage, expect } from '@playwright/test';
-import { Page as PlaywrightPage, expect } from '@playwright/test';
 import Page from './page';
 
 class ProductsPage extends Page {
@@ -41,7 +40,6 @@ class ProductsPage extends Page {
     }
 
     async clickOnDropdownArrow() {
-        await this.dropdownArrow.click();
         await this.dropdownArrow.click();
     }
 

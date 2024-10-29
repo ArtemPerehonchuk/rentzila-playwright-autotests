@@ -1,5 +1,4 @@
 import { test, expect, request, APIRequestContext } from "@playwright/test";
-import { test, expect, request, APIRequestContext } from "@playwright/test";
 import HomePage from '../pages/home.page';
 import PrivacyPolicyPage from '../pages/privacy.policy.page';
 import CookiePolicyPage from '../pages/cookie.policy.page';
@@ -9,22 +8,13 @@ import TendersPage from '../pages/tenders.page';
 import { faker } from '@faker-js/faker';
 import testData from '../data/test_data.json' assert {type: 'json'}
 
-import testData from '../data/test_data.json' assert {type: 'json'}
-
-
-let apiRequestContext: APIRequestContext;
 let apiRequestContext: APIRequestContext;
 
-let homepage: HomePage;
 let homepage: HomePage;
 
 const homepageUrl: string = process.env.HOMEPAGE_URL || '';
 const pagesUrlPath = testData["pages URL path"];
 const contactUsFormInputValues = testData["contuct us form inputs"];
-
-const pagesUrlPath = testData["pages URL path"];
-const contactUsFormInputValues = testData["contuct us form inputs"];
-
 
 test.beforeEach(async ({ page }) => {
     apiRequestContext = await request.newContext(); 

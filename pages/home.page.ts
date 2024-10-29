@@ -1,5 +1,4 @@
 import { Page as PlaywrightPage, expect, request, APIRequestContext } from '@playwright/test';
-import { Page as PlaywrightPage, expect, request, APIRequestContext } from '@playwright/test';
 import Page from './page';
 import ApiHelper from '../helpers/api.helper';
 
@@ -57,7 +56,6 @@ class HomePage extends Page {
 
     async scrollToServicesContainer() {
         await this.servicesContainer.scrollIntoViewIfNeeded();
-        await this.servicesContainer.scrollIntoViewIfNeeded();
     }
 
     async scrollToSpecialEquipmentContainer() {
@@ -71,21 +69,17 @@ class HomePage extends Page {
 
     async clickFirstSpecialEquipmentUnit() {
         await this.specialEquipmentsUnitsList.first().click()
-        await this.specialEquipmentsUnitsList.first().click()
     }
 
     async getFirstServicesUnitName(): Promise<string> {
-        return await this.servicesUnitsList.first().innerText();
         return await this.servicesUnitsList.first().innerText();
     }
 
     async getFirstSpecialEquipmentsUnitName(): Promise<string> {
         return await this.specialEquipmentsUnitsList.first().innerText();
-        return await this.specialEquipmentsUnitsList.first().innerText();
     }
 
     async clickOnAnnouncementsNavMenuItem() {
-        await this.announcementsNavMenuItem.click({force: true});
         await this.announcementsNavMenuItem.click({force: true});
     }
 
@@ -108,18 +102,15 @@ class HomePage extends Page {
 
     async clickOnCookiePolicyLink() {
         await this.cookiePolicyLink.click();
-        await this.cookiePolicyLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async clickOnTermsConditionsLink() {
         await this.termsConditionsLink.click();
-        await this.termsConditionsLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async clickOnAnnouncementsLink() {
-        await this.announcementsLink.click();
         await this.announcementsLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
@@ -130,12 +121,10 @@ class HomePage extends Page {
 
     async clickOnTendersLink() {
         await this.tendersLink.click();
-        await this.tendersLink.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
     async clickOnContactsEmail() {
-        await this.contactsEmail.click();
         await this.contactsEmail.click();
     }
 
@@ -150,15 +139,11 @@ class HomePage extends Page {
 
     async clickOnSubmitConsultationBtn() {
         await this.submitConsultationBtn.click();
-        await this.submitConsultationBtn.click();
         await this.page.waitForTimeout(3000);
     }
 
     async checkInputErrorIsDisplayed(inputName: string, errorText: string) {
-    async checkInputErrorIsDisplayed(inputName: string, errorText: string) {
         const inputValues = {
-            name: await this.consultationFormNameInput.evaluate((el) => (el as HTMLInputElement).value),
-            phone: await this.consultationFormPhoneInput.evaluate((el) => (el as HTMLInputElement).value),
             name: await this.consultationFormNameInput.evaluate((el) => (el as HTMLInputElement).value),
             phone: await this.consultationFormPhoneInput.evaluate((el) => (el as HTMLInputElement).value),
             email: '',
@@ -167,12 +152,8 @@ class HomePage extends Page {
 
         if (await this.loginEmailOrPhoneInput.isVisible()) {
             inputValues.email = await this.loginEmailOrPhoneInput.evaluate((el) => (el as HTMLInputElement).value);
-        if (await this.loginEmailOrPhoneInput.isVisible()) {
-            inputValues.email = await this.loginEmailOrPhoneInput.evaluate((el) => (el as HTMLInputElement).value);
         }
 
-        if (await this.loginPasswordInput.isVisible()) {
-            inputValues.password = await this.loginPasswordInput.evaluate((el) => (el as HTMLInputElement).value);
         if (await this.loginPasswordInput.isVisible()) {
             inputValues.password = await this.loginPasswordInput.evaluate((el) => (el as HTMLInputElement).value);
         }
@@ -188,22 +169,18 @@ class HomePage extends Page {
     
         if (inputName === 'name' && inputValues.name === '') {
             return await showError(this.consultationFormNameInput, this.consultationFormErrorMessage, 0);
-            return await showError(this.consultationFormNameInput, this.consultationFormErrorMessage, 0);
         }
     
         if (inputName === 'phone' && inputValues.phone === '') {
             const errorIndex = inputValues.name === '' ? 1 : 0;
             return await showError(this.consultationFormPhoneInput, this.consultationFormErrorMessage, errorIndex);
-            return await showError(this.consultationFormPhoneInput, this.consultationFormErrorMessage, errorIndex);
         }
 
         if (inputName === 'email' && inputValues.email === '') {
             return await showError(this.loginEmailOrPhoneInput, this.loginErrorInputsMsg, 0);
-            return await showError(this.loginEmailOrPhoneInput, this.loginErrorInputsMsg, 0);
         }
         if (inputName === 'password' && inputValues.password === '') {
             const errorIndex = inputValues.email === '' ? 1 : 0;
-            return await showError(this.loginPasswordInput, this.loginErrorInputsMsg, errorIndex);
             return await showError(this.loginPasswordInput, this.loginErrorInputsMsg, errorIndex);
         }
     
@@ -215,10 +192,8 @@ class HomePage extends Page {
             switch (inputName) {
                 case 'name':
                     await this.consultationFormNameInput.fill(inputValue);
-                    await this.consultationFormNameInput.fill(inputValue);
                     break;
                 case 'phone':
-                    await this.consultationFormPhoneInput.fill(inputValue);
                     await this.consultationFormPhoneInput.fill(inputValue);
                     break;
                 case 'email':
@@ -235,7 +210,6 @@ class HomePage extends Page {
 
     async clickOnPhoneInput() {
         await this.consultationFormPhoneInput.click();
-        await this.consultationFormPhoneInput.click();
     }
 
     async getPhoneInputText() {
@@ -246,18 +220,14 @@ class HomePage extends Page {
         switch(inputName) {
             case 'name':
                 await this.consultationFormNameInput.clear();
-                await this.consultationFormNameInput.clear();
                 break;
             case 'phone':
-                await this.consultationFormPhoneInput.clear();
                 await this.consultationFormPhoneInput.clear();
                 break;
             case 'email':
                 await this.loginEmailOrPhoneInput.clear();
-                await this.loginEmailOrPhoneInput.clear();
                 break;
             case 'password':
-                await this.loginPasswordInput.clear();
                 await this.loginPasswordInput.clear();
                 break;
             default:
@@ -301,7 +271,6 @@ class HomePage extends Page {
 
     async clickOnHidePasswordIcon() {
         await this.hidePasswordIcon.click();
-        await this.hidePasswordIcon.click();
     }
 
     async getPasswordInputType() {
@@ -317,7 +286,6 @@ class HomePage extends Page {
 
     async clickOnUserIcon() {
         await this.userIcon.click();
-        await this.userIcon.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 
@@ -327,11 +295,9 @@ class HomePage extends Page {
 
     async logout() {
         await this.profileLogoutBtn.click();
-        await this.profileLogoutBtn.click();
     }
 
     async clickOnMyProfileMenuItem() {
-        await this.myProfileMenuItem.click();
         await this.myProfileMenuItem.click();
         await this.page.waitForTimeout(2000);
     }

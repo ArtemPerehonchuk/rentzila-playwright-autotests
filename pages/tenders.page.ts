@@ -1,9 +1,7 @@
 import { Page as PlaywrightPage, expect } from '@playwright/test';
-import { Page as PlaywrightPage, expect } from '@playwright/test';
 import Page from './page';
 
-class TendersPage extends Page {  
-class TendersPage extends Page {  
+class TendersPage extends Page {   
 
     constructor(page: PlaywrightPage) {
         super(page);
