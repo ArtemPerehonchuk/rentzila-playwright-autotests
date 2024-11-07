@@ -114,8 +114,16 @@ class HomePage extends Page {
     }
 
     async clickOnTermsConditionsLink() {
+        const navigationPromise = new Promise<void>(resolve => {
+            this.page.on('framenavigated', frame => {
+                if (frame === this.page.mainFrame()) { 
+                    resolve();
+                }
+            });
+        });
+
         await this.termsConditionsLink.click();
-        await this.page.waitForLoadState('domcontentloaded');
+        await navigationPromise; 
     }
 
     async clickOnAnnouncementsLink() {

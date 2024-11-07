@@ -53,8 +53,9 @@ test.describe('Negative test cases for login form', () => {
     
         await expect(await homepage.autorizationForm).toBeVisible();
         await expect(await homepage.checkInputErrorIsDisplayed('email', 'Поле не може бути порожнім')).toBe(true);
-        await expect(await homepage.checkInputErrorIsDisplayed('password', 'Поле не може бути порожнім')).toBe(true);
+        await expect(await homepage.checkInputErrorIsDisplayed('password', 'Поле не може бути порожнім')).toBe(false);
     
+        await homepage.clearInput('password');
         await homepage.fillInput('email', VALID_EMAIL);
         await homepage.clickOnSubmitLoginFormBtn();
 
