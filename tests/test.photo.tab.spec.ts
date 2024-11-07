@@ -184,7 +184,7 @@ test('Test case C594: Verify image moving', async( {page}) => {
     await photoTab.deleteUploadedImg(imageBlocksItems.length)
 })
 
-test.only('Test case C595: Verify image deleting', async( {page}) => {
+test('Test case C595: Verify image deleting', async( {page}) => {
     await photoTab.uploadToTwelvePhotos(1);
 
     const imageBlocksItems = await photoTab.imageBlocks.all();
