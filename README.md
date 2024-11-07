@@ -6,7 +6,7 @@ This project contains end-to-end tests for the Rentzila web site using Playwrigh
 
 ## Prerequisites
 
-- [Node.js]
+- [Node.js >= 18.0.0]
 - [npm]
 
 ## Installation
@@ -65,4 +65,10 @@ To run all tests using the default browser configuration:
 
     ```bash
     npm run test:unit-page-main-info-tab:chrome
+    ```
+
+- Run tests for photo tab on create unit page:
+
+    ```bash
+    npm run test:photo-tab:chrome
     ```
