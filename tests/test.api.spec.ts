@@ -60,6 +60,4 @@ test('Verify creating unit through the API request', async( {page} ) => {
     const deleteUnitResponse  = await apiHelper.deleteUnit(accessUserToken, createdUnitId);
 
     await expect(deleteUnitResponse.status()).toBe(204)
-    const unitlist = await apiHelper.getUnitsList(accessUserToken);
-    console.log('unitList is: ', unitlist)
 })
