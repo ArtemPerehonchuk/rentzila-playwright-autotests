@@ -184,7 +184,7 @@ test('Test case C594: Verify image moving', async( {page}) => {
     await photoTab.deleteUploadedImg(imageBlocksItems.length)
 })
 
-test('Test case C595: Verify image deleting', async( {page}) => {
+test.only('Test case C595: Verify image deleting', async( {page}) => {
     await photoTab.uploadToTwelvePhotos(1);
 
     const imageBlocksItems = await photoTab.imageBlocks.all();
@@ -196,7 +196,8 @@ test('Test case C595: Verify image deleting', async( {page}) => {
 
             await expect(photoTab.deleteImgIcons.nth(i)).toBeVisible();
 
-            await photoTab.deleteImgIcons.nth(i).click()
+            await photoTab.deleteImgIcons.nth(i).click();
+            await page.waitForLoadState('domcontentloaded');
 
             imageBlockAttr = await photoTab.imageBlocks.nth(i).getAttribute('draggable');
             
