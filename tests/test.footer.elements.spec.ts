@@ -24,7 +24,7 @@ test.beforeEach(async ({ page }) => {
     await homepage.navigate('/');
 });
 
-test.only('test case C214: Verify that all elements on the footer are displayed and all links are clickable', async ({ page }) => {
+test('test case C214: Verify that all elements on the footer are displayed and all links are clickable', async ({ page }) => {
     const privacyPolicyPage = new PrivacyPolicyPage(page);
     const cookiePolicyPage = new CookiePolicyPage(page);
     const termsConditionsPage = new TermsConditionsPage(page);
