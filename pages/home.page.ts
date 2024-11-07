@@ -53,6 +53,8 @@ class HomePage extends Page {
     invalidEmailOrPasswordError = this.page.locator('div[data-testid="errorMessage"]');
     createUnitBtn = this.page.locator('a[class*="Navbar_addAnnouncement"]');
     closePopUpBtn = this.page.locator('[data-testid="crossButton"]');
+    profileAnnouncementsDropDownMenuItem = this.page.locator('[data-testid="units"]');
+    profileMyAnnouncementsItem = this.page.locator('[data-testid="units"] > ul > li:nth-child(1)');
 
     async scrollToServicesContainer() {
         await this.servicesContainer.scrollIntoViewIfNeeded();
@@ -286,7 +288,7 @@ class HomePage extends Page {
 
     async clickOnUserIcon() {
         await this.userIcon.click();
-        await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForLoadState('load');
     }
 
     async getProfileDropDownEmail() {
@@ -324,6 +326,32 @@ class HomePage extends Page {
 
     async clickOnClosePopUpBtn() {
         await this.closePopUpBtn.click();
+    }
+
+    async clickOnProfileMyAnnouncementsItem() {
+        await this.profileAnnouncementsDropDownMenuItem.click({ force: true });
+    
+        try {
+            const dialog = await this.page.waitForEvent('dialog', { timeout: 3000 });
+            await dialog.accept();
+        } catch (e) {
+        }
+    
+        await this.page.waitForLoadState('networkidle');
+    }
+
+    async logoutUser() {
+        await this.clickOnUserIcon();
+        await this.logout();
+        await this.page.waitForTimeout(2000);
+    }
+
+    async loginUser(email: string, password: string) {
+        await this.clickOnEnterBtn();
+        await this.fillInput('email', email);
+        await this.fillInput('password', password);
+        await this.submitLoginFormBtn.click();
+        await this.page.waitForLoadState('networkidle')
     }
 }
 

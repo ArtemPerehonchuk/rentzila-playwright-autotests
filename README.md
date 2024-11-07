@@ -84,3 +84,15 @@ To run all tests using the default browser configuration:
     ```bash
     npm run test:services-tab:chrome
     ```
+
+- Run tests for creating unit using API:
+
+    ```bash
+    npm run test:api:chrome
+    ```
+
+- Run tests for edit unit functionality:
+
+    ```bash
+    npm run test:edit-unit:chrome
+    ```
