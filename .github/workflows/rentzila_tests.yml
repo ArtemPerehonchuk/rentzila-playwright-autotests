@@ -25,15 +25,15 @@ jobs:
 
       - name: Set up environment variables
         run: |
-          echo "ADMIN_EMAIL=${{secrets.ADMIN_EMAIL}}" >> .env
-          echo "ADMIN_PASSWORD=${{secrets.ADMIN_PASSWORD}}" >> .env
-          echo "VALID_EMAIL=${{ secrets.VALID_EMAIL}}" >> .env
-          echo "VALID_PASSWORD=${{ secrets.VALID_PASSWORD}}" >> .env
-          echo "VALID_PHONE=${{ secrets.VALID_PHONE}}" >> .env
-          echo "CORRECT_PHONE_NUMBERS_FULL=${{ secrets.CORRECT_PHONE_NUMBERS_FULL }}" >> .env
-          echo "CORRECT_PHONE_NUMBERS_WITHOUT_PLUS=${{ secrets.CORRECT_PHONE_NUMBERS_WITHOUT_PLUS }}" >> .env
-          echo "CORRECT_PHONE_NUMBERS_WITHOUT_PLUS38=${{ secrets.CORRECT_PHONE_NUMBERS_WITHOUT_PLUS38 }}" >> .env
-          echo "HOMEPAGE_URL=${{ secrets.HOMEPAGE_URL }}" >> .env
+          ADMIN_EMAIL: ${{secrets.ADMIN_EMAIL}}
+          ADMIN_PASSWORD: ${{secrets.ADMIN_PASSWORD}}
+          VALID_EMAIL: ${{ secrets.VALID_EMAIL}}
+          VALID_PASSWORD: ${{ secrets.VALID_PASSWORD}}
+          VALID_PHONE: ${{ secrets.VALID_PHONE}}
+          CORRECT_PHONE_NUMBERS_FULL=${{ secrets.CORRECT_PHONE_NUMBERS_FULL }}
+          CORRECT_PHONE_NUMBERS_WITHOUT_PLUS: ${{ secrets.CORRECT_PHONE_NUMBERS_WITHOUT_PLUS }}
+          CORRECT_PHONE_NUMBERS_WITHOUT_PLUS38: ${{ secrets.CORRECT_PHONE_NUMBERS_WITHOUT_PLUS38 }}
+          HOMEPAGE_URL: ${{ secrets.HOMEPAGE_URL }}
 
       - name: Run tests
         run: npm run test:chrome
