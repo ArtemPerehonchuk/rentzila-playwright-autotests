@@ -60,5 +60,21 @@
         "pexels-pixabay-210019",
         "pexels-sarmad-mughal-94606-305070",
         "pexels-trace-707046"
+    ],
+    "incorrect prices": {
+        "space in middle": "123 456",
+        "space in end": "123456 ",
+        "one space": " ",
+        "letters": "abcd",
+        "special symbols": "!@#$%.,"
+    },
+    "add price options": [
+        "Година",
+        "Зміна",
+        "Тонна",
+        "Гектар",
+        "Метр кв.",
+        "Метр куб.",
+        "Кілометр"
     ]
 }

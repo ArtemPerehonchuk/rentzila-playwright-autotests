@@ -72,3 +72,9 @@ To run all tests using the default browser configuration:
     ```bash
     npm run test:photo-tab:chrome
     ```
+
+- Run tests for prices tab on create unit page:
+
+    ```bash
+    npm run test:prices-tab:chrome
+    ```

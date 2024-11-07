@@ -1,5 +1,6 @@
 import { Page as PlaywrightPage, expect } from '@playwright/test';
 import Page from './page';
+import { getRandomLetter } from '../helpers/random_values';
 
 class ServicesTab extends Page {  
 
@@ -8,7 +9,18 @@ class ServicesTab extends Page {
         } 
 
     servicesTabTitle = this.page.locator('[class*="ServicesUnitFlow_title"]');
-    servucesTabInput = this.page.locator('div[class*="ServicesUnitFlow_searchInput"] > input');
+    servicesTabInput = this.page.locator('div[class*="ServicesUnitFlow_searchInput"] > input');
+    servicesOptions = this.page.locator('[data-testid="searchItem-servicesUnitFlow"]');
+
+    async selectService() {
+        await this.servicesTabInput.fill(getRandomLetter());
+        await this.servicesOptions.first().click();
+    }
+
+    async getSelectedService() {
+       const selectedService =  await this.servicesOptions.first().innerText();
+       return selectedService;
+    }
 }
 
 export default ServicesTab;
