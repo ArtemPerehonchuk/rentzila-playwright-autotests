@@ -78,3 +78,9 @@ To run all tests using the default browser configuration:
     ```bash
     npm run test:prices-tab:chrome
     ```
+
+- Run tests for services tab on create unit page:
+
+    ```bash
+    npm run test:services-tab:chrome
+    ```
