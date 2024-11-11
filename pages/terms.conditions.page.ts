@@ -9,9 +9,9 @@ class TermsConditionsPage extends Page {
 
     termsConditionsTitle = this.page.locator('h1[class*="TermsConditions_title"]');
 
-    async getCookiePolicyTitleText() {
-        return await this.termsConditionsTitle.innerText();
-    }
+    // async getCookiePolicyTitleText() {
+    //     return await this.termsConditionsTitle.innerText();
+    // }
 
 }
 

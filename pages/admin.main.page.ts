@@ -43,10 +43,6 @@ class AdminMainPage extends Page {
         await this.adminPanelIcon.click();
     }
 
-    // async getAdminPanelTitleText() {
-    //     return await this.adminPanelTitle.innerText();
-    // }
-
     async clickOnAnnouncementsMenuItem() {
         const navigationPromise = new Promise<void>(resolve => {
             this.page.on('framenavigated', frame => {

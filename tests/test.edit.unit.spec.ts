@@ -218,7 +218,6 @@ test('Test case C273: Check ""Виробник транспортного зас
 
     await expect(editUnitPage.vehicleManufacturerNotFoundMsg).toBeVisible();
 
-    // const notFoundMsg = await editUnitPage.getVehicleManufacturerNotFoundMsgText(); 
     const capitalizedRandomString = randomString.charAt(0).toUpperCase() + randomString.slice(1);
 
     await expect(editUnitPage.vehicleManufacturerNotFoundMsg).toHaveText(`На жаль, виробника “${capitalizedRandomString}“ не знайдено в нашій базі.

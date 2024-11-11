@@ -59,9 +59,9 @@ class CreateUnitPage extends Page {
     vehicleManufacturerList = this.page.locator('[data-testid="input-customSelectWithSearch"]');
     mapLabel = this.page.locator('[data-testid="mapLabel"]');
 
-    async getCreateUnitTitleText() {
-        return await this.createUnitTitle.innerText();
-    }
+    // async getCreateUnitTitleText() {
+    //     return await this.createUnitTitle.innerText();
+    // }
 
     async checkCreateUnitTabsTitles(activeTabNumber: number) {
         if(await this.createUnitTabs.isVisible) {
@@ -362,9 +362,9 @@ class CreateUnitPage extends Page {
         await this.page.waitForLoadState('domcontentloaded');
     }
 
-    async getNextBtnText() {
-        return await this.nextBtn.innerText();
-    }
+    // async getNextBtnText() {
+    //     return await this.nextBtn.innerText();
+    // }
 
     async fillCategory() {
         const firstCategoryItem = await this.page.locator('[data-testid="firstCategoryLabel"]').first();

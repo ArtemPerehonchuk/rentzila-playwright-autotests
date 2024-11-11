@@ -28,14 +28,6 @@ class AdminUnitsPage extends Page {
     sortDateBtn = this.page.locator('[data-testid="ArrowDownwardIcon"]').nth(6);
     adminShowIcon = this.page.locator('[data-testid="adminOkoButton"]');
 
-    // async getAnnouncementsTitleText() {
-    //     return await this.announcementsTitle.innerText();
-    // }
-
-    // async getAllUnitsTabText() {
-    //     return await this.allUnitsTab.innerText();
-    // }
-
     async clickOnWaitingsTab() {
         await this.waitingsTab.click();
         await this.page.waitForTimeout(1000);
@@ -65,10 +57,6 @@ class AdminUnitsPage extends Page {
         await this.page.waitForTimeout(2000);
     }
 
-    // async getUnitNameCellText() {
-    //     return await this.unitNameCell.innerText();
-    // }
-
     async verifyEditedUnitPresentsInWaitingsTab(expectedUnitTab: string, unitName: string) {
         await this.homepage.logoutUser();
     
@@ -80,8 +68,6 @@ class AdminUnitsPage extends Page {
     
         await expect(this.adminMainPage.adminPanelTitle).toBeVisible();
         await expect(this.adminMainPage.adminPanelTitle).toHaveText('Панель стану');
-
-        // await expect(await this.adminMainPage.getAdminPanelTitleText()).toBe('Панель стану');
     
         await this.adminMainPage.clickOnAnnouncementsMenuItem();
         await this.sortDateBtn.click({force: true});
@@ -92,10 +78,8 @@ class AdminUnitsPage extends Page {
         await expect(adminUnitsPageUrl).toContain('units');
         await expect(this.announcementsTitle).toBeVisible();
         await expect(await this.announcementsTitle).toHaveText('Оголошення');
-        // await expect(await this.getAnnouncementsTitleText()).toBe('Оголошення');
         await expect(this.allUnitsTab).toBeVisible();
         await expect(await this.allUnitsTab).toHaveText('Всі');
-        // await expect(await this.getAllUnitsTabText()).toBe('Всі');
         await expect(this.allUnitsTab).toHaveCSS('background-color', 'rgb(40, 49, 73)');
     
         if(expectedUnitTab === 'waitings') {
@@ -116,8 +100,6 @@ class AdminUnitsPage extends Page {
         if(!await this.unitNameCell.isVisible()) {
             await this.clickOnAllUnitsTab();
         }
-    
-        // const unitNameCellText = await this.getUnitNameCellText();
     
         await expect(this.unitNameCell).toHaveText(unitName);
     }

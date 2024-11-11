@@ -38,22 +38,30 @@ jobs:
       - name: Run tests
         run: npm run test:chrome -- --reporter=html
 
+      - name: Deploy report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: playwright-report  
+          publish_branch: gh-pages      
+
       # - name: Generate Playwright report
       #   run: |
       #     npx playwright show-report playwright-report 
 
-      - name: Deploy report to GitHub Pages
-        if: always()
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@users.noreply.github.com"
-          git checkout gh-pages || git checkout --orphan gh-pages
-          git rm -rf .
-          cp -r playwright-report/* .
-          git add .
-          git commit -m "Deploy test report"
-          git push --force origin gh-pages
-        continue-on-error: true
+      # - name: Deploy report to GitHub Pages
+      #   if: always()
+      #   run: |
+      #     git config --global user.name "github-actions"
+      #     git config --global user.email "github-actions@users.noreply.github.com"
+      #     git checkout gh-pages || git checkout --orphan gh-pages
+      #     git rm -rf .
+      #     cp -r playwright-report/* .
+      #     git add .
+      #     git commit -m "Deploy test report"
+      #     git push --force origin gh-pages
+      #   continue-on-error: true
 
       - name: Upload test results
         if: failure()

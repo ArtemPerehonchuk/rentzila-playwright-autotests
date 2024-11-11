@@ -58,18 +58,18 @@ class PhotoTab extends Page {
             await this.uploadFileInput.setInputFiles(path.resolve('data/test.txt'));
     }
 
-    async getSubmitPopUpBtnText() {
-        return await this.submitPopUpBtn.textContent();
-    }
+    // async getSubmitPopUpBtnText() {
+    //     return await this.submitPopUpBtn.textContent();
+    // }
 
     async uploadIncorrectFileSize() {
         await this.imageBlocks.nth(0).focus();
         await this.uploadFileInput.setInputFiles(path.resolve('data/photo/21mb.jpg'));
     }
 
-    async getPrevBtnText() {
-        return await this.prevBtn.innerText();
-    }
+    // async getPrevBtnText() {
+    //     return await this.prevBtn.innerText();
+    // }
     
     async clickOnPrevBtn() {
         await this.prevBtn.click();
@@ -107,9 +107,9 @@ class PhotoTab extends Page {
         }
     }
 
-    async getFirstImgLableText() {
-        return await this.firstImgLable.innerText();
-    }
+    // async getFirstImgLableText() {
+    //     return await this.firstImgLable.innerText();
+    // }
 
     async deleteUploadedImg(itemsLength: number) {
         for(let i =0; i < itemsLength; i++) {

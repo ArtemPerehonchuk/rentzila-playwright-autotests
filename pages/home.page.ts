@@ -237,9 +237,9 @@ class HomePage extends Page {
         }
     }
 
-    async getConsultationFormPhoneErrorMessageText() {
-        return await this.consultationFormErrorMessage.first().innerText();
-    }
+    // async getConsultationFormPhoneErrorMessageText() {
+    //     return await this.consultationFormErrorMessage.first().innerText();
+    // }
 
     async checkSuccessSubmitConsultationMsg() {
         await this.page.on('dialog', async (dialog) => {
@@ -304,13 +304,13 @@ class HomePage extends Page {
         await this.page.waitForTimeout(2000);
     }
     
-    async getIncorrectPasswordFormatErrorText() {
-        return await this.loginErrorInputsMsg.innerText();
-    }
+    // async getIncorrectPasswordFormatErrorText() {
+    //     return await this.loginErrorInputsMsg.innerText();
+    // }
 
-    async getIncorrectEmailOrPhoneFormatErrorText() {
-        return await this.loginErrorInputsMsg.innerText();
-    }
+    // async getIncorrectEmailOrPhoneFormatErrorText() {
+    //     return await this.loginErrorInputsMsg.innerText();
+    // }
 
     async getIncorrectPasswordErrorText() {
         if(await this.invalidEmailOrPasswordError.isVisible()) {
