@@ -118,7 +118,7 @@ test('Test case C182: Edit Unit without changes', async({page}) => {
 
     if(unitCardsLength === 1) {
         await expect(ownerUnitsPage.activeAnnouncementsTabTitle).toBeVisible();
-        await expect(await ownerUnitsPage.getActiveAnnouncementsTabTitleText()).toBe('У Вас поки немає активних оголошень');
+        await expect(await ownerUnitsPage.activeAnnouncementsTabTitle).toHaveText('У Вас поки немає активних оголошень');
         await adminUnitsPage.verifyEditedUnitPresentsInWaitingsTab('waitings', activeUnitName);
     }else if(unitCardsLength > 0 && unitCardsLength !== 1) {
         const editedUnitName = await ownerUnitsPage.verifyEditedUnitExludedFromUnitCards(unitName);
@@ -147,7 +147,7 @@ test('Test case C272: Check ""Назва оголошення"" input field', as
     await editUnitPage.clickOnSaveUnitChangesBtn();
 
     await expect(editUnitPage.unitNameInputError).toBeVisible();
-    await expect(await editUnitPage.getUnitNameInputErrorText()).toBe('Це поле обов’язкове');
+    await expect(editUnitPage.unitNameInputError).toHaveText('Це поле обов’язкове');
 
     for(const inputValue of inputValues) {
         await editUnitPage.fillUnitNameInput(inputValue);
@@ -155,18 +155,18 @@ test('Test case C272: Check ""Назва оголошення"" input field', as
 
         switch(inputValue) {
             case '<>{};^':
-                await expect(await editUnitPage.getUnitNameInputText()).toBe('');
+                await expect(editUnitPage.unitNameInput).toHaveText('');
                 await expect(await editUnitPage.getUnitNameInputBgText()).toBe('Введіть назву оголошення');
                 break
 
             case nineCharStr:
                 await expect(editUnitPage.unitNameInputError).toBeVisible();
-                await expect(await editUnitPage.getUnitNameInputErrorText()).toBe('У назві оголошення повинно бути не менше 10 символів');
+                await expect(editUnitPage.unitNameInputError).toHaveText('У назві оголошення повинно бути не менше 10 символів');
                 break
 
             case over100CharStr:
                 await expect(editUnitPage.unitNameInputError).toBeVisible();
-                await expect(await editUnitPage.getUnitNameInputErrorText()).toBe('У назві оголошення може бути не більше 100 символів');
+                await expect(editUnitPage.unitNameInputError).toHaveText('У назві оголошення може бути не більше 100 символів');
                 break
         }
     }
@@ -208,20 +208,20 @@ test('Test case C273: Check ""Виробник транспортного зас
     }
 
     await expect(editUnitPage.vehicleManufacturerInputError).toBeVisible();
-    await expect(await editUnitPage.getVehicleManufacturerInputErrorText()).toBe('Це поле обов’язкове');
+    await expect(editUnitPage.vehicleManufacturerInputError).toHaveText('Це поле обов’язкове');
 
     await editUnitPage.fillVehicleManufacturerInput('<>{};^');
 
-    await expect(await editUnitPage.getUnitNameInputText()).toBe('');
+    await expect(editUnitPage.unitNameInput).toHaveText('');
 
     await editUnitPage.fillVehicleManufacturerInput(randomString);
 
     await expect(editUnitPage.vehicleManufacturerNotFoundMsg).toBeVisible();
 
-    const notFoundMsg = await editUnitPage.getVehicleManufacturerNotFoundMsgText(); 
+    // const notFoundMsg = await editUnitPage.getVehicleManufacturerNotFoundMsgText(); 
     const capitalizedRandomString = randomString.charAt(0).toUpperCase() + randomString.slice(1);
 
-    await expect(notFoundMsg).toBe(`На жаль, виробника “${capitalizedRandomString}“ не знайдено в нашій базі.
+    await expect(editUnitPage.vehicleManufacturerNotFoundMsg).toHaveText(`На жаль, виробника “${capitalizedRandomString}“ не знайдено в нашій базі.
 Щоб додати виробника - зв\`яжіться із службою підтримки`);
 
     await editUnitPage.clearVehicleManufacturerInput();
@@ -248,7 +248,7 @@ test('Test case C273: Check ""Виробник транспортного зас
         await adminUnitsPage.clickOnAdminWatchUnitIcon();
     }
 
-    await expect(await adminUnitReviewPage.getManufacturerFieldText()).toBe(selectedOptionText);
+    await expect(adminUnitReviewPage.manufacturerField).toHaveText(selectedOptionText);
     
     await apiHelper.deleteUnit(accessUserToken, createdUnitId);
 })
@@ -269,7 +269,7 @@ test('Test case C532: Check ""Check ""Назва моделі"" input field', as
     await editUnitPage.fillModelNameInput(random16CharString);
 
     await expect(editUnitPage.modelNameInputError).toBeVisible();
-    await expect(await editUnitPage.getModelNameInputErrorText()).toBe('У назві моделі може бути не більше 15 символів')
+    await expect(editUnitPage.modelNameInputError).toHaveText('У назві моделі може бути не більше 15 символів')
 
     await editUnitPage.fillModelNameInput(random15CharString);
 
@@ -289,7 +289,7 @@ test('Test case C532: Check ""Check ""Назва моделі"" input field', as
         await adminUnitsPage.clickOnAdminWatchUnitIcon();
     }
 
-    await expect(await adminUnitReviewPage.getModelNameFieldText()).toBe(random15CharString);
+    await expect(adminUnitReviewPage.modelNameField).toHaveText(random15CharString);
     
     await apiHelper.deleteUnit(accessUserToken, createdUnitId);
 })
@@ -301,7 +301,7 @@ test('Test case C533: Check ""Технічні характеристики"" in
     await ownerUnitsPage.clickOnEditUnitBtn();
     await editUnitPage.clearTechnicalCharacteristicsInput();
 
-    await expect(await editUnitPage.getTechnicalCharacteristicsInputText()).toBe('');
+    await expect(editUnitPage.technicalCharacteristicsInput).toHaveText('');
 
     await editUnitPage.clickOnSaveUnitChangesBtn();
 
@@ -316,17 +316,17 @@ test('Test case C533: Check ""Технічні характеристики"" in
     await ownerUnitsPage.clickOnWaitingsAnnouncementsTab();
     await ownerUnitsPage.clickOnEditWaitingsUnitBtn();
 
-    await expect(await editUnitPage.getTechnicalCharacteristicsInputText()).toBe('');
+    await expect(editUnitPage.technicalCharacteristicsInput).toHaveText('');
 
     await editUnitPage.fillTechnicalCharacteristicsInput('<>&{};^');
 
-    await expect(await editUnitPage.getTechnicalCharacteristicsInputText()).toBe('');
+    await expect(editUnitPage.technicalCharacteristicsInput).toHaveText('');
 
     await editUnitPage.fillTechnicalCharacteristicsInput(randomDescription);
     await editUnitPage.clickOnSaveUnitChangesBtn();
 
     await expect(editUnitPage.successEditUnitMsg).toBeVisible();
-    await expect(await editUnitPage.getSuccessEditUnitMsgText()).toBe('Вашe оголошення успішно відредаговане');
+    await expect(editUnitPage.successEditUnitMsg).toHaveText('Вашe оголошення успішно відредаговане');
     await expect(editUnitPage.lookInMyAnnouncementsBtn).toBeVisible();
 
     await adminUnitsPage.verifyEditedUnitPresentsInWaitingsTab('waitings', editedUnitName);
@@ -339,7 +339,7 @@ test('Test case C533: Check ""Технічні характеристики"" in
         await adminUnitsPage.clickOnAdminWatchUnitIcon();
     }
 
-    await expect(await adminUnitReviewPage.getTechnicalCharacteristicsFieldText()).toBe(randomDescription);
+    await expect(adminUnitReviewPage.technicalCharacteristicsField).toHaveText(randomDescription);
 
     await apiHelper.deleteUnit(accessUserToken, createdUnitId);
 })
@@ -351,7 +351,7 @@ test('Test case C534: Check ""Опис"" input field', async({page}) => {
     await ownerUnitsPage.clickOnEditUnitBtn();
     await editUnitPage.clearDetailDescriptionInput();
 
-    await expect(await editUnitPage.getDetailDescriptionInputText()).toBe('');
+    await expect(editUnitPage.detailDescriptionInput).toHaveText('');
 
     await editUnitPage.clickOnSaveUnitChangesBtn();
 
@@ -366,17 +366,17 @@ test('Test case C534: Check ""Опис"" input field', async({page}) => {
     await ownerUnitsPage.clickOnWaitingsAnnouncementsTab();
     await ownerUnitsPage.clickOnEditWaitingsUnitBtn();
 
-    await expect(await editUnitPage.getDetailDescriptionInputText()).toBe('');
+    await expect(editUnitPage.detailDescriptionInput).toHaveText('');
 
     await editUnitPage.fillDetailDescriptionInput('<>&{};^');
 
-    await expect(await editUnitPage.getDetailDescriptionInputText()).toBe('');
+    await expect(editUnitPage.detailDescriptionInput).toHaveText('');
 
     await editUnitPage.fillDetailDescriptionInput(randomDescription);
     await editUnitPage.clickOnSaveUnitChangesBtn();
 
     await expect(editUnitPage.successEditUnitMsg).toBeVisible();
-    await expect(await editUnitPage.getSuccessEditUnitMsgText()).toBe('Вашe оголошення успішно відредаговане');
+    await expect(editUnitPage.successEditUnitMsg).toHaveText('Вашe оголошення успішно відредаговане');
     await expect(editUnitPage.lookInMyAnnouncementsBtn).toBeVisible();
 
     await adminUnitsPage.verifyEditedUnitPresentsInWaitingsTab('waitings', editedUnitName);
@@ -389,7 +389,7 @@ test('Test case C534: Check ""Опис"" input field', async({page}) => {
         await adminUnitsPage.clickOnAdminWatchUnitIcon();
     }
 
-    await expect(await adminUnitReviewPage.getDetailDescriptionFieldText()).toBe(randomDescription);
+    await expect(adminUnitReviewPage.detailDescriptionField).toHaveText(randomDescription);
 
     await apiHelper.deleteUnit(accessUserToken, createdUnitId);
 })
@@ -442,11 +442,11 @@ test('Test case C535: Check ""Місце розташування технічн
 
     await expect(await editUnitPage.getUrl()).toContain('edit-unit');
     await expect(editUnitPage.mapPopUp).not.toBeVisible();
-    await expect(await editUnitPage.getVehicleLocationText()).toBe(choosenLocation);
+    await expect(editUnitPage.vehicleLocation).toHaveText(choosenLocation);
 
     await editUnitPage.clickOnSaveUnitChangesBtn();
 
     await expect(editUnitPage.successEditUnitMsg).toBeVisible();
-    await expect(await editUnitPage.getSuccessEditUnitMsgText()).toBe('Вашe оголошення успішно відредаговане');
+    await expect(editUnitPage.successEditUnitMsg).toHaveText('Вашe оголошення успішно відредаговане');
     await expect(editUnitPage.lookInMyAnnouncementsBtn).toBeVisible();
 })

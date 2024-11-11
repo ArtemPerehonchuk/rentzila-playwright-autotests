@@ -58,9 +58,9 @@ class OwnerUnitsPage extends Page {
         return editedUnitName;
     }
 
-    async getActiveAnnouncementsTabTitleText() {
-        return await this.activeAnnouncementsTabTitle.innerText();
-    }
+    // async getActiveAnnouncementsTabTitleText() {
+    //     return await this.activeAnnouncementsTabTitle.innerText();
+    // }
 }
 
 export default OwnerUnitsPage;

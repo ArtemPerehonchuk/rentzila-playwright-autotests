@@ -11,8 +11,8 @@ class EditUnitPage extends Page {
     saveUnitChangesBtn = this.page.locator('[data-testid="nextButton"]');
     successEditUnitMsg = this.page.locator('[class*="SuccessfullyCreatedPage_finishTitle"]');
     lookInMyAnnouncementsBtn = this.page.locator('[class*="ItemButtons_darkBlueBtn"]');
-    unitNameInput = this.page.locator('[data-testid="custom-input"]');
-    unitNameInputError = this.page.locator('[data-testid="descriptionError"]');
+    unitNameInput = this.page.locator('[data-testid="custom-input"]').first();
+    unitNameInputError = this.page.locator('[data-testid="descriptionError"]').first();
     vehicleManufacturerInputCloseIcon = this.page.locator('[data-testid="closeButton"]');
     vehicleManufacturerInput = this.page.locator('[data-testid="input-customSelectWithSearch"]');
     vehicleManufacturerInputSelectedOption = this.page.locator('[data-testid="div-service-customSelectWithSearch"]');
@@ -49,9 +49,9 @@ class EditUnitPage extends Page {
         await this.page.waitForTimeout(1500);
     }
 
-    async getSuccessEditUnitMsgText() {
-        return await this.successEditUnitMsg.innerText();
-    }
+    // async getSuccessEditUnitMsgText() {
+    //     return await this.successEditUnitMsg.innerText();
+    // }
 
     async clickOnLookInMyAnnouncementsBtn() {
         await this.lookInMyAnnouncementsBtn.click();
@@ -66,13 +66,13 @@ class EditUnitPage extends Page {
         await this.page.waitForLoadState('load')
     }
 
-    async getUnitNameInputErrorText() {
-        return await this.unitNameInputError.innerText();
-    }
+    // async getUnitNameInputErrorText() {
+    //     return await this.unitNameInputError.innerText();
+    // }
 
-    async getUnitNameInputText() {
-        return await this.unitNameInput.first().innerText();
-    }
+    // async getUnitNameInputText() {
+    //     return await this.unitNameInput.first().innerText();
+    // }
 
     async getUnitNameInputBgText() {
         return await this.unitNameInput.first().getAttribute('placeholder');
@@ -86,9 +86,9 @@ class EditUnitPage extends Page {
         return await this.vehicleManufacturerInput.getAttribute('placeholder');
     }
 
-    async getVehicleManufacturerInputErrorText() {
-        return await this.vehicleManufacturerInputError.innerText();
-    }
+    // async getVehicleManufacturerInputErrorText() {
+    //     return await this.vehicleManufacturerInputError.innerText();
+    // }
 
     async fillVehicleManufacturerInput(value: string) {
         await this.vehicleManufacturerInput.fill(value);
@@ -102,9 +102,9 @@ class EditUnitPage extends Page {
         return await this.vehicleManufacturerInputSelectedOption.innerText();
     }
 
-    async getVehicleManufacturerNotFoundMsgText() {
-        return await this.vehicleManufacturerNotFoundMsg.innerText();
-    }
+    // async getVehicleManufacturerNotFoundMsgText() {
+    //     return await this.vehicleManufacturerNotFoundMsg.innerText();
+    // }
 
     async clearVehicleManufacturerInput() {
         await this.vehicleManufacturerInput.clear();
@@ -115,9 +115,9 @@ class EditUnitPage extends Page {
         await this.page.waitForLoadState('load');
     }
 
-    async getModelNameInputErrorText() {
-        return await this.modelNameInputError.innerText();
-    }
+    // async getModelNameInputErrorText() {
+    //     return await this.modelNameInputError.innerText();
+    // }
 
     async fillModelNameInput(value: string) {
         await this.modelNameInput.fill(value)
@@ -139,9 +139,9 @@ class EditUnitPage extends Page {
         await this.technicalCharacteristicsInput.clear();
     }
 
-    async getTechnicalCharacteristicsInputText() {
-        return await this.technicalCharacteristicsInput.innerText();
-    }
+    // async getTechnicalCharacteristicsInputText() {
+    //     return await this.technicalCharacteristicsInput.innerText();
+    // }
 
     async fillTechnicalCharacteristicsInput(value: string) {
         await this.clearTechnicalCharacteristicsInput();
@@ -150,14 +150,14 @@ class EditUnitPage extends Page {
         await this.page.waitForTimeout(1000);
     }
 
-    async getDetailDescriptionInputText() {
-        return await this.detailDescriptionInput.innerText(); 
-    }
+    // async getDetailDescriptionInputText() {
+    //     return await this.detailDescriptionInput.innerText(); 
+    // }
 
     async fillDetailDescriptionInput(value: string) {
         await this.clearDetailDescriptionInput();
         await this.detailDescriptionInput.click();
-        await this.detailDescriptionInput.type(value);
+        await this.detailDescriptionInput.fill(value);
     }
 
     async clearDetailDescriptionInput() {
@@ -217,9 +217,9 @@ class EditUnitPage extends Page {
         await this.clickOnSaveUnitChangesBtn();
     }
 
-    async getVehicleLocationText() {
-        return await this.vehicleLocation.innerText();
-    }
+    // async getVehicleLocationText() {
+    //     return await this.vehicleLocation.innerText();
+    // }
 }
 
 export default EditUnitPage;
