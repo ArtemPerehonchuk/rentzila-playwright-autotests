@@ -13,21 +13,21 @@ class AdminUnitReviewPage extends Page {
     detailDescriptionField = this.page.locator('[class*="AdminCurrentUnit_info_content"]').nth(5);
     locationField = this.page.locator('div[class*="AdminCurrentUnit_info_content"] > span');
 
-    async getManufacturerFieldText() {
-        return await this.manufacturerField.textContent();
-    }
+    // async getManufacturerFieldText() {
+    //     return await this.manufacturerField.textContent();
+    // }
 
-    async getModelNameFieldText() {
-        return await this.modelNameField.innerText();
-    }
+    // async getModelNameFieldText() {
+    //     return await this.modelNameField.innerText();
+    // }
 
-    async getTechnicalCharacteristicsFieldText() {
-        return await this.technicalCharacteristicsField.innerText();
-    }
+    // async getTechnicalCharacteristicsFieldText() {
+    //     return await this.technicalCharacteristicsField.innerText();
+    // }
     
-    async getDetailDescriptionFieldText() {
-        return await this.detailDescriptionField.innerText();
-    }
+    // async getDetailDescriptionFieldText() {
+    //     return await this.detailDescriptionField.innerText();
+    // }
 
     async getLocationFieldText() {
         const text = await this.locationField.evaluate(element => 

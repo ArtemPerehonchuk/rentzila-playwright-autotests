@@ -59,9 +59,9 @@ class CreateUnitPage extends Page {
     vehicleManufacturerList = this.page.locator('[data-testid="input-customSelectWithSearch"]');
     mapLabel = this.page.locator('[data-testid="mapLabel"]');
 
-    async getCreateUnitTitleText() {
-        return await this.createUnitTitle.innerText();
-    }
+    // async getCreateUnitTitleText() {
+    //     return await this.createUnitTitle.innerText();
+    // }
 
     async checkCreateUnitTabsTitles(activeTabNumber: number) {
         if(await this.createUnitTabs.isVisible) {
@@ -84,17 +84,17 @@ class CreateUnitPage extends Page {
         }else return false
     }
 
-    async getCategoriesTitleText() {
-        return await this.categoriesTitle.innerText();
-    }
+    // async getCategoriesTitleText() {
+    //     return await this.categoriesTitle.innerText();
+    // }
 
-    async getCategoriesDropDownBgText() {
-        return await this.categoriesDropDown.innerText();
-    }
+    // async getCategoriesDropDownBgText() {
+    //     return await this.categoriesDropDown.innerText();
+    // }
 
-    async getCategoryInputErrorText() {
-        return await this.categoryErrorMessage.innerText();
-    }
+    // async getCategoryInputErrorText() {
+    //     return await this.categoryErrorMessage.innerText();
+    // }
 
     async clickOnNextBtn() {
         await this.nextBtn.click({force: true});
@@ -144,13 +144,13 @@ class CreateUnitPage extends Page {
         await this.categoriesDropDown.click();
     }
 
-    async getCategoriesPopUpTitleText() {
-        return await this.categoriesPopUpTitle.innerText();
-    }
+    // async getCategoriesPopUpTitleText() {
+    //     return await this.categoriesPopUpTitle.innerText();
+    // }
 
-    async getAnnouncementNameTitleText() {
-        return await this.announcementNameTitle.innerText();
-    } 
+    // async getAnnouncementNameTitleText() {
+    //     return await this.announcementNameTitle.innerText();
+    // } 
 
     async getAnnouncementNameInputBgText() {
         return await this.announcementNameInput.getAttribute('placeholder');
@@ -160,51 +160,51 @@ class CreateUnitPage extends Page {
         return await this.announcementNameInput.inputValue();
     }
 
-    async getAnnouncementNameInputErrorText() {
-        return await this.announcementNameInputError.innerText();
-    } 
+    // async getAnnouncementNameInputErrorText() {
+    //     return await this.announcementNameInputError.innerText();
+    // } 
 
     async getAnnouncementInputValueCharCount() {
         const value = await this.announcementNameInput.inputValue();
         return value.length;
     }
 
-    async getVehicleManufacturerTitleText() {
-        return await this.vehicleManufacturerTitle.innerText();
-    } 
+    // async getVehicleManufacturerTitleText() {
+    //     return await this.vehicleManufacturerTitle.innerText();
+    // } 
 
     async getVehicleManufacturerInputBgText() {
         return await this.vehicleManufacturerInput.getAttribute('placeholder');
     } 
 
-    async getVehicleManufacturerInputErrorText() {
-        return await this.vehicleManufacturerInputError.innerText();
-    } 
+    // async getVehicleManufacturerInputErrorText() {
+    //     return await this.vehicleManufacturerInputError.innerText();
+    // } 
 
     async getVehicleManufacturerInputValueLength() {
         const currentValue = await this.vehicleManufacturerInput.inputValue();
         return currentValue.length;
     }
 
-    async getVehicleManufacturerDropDownOptionText() {
-        return await this.vehicleManufacturerDropDownOption.innerText();
-    }
+    // async getVehicleManufacturerDropDownOptionText() {
+    //     return await this.vehicleManufacturerDropDownOption.innerText();
+    // }
 
     async clickOnOptionInVehicleManufacturerDropDown() {
         await this.vehicleManufacturerDropDownOption.click();
     }
 
-    async getOptionNotFoundErrorText() {
-        return await this.optionNotFoundMessage.innerText();
-    }
+    // async getOptionNotFoundErrorText() {
+    //     return await this.optionNotFoundMessage.innerText();
+    // }
 
-    async getVehicleManufacturerSelectedOptionText() {
-        return await this.vehicleManufacturerSelectedOption.innerText();
-    }
+    // async getVehicleManufacturerSelectedOptionText() {
+    //     return await this.vehicleManufacturerSelectedOption.innerText();
+    // }
 
-    async getVehicleManufacturerInputText() {
-        return await this.vehicleManufacturerInput.inputValue();
-    }
+    // async getVehicleManufacturerInputText() {
+    //     return await this.vehicleManufacturerInput.inputValue();
+    // }
 
     async clickOnCategoriesPopUpCloseBtn() {
         await this.categoriesPopUpCloseBtn.click();
@@ -263,66 +263,66 @@ class CreateUnitPage extends Page {
         await this.clearVehicleManifacturerDropDownIcon.click({force: true});
     }
     
-    async getModelNameTitleText() {
-        return await this.modelNameTitle.innerText();
-    }
+    // async getModelNameTitleText() {
+    //     return await this.modelNameTitle.innerText();
+    // }
 
     async getModelNameInputBgText() {
         return await this.modelNameInput.getAttribute('placeholder');
     }
 
-    async getModelNameInputErrorText() {
-        return await this.modelNameInputError.innerText();
-    }
+    // async getModelNameInputErrorText() {
+    //     return await this.modelNameInputError.innerText();
+    // }
 
     async getModelNameInputText() {
         return await this.modelNameInput.inputValue();
     }
    
-    async getTechnicalInfoTitleText() {
-        return await this.technicalInfoTitle.innerText();
-    }
+    // async getTechnicalInfoTitleText() {
+    //     return await this.technicalInfoTitle.innerText();
+    // }
 
     async getTechnicalInfoInputText() {
         return await this.technicalInfoInput.inputValue();
     }
 
-    async getDescriptionInfoTitleText() {
-        return await this.descriptionInfoTitle.innerText();
-    }
+    // async getDescriptionInfoTitleText() {
+    //     return await this.descriptionInfoTitle.innerText();
+    // }
 
     async getDescriptionInfoInputText() {
         return await this.descriptionInfoInput.inputValue();
     }
 
-    async getAddressSelectionTitleText() {
-        return await this.addressSelectionTitle.innerText();
-    }
+    // async getAddressSelectionTitleText() {
+    //     return await this.addressSelectionTitle.innerText();
+    // }
 
-    async getAddressSelectionInputText() {
-        return await this.addressSelectionInput.innerText();
-    }
+    // async getAddressSelectionInputText() {
+    //     return await this.addressSelectionInput.innerText();
+    // }
 
-    async getAddressSelectionInputErrorText() {
-        return await this.addressSelectionInputError.innerText();
-    }
+    // async getAddressSelectionInputErrorText() {
+    //     return await this.addressSelectionInputError.innerText();
+    // }
 
     async clickOnSelectOnMapBtn() {
         await this.selectOnMapBtn.click();
         await this.page.waitForTimeout(1000)
     }
 
-    async getMapPopUpTitleText() {
-        return await this.mapPopUpTitle.innerText();
-    }
+    // async getMapPopUpTitleText() {
+    //     return await this.mapPopUpTitle.innerText();
+    // }
 
-    async getMapPopUpAddressLineText() {
-        return await this.mapPopUpAddressLine.innerText();
-    }
+    // async getMapPopUpAddressLineText() {
+    //     return await this.mapPopUpAddressLine.innerText();
+    // }
 
-    async getAddressLineText() {
-        return await this.selectedAddress.innerText();
-    }
+    // async getAddressLineText() {
+    //     return await this.selectedAddress.innerText();
+    // }
 
     async clickOnMapPopUpCloseBtn() {
         await this.mapPopUpCloseBtn.click();
@@ -362,9 +362,9 @@ class CreateUnitPage extends Page {
         await this.page.waitForLoadState('domcontentloaded');
     }
 
-    async getNextBtnText() {
-        return await this.nextBtn.innerText();
-    }
+    // async getNextBtnText() {
+    //     return await this.nextBtn.innerText();
+    // }
 
     async fillCategory() {
         const firstCategoryItem = await this.page.locator('[data-testid="firstCategoryLabel"]').first();

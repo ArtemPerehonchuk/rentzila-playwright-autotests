@@ -36,11 +36,11 @@ jobs:
           echo "HOMEPAGE_URL=${{ secrets.HOMEPAGE_URL }}" >> .env
 
       - name: Run tests
-        run: npm run test:chrome
+        run: npm run test:chrome -- --reporter=html
 
-      - name: Generate Playwright report
-        run: |
-          npx playwright show-report playwright-report 
+      # - name: Generate Playwright report
+      #   run: |
+      #     npx playwright show-report playwright-report 
 
       - name: Deploy report to GitHub Pages
         run: |
