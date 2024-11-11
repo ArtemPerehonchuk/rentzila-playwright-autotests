@@ -96,3 +96,9 @@ To run all tests using the default browser configuration:
     ```bash
     npm run test:edit-unit:chrome
     ```
+
+## GitHub Pages
+
+View report on GitHub Pages:
+
+https://artemperehonchuk.github.io/rentzila-playwright-autotests/
