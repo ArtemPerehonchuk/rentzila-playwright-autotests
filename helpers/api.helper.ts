@@ -11,8 +11,8 @@ dotenv.config();
 
 const admin_email: string = process.env.ADMIN_EMAIL || '';
 const admin_password: string = process.env.ADMIN_PASSWORD || '';
-const user_email: string = process.env.VALID_EMAIL || ''
-const user_password: string = process.env.VALID_PASSWORD || ''
+const user_email: string = process.env.VALID_EMAIL || '';
+const user_password: string = process.env.VALID_PASSWORD || '';
 
 let adminAccessToken: any = null;
 let userAccessToken: any = null;
@@ -20,8 +20,12 @@ let user: any = null;
 let unit: any = null;
 
 class ApiHelper {
+    private defaultHeaders: { [key: string]: string };
     constructor(private request: APIRequestContext) {
         this.request = request;
+        this.defaultHeaders = {
+            'Content-Type': 'application/json'
+        }
     }
 
     async createAdminAccessToken() {
@@ -82,7 +86,7 @@ class ApiHelper {
               .post('https://dev.rentzila.com.ua/api/units/', {
                 headers: {
                     Authorization: `Bearer ${accessUserToken}`,
-                    'Content-Type': 'application/json'
+                    ...this.defaultHeaders
                 },
                 data: JSON.stringify({
                     "name": `${unitName}`,
@@ -136,7 +140,7 @@ class ApiHelper {
             .get('https://dev.rentzila.com.ua/api/units/', {
             headers: {
                 Authorization: `Bearer ${accessUserToken}`,
-                'Content-Type': 'application/json'
+                ...this.defaultHeaders
                 }
             })
         const responseData = await response.json();
@@ -148,7 +152,7 @@ class ApiHelper {
         const response = await this.request.delete(`https://dev.rentzila.com.ua/api/units/${unitId}/`, {
             headers: {
                 Authorization: `Bearer ${accessUserToken}`,
-                'Content-Type': 'application/json'
+                ...this.defaultHeaders
             }
         });
     
