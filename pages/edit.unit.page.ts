@@ -150,9 +150,9 @@ class EditUnitPage extends Page {
         await this.page.waitForTimeout(1000);
     }
 
-    // async getDetailDescriptionInputText() {
-    //     return await this.detailDescriptionInput.innerText(); 
-    // }
+    async getDetailDescriptionInputText() {
+        return await this.detailDescriptionInput.innerText(); 
+    }
 
     async fillDetailDescriptionInput(value: string) {
         await this.clearDetailDescriptionInput();

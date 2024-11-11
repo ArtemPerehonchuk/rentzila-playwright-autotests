@@ -155,7 +155,7 @@ test('Test case C272: Check ""Назва оголошення"" input field', as
 
         switch(inputValue) {
             case '<>{};^':
-                await expect(editUnitPage.unitNameInput).toHaveText('');
+                await expect(editUnitPage.unitNameInput).toHaveText('', {useInnerText: true});
                 await expect(await editUnitPage.getUnitNameInputBgText()).toBe('Введіть назву оголошення');
                 break
 
@@ -212,7 +212,7 @@ test('Test case C273: Check ""Виробник транспортного зас
 
     await editUnitPage.fillVehicleManufacturerInput('<>{};^');
 
-    await expect(editUnitPage.unitNameInput).toHaveText('');
+    await expect(editUnitPage.unitNameInput).toHaveText('', {useInnerText: true});
 
     await editUnitPage.fillVehicleManufacturerInput(randomString);
 
@@ -301,7 +301,7 @@ test('Test case C533: Check ""Технічні характеристики"" in
     await ownerUnitsPage.clickOnEditUnitBtn();
     await editUnitPage.clearTechnicalCharacteristicsInput();
 
-    await expect(editUnitPage.technicalCharacteristicsInput).toHaveText('');
+    await expect(editUnitPage.technicalCharacteristicsInput).toHaveText('', {useInnerText: true});
 
     await editUnitPage.clickOnSaveUnitChangesBtn();
 
@@ -316,11 +316,11 @@ test('Test case C533: Check ""Технічні характеристики"" in
     await ownerUnitsPage.clickOnWaitingsAnnouncementsTab();
     await ownerUnitsPage.clickOnEditWaitingsUnitBtn();
 
-    await expect(editUnitPage.technicalCharacteristicsInput).toHaveText('');
+    await expect(editUnitPage.technicalCharacteristicsInput).toHaveText('', {useInnerText: true});
 
     await editUnitPage.fillTechnicalCharacteristicsInput('<>&{};^');
 
-    await expect(editUnitPage.technicalCharacteristicsInput).toHaveText('');
+    await expect(editUnitPage.technicalCharacteristicsInput).toHaveText('', {useInnerText: true});
 
     await editUnitPage.fillTechnicalCharacteristicsInput(randomDescription);
     await editUnitPage.clickOnSaveUnitChangesBtn();
@@ -351,7 +351,7 @@ test('Test case C534: Check ""Опис"" input field', async({page}) => {
     await ownerUnitsPage.clickOnEditUnitBtn();
     await editUnitPage.clearDetailDescriptionInput();
 
-    await expect(editUnitPage.detailDescriptionInput).toHaveText('');
+    await expect(editUnitPage.detailDescriptionInput).toHaveText('', {useInnerText: true});
 
     await editUnitPage.clickOnSaveUnitChangesBtn();
 
@@ -366,11 +366,11 @@ test('Test case C534: Check ""Опис"" input field', async({page}) => {
     await ownerUnitsPage.clickOnWaitingsAnnouncementsTab();
     await ownerUnitsPage.clickOnEditWaitingsUnitBtn();
 
-    await expect(editUnitPage.detailDescriptionInput).toHaveText('');
+    await expect(editUnitPage.detailDescriptionInput).toHaveText('', {useInnerText: true});
 
     await editUnitPage.fillDetailDescriptionInput('<>&{};^');
 
-    await expect(editUnitPage.detailDescriptionInput).toHaveText('');
+    await expect(editUnitPage.detailDescriptionInput).toHaveText('', {useInnerText: true});
 
     await editUnitPage.fillDetailDescriptionInput(randomDescription);
     await editUnitPage.clickOnSaveUnitChangesBtn();
