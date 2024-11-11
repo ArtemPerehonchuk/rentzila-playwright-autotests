@@ -19,10 +19,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install Playwright browsers
-        run: npx playwright install
-
-
       - name: Set up environment variables
         run: |
           echo "ADMIN_EMAIL=${{secrets.ADMIN_EMAIL}}" >> .env
@@ -46,23 +42,6 @@ jobs:
           publish_dir: playwright-report  
           publish_branch: gh-pages  
         continue-on-error: true    
-
-      # - name: Generate Playwright report
-      #   run: |
-      #     npx playwright show-report playwright-report 
-
-      # - name: Deploy report to GitHub Pages
-      #   if: always()
-      #   run: |
-      #     git config --global user.name "github-actions"
-      #     git config --global user.email "github-actions@users.noreply.github.com"
-      #     git checkout gh-pages || git checkout --orphan gh-pages
-      #     git rm -rf .
-      #     cp -r playwright-report/* .
-      #     git add .
-      #     git commit -m "Deploy test report"
-      #     git push --force origin gh-pages
-      #   continue-on-error: true
 
       - name: Upload test results
         if: failure()
