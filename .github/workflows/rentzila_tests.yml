@@ -37,7 +37,6 @@ jobs:
 
       - name: Run tests
         run: npm run test:chrome -- --reporter=html
-        continue-on-error: true
 
       - name: Deploy report to GitHub Pages
         if: always()
