@@ -55,7 +55,6 @@ test('test case C214: Verify that all elements on the footer are displayed and a
     await expect(await privacyPolicyPage.getUrl()).toContain(pagesUrlPath["privacy-policy"]);
     await expect(privacyPolicyPage.privacyPolicyTitle).toBeVisible();
     await expect(privacyPolicyPage.privacyPolicyTitle).toHaveText('Політика конфіденційності');
-    // await expect(await privacyPolicyPage.getPrivacyPolicyTitleText()).toBe('Політика конфіденційності');
 
     await homepage.clickOnCookiePolicyLink();
 

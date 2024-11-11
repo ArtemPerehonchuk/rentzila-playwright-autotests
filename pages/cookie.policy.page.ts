@@ -9,10 +9,6 @@ class CookiePolicyPage extends Page {
 
     cookiePolicyTitle = this.page.locator('h1[class*="Cookies_title"]');
 
-    // async getCookiePolicyTitleText() {
-    //     return await this.cookiePolicyTitle.innerText();
-    // }
-
 }
 
 export default CookiePolicyPage;
