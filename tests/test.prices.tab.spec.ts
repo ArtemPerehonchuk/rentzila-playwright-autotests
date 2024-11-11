@@ -141,7 +141,7 @@ test('Test case C482: Verify adding price for service', async({page}) => {
     await expect(await pricesTab.getServicePriceClueText()).toContain('За бажанням Ви можете додати вартість конкретних послуг,');
     await expect(pricesTab.addPriceBtn).toBeVisible();
     await expect(pricesTab.addBtnIcon).toBeVisible();
-    await expect(await pricesTab.getAddPriceBtnText()).toBe('Додати вартість');
+    await expect(pricesTab.addPriceBtn).toHaveText('Додати вартість');
 
     await pricesTab.clickOnAddPriceBtn();
 
@@ -218,7 +218,7 @@ test('Test case C482: Verify adding price for service', async({page}) => {
 
     await expect(pricesTab.addPriceBtn).toBeVisible();
     await expect(pricesTab.addBtnIcon).toBeVisible();
-    await expect(await pricesTab.getAddPriceBtnText()).toBe('Додати вартість');
+    await expect(pricesTab.addPriceBtn).toHaveText('Додати вартість');
 })
 
 test('Test case C488: Verify ""Назад"" button', async({page}) => {
@@ -229,14 +229,14 @@ test('Test case C488: Verify ""Назад"" button', async({page}) => {
 
 test('Test case C489: Verify ""Далі"" button', async({page}) => {
     await expect(createUnitPage.nextBtn).toBeVisible();
-    await expect(await createUnitPage.getNextBtnText()).toBe('Далі');
+    await expect(createUnitPage.nextBtn).toHaveText('Далі');
 
     await createUnitPage.clickOnNextBtn();
 
     await createUnitPage.checkCreateUnitTabsTitles(4);
 
     await expect(pricesTab.priceOfMinOrderInputError).toBeVisible();
-    await expect(await pricesTab.getPriceOfMinOrderInputErrorText()).toBe('Це поле обов’язкове');
+    await expect(pricesTab.priceOfMinOrderInputError).toHaveText('Це поле обов’язкове');
     await expect(pricesTab.priceOfMinOrderInputContainer).toHaveCSS('border-color', 'rgb(247, 56, 89)');
 })
 
@@ -252,13 +252,13 @@ test('Test case C596: Verify adding an invalid price in the "Вартість м
     await createUnitPage.clickOnNextBtn();
 
     await expect(pricesTab.priceOfMinOrderInputError).toBeVisible();
-    await expect(await pricesTab.getPriceOfMinOrderInputErrorText()).toBe('Мінімальна вартiсть має бути не менше 1000 грн');
+    await expect(pricesTab.priceOfMinOrderInputError).toHaveText('Мінімальна вартiсть має бути не менше 1000 грн');
     await expect(pricesTab.priceOfMinOrderInputContainer).toHaveCSS('border-color', 'rgb(247, 56, 89)');
 
     await pricesTab.clearInput(pricesTab.priceOfMinOrderInput);
 
     await expect(pricesTab.priceOfMinOrderInputError).toBeVisible();
-    await expect(await pricesTab.getPriceOfMinOrderInputErrorText()).toBe('Це поле обов’язкове');
+    await expect(pricesTab.priceOfMinOrderInputError).toHaveText('Це поле обов’язкове');
     await expect(pricesTab.priceOfMinOrderInputContainer).toHaveCSS('border-color', 'rgb(247, 56, 89)');
 
     await pricesTab.fillInput(pricesTab.priceOfMinOrderInput, '1000');
@@ -312,7 +312,7 @@ test('Test case C637: Verify UI of the "Вартість Ваших послуг
     await expect(await pricesTab.getServicePriceClueText()).toContain('За бажанням Ви можете додати вартість конкретних послуг,');
     await expect(pricesTab.addPriceBtn).toBeVisible();
     await expect(pricesTab.addBtnIcon).toBeVisible();
-    await expect(await pricesTab.getAddPriceBtnText()).toBe('Додати вартість');
+    await expect(pricesTab.addPriceBtn).toHaveText('Додати вартість');
 
     await expect(selectedService).toBe(await pricesTab.getServiceFromAddPriceSection());
 

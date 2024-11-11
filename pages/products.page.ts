@@ -9,7 +9,7 @@ class ProductsPage extends Page {
     
     produtsList = this.page.locator('[data-testid="cardWrapper"]');
     productFilterItem = this.page.locator('div[class*="ResetFilters_selectedCategory"]');
-    dropdownArrow = this.page.locator('[data-testid="rightArrow"]').first();
+    dropdownArrow = this.page.locator('[data-testid="rightArrow"]').nth(2);
     unitsContainer = this.page.locator('div[class*="MapPagination_units_container"]');
     constructionsCheckBox = this.page.locator('[data-testid="categoryCheckbox"]').nth(1);
     othersCheckBox = this.page.locator('[data-testid="categoryCheckbox"]').nth(2);

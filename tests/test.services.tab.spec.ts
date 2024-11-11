@@ -42,7 +42,7 @@ test('Text case: 410: Verify creating new service', async ( {page} ) => {
     await expect(servicesTab.serviceNotFoundMessage).toBeVisible();
     await expect(servicesTab.createServiceBtn).toBeVisible();
     await expect(await servicesTab.getServiceNotFoundMessageText()).toContain(`На жаль, послугу “${notExistingService}“ не знайдено в нашій базі.`);
-    await expect(await servicesTab.getCreateServiceBtnText()).toBe('Створити послугу');
+    await expect(servicesTab.createServiceBtn).toHaveText('Створити послугу');
 
     await servicesTab.clickOnCreateServiceBtn();
 
@@ -98,7 +98,7 @@ test('Text case: 412: Verify removing variants from choosed list', async ( {page
 });
 
 test('Text case: 413: Verify ""Назад"" button', async ( {page} ) => {
-    await expect(await photoTab.getPrevBtnText()).toBe('Назад');
+    await expect(photoTab.prevBtn).toHaveText('Назад');
 
     await photoTab.clickOnPrevBtn();
 
@@ -106,7 +106,7 @@ test('Text case: 413: Verify ""Назад"" button', async ( {page} ) => {
 });
 
 test('Text case: 414: Verify ""Далі"" button', async ( {page} ) => {
-    await expect(await createUnitPage.getNextBtnText()).toBe('Далі');
+    await expect(createUnitPage.nextBtn).toHaveText('Далі');
 
     await createUnitPage.clickOnNextBtn();
 
@@ -130,11 +130,11 @@ test('Text case: 591: Verify ""Послуги"" input with invalid data', async 
 });
 
 test('Text case: 592: Verify ""Послуги"" input choosin of existing service', async ( {page} ) => {
-    await expect(await servicesTab.getServicesTabTitleText()).toBe('Послуги');
+    await expect(servicesTab.servicesTabTitle).toHaveText('Послуги');
     await expect(await servicesTab.getServicesParagraphTitleText()).toContain('Знайдіть послуги, які надає Ваш технічний засіб');
     await expect(await servicesTab.getServicesParagraphTitleText()).toContain('*');
     await expect(servicesTab.addServiceClueMsg).toBeVisible();
-    await expect(await servicesTab.getAddServicesClueText()).toBe('Додайте в оголошення принаймні 1 послугу');
+    await expect(servicesTab.addServiceClueMsg).toHaveText('Додайте в оголошення принаймні 1 послугу');
     await expect(servicesTab.searchServiceIcon).toBeVisible();
     await expect(await servicesTab.getServiceTabInputBgText()).toBe('Наприклад: Рихлення грунту, буріння');
 

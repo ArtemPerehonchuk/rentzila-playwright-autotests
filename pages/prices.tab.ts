@@ -105,9 +105,9 @@ class PricesTab extends Page {
         return await this.servicePriceClue.innerText();
     }
 
-    async getAddPriceBtnText() {
-        return await this.addPriceBtn.innerText();
-    }
+    // async getAddPriceBtnText() {
+    //     return await this.addPriceBtn.innerText();
+    // }
 
     async clickOnAddPriceBtn() {
         await this.addPriceBtn.click();
@@ -165,9 +165,9 @@ class PricesTab extends Page {
         await this.prevBtn.click();
     }
 
-    async getPriceOfMinOrderInputErrorText() {
-        return await this.priceOfMinOrderInputError.innerText();
-    }
+    // async getPriceOfMinOrderInputErrorText() {
+    //     return await this.priceOfMinOrderInputError.innerText();
+    // }
 
     async getServiceFromAddPriceSection() {
         const service = await this.serviceInAddPriceSection.innerText();

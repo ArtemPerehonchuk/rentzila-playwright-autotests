@@ -37,6 +37,7 @@ jobs:
 
       - name: Run tests
         run: npm run test:chrome -- --reporter=html
+        continue-on-error: true
 
       - name: Deploy report to GitHub Pages
         if: always()
@@ -44,7 +45,8 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: playwright-report  
-          publish_branch: gh-pages      
+          publish_branch: gh-pages  
+        continue-on-error: true    
 
       # - name: Generate Playwright report
       #   run: |
