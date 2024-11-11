@@ -40,7 +40,7 @@ jobs:
 
       - name: Generate Playwright report
         run: |
-          npx playwright show-report 
+          npx playwright show-report playwright-report 
 
       - name: Deploy report to GitHub Pages
         run: |
