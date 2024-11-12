@@ -103,18 +103,42 @@ class HomePage extends Page {
     }
 
     async clickOnCookiePolicyLink() {
-        await this.cookiePolicyLink.click();
-        await this.page.waitForLoadState('domcontentloaded');
+        const navigationPromise = new Promise<void>(resolve => {
+            this.page.on('framenavigated', frame => {
+                if (frame === this.page.mainFrame()) { 
+                    resolve();
+                }
+            });
+        });
+    
+        await this.cookiePolicyLink.click(); 
+        await navigationPromise; 
     }
 
     async clickOnTermsConditionsLink() {
+        const navigationPromise = new Promise<void>(resolve => {
+            this.page.on('framenavigated', frame => {
+                if (frame === this.page.mainFrame()) { 
+                    resolve();
+                }
+            });
+        });
+
         await this.termsConditionsLink.click();
-        await this.page.waitForLoadState('domcontentloaded');
+        await navigationPromise;
     }
 
     async clickOnAnnouncementsLink() {
-        await this.announcementsLink.click();
-        await this.page.waitForLoadState('domcontentloaded');
+        const navigationPromise = new Promise<void>(resolve => {
+            this.page.on('framenavigated', frame => {
+                if (frame === this.page.mainFrame()) { 
+                    resolve();
+                }
+            });
+        });
+    
+        await this.announcementsLink.click(); 
+        await navigationPromise; 
     }
 
     async getSearchServiceSpecialEquipmentTitleText() {
@@ -141,7 +165,7 @@ class HomePage extends Page {
 
     async clickOnSubmitConsultationBtn() {
         await this.submitConsultationBtn.click();
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForTimeout(4000);
     }
 
     async checkInputErrorIsDisplayed(inputName: string, errorText: string) {

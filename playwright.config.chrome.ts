@@ -1,5 +1,5 @@
 import { defineConfig } from '@playwright/test';
-import projects from './projects.config';
+import chromeProject from './projects.config';
 
 export default defineConfig({
   testDir: './tests',
@@ -19,5 +19,5 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
-  projects: projects,
+  projects: chromeProject,
 });

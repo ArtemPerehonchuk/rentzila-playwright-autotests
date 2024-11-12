@@ -129,7 +129,7 @@ class EditUnitPage extends Page {
     async fillDetailDescriptionInput(value: string) {
         await this.clearDetailDescriptionInput();
         await this.detailDescriptionInput.click();
-        await this.detailDescriptionInput.fill(value);
+        await this.detailDescriptionInput.type(value);
     }
 
     async clearDetailDescriptionInput() {
