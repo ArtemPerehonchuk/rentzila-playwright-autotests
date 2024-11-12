@@ -15,7 +15,8 @@ class HomePage extends Page {
 
     servicesContainer = this.page.locator('[data-testid="services"]');
     servicesList = this.page.locator('div[class*="RentzilaProposes_categories_list"] > div[class*="RentzilaProposes_service"]');
-    servicesUnitsList = this.page.locator('div[class*="RentzilaProposes_proposes_list"]').first().locator('div[class*="RentzilaProposes_proposes_item"]');
+    servicesUnitsList = this.page.locator('div[class*="RentzilaProposes_proposes_list"]').first().locator('div[class*="RentzilaProposes_proposes_item"]');;
+    firstServucesUnit = this.page.locator('div[class*="RentzilaProposes_proposes_item"]').first();
     announcementsNavMenuItem = this.page.locator('[class*="Navbar_link"][href="/products/"]');
     specialEquipmentContainer = this.page.getByTestId('specialEquipment');
     specialEquipmentsList = this.page.locator('div[class*="RentzilaProposes_categories_list"]').nth(1).locator('div[class*="RentzilaProposes_service"]');
@@ -65,7 +66,7 @@ class HomePage extends Page {
     }
 
     async clickFirstServicesUnit() {
-        await this.servicesUnitsList.first().click();
+        await this.servicesUnitsList.first().click({force: true});
         await this.page.waitForTimeout(3000)
     }
 
