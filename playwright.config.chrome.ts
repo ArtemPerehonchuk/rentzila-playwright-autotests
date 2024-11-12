@@ -1,4 +1,5 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
+import projects from './projects.config';
 
 export default defineConfig({
   testDir: './tests',
@@ -17,13 +18,6 @@ export default defineConfig({
     baseURL: 'https://dev.rentzila.com.ua/',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    ...devices['Desktop Chrome'],
-    headless: true
   },
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-  ],
+  projects: projects,
 });
