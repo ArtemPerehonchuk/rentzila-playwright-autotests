@@ -20,6 +20,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install Chromium browser only
+        run: npx playwright install chromium
+
       - name: Set up environment variables
         run: |
           echo "ADMIN_EMAIL=${{secrets.ADMIN_EMAIL}}" >> .env
