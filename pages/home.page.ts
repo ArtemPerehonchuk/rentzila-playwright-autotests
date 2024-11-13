@@ -15,7 +15,8 @@ class HomePage extends Page {
 
     servicesContainer = this.page.locator('[data-testid="services"]');
     servicesList = this.page.locator('div[class*="RentzilaProposes_categories_list"] > div[class*="RentzilaProposes_service"]');
-    servicesUnitsList = this.page.locator('div[class*="RentzilaProposes_proposes_list"]').first().locator('div[class*="RentzilaProposes_proposes_item"]');
+    servicesUnitsList = this.page.locator('div[class*="RentzilaProposes_proposes_list"]').first().locator('div[class*="RentzilaProposes_proposes_item"]');;
+    firstServucesUnit = this.page.locator('div[class*="RentzilaProposes_proposes_item"]').first();
     announcementsNavMenuItem = this.page.locator('[class*="Navbar_link"][href="/products/"]');
     specialEquipmentContainer = this.page.getByTestId('specialEquipment');
     specialEquipmentsList = this.page.locator('div[class*="RentzilaProposes_categories_list"]').nth(1).locator('div[class*="RentzilaProposes_service"]');
@@ -53,6 +54,8 @@ class HomePage extends Page {
     invalidEmailOrPasswordError = this.page.locator('div[data-testid="errorMessage"]');
     createUnitBtn = this.page.locator('a[class*="Navbar_addAnnouncement"]');
     closePopUpBtn = this.page.locator('[data-testid="crossButton"]');
+    profileAnnouncementsDropDownMenuItem = this.page.locator('[data-testid="units"]');
+    profileMyAnnouncementsItem = this.page.locator('[data-testid="units"] > ul > li:nth-child(1)');
 
     async scrollToServicesContainer() {
         await this.servicesContainer.scrollIntoViewIfNeeded();
@@ -63,7 +66,7 @@ class HomePage extends Page {
     }
 
     async clickFirstServicesUnit() {
-        await this.servicesUnitsList.first().click();
+        await this.servicesUnitsList.first().click({force: true});
         await this.page.waitForTimeout(3000)
     }
 
@@ -123,12 +126,20 @@ class HomePage extends Page {
         });
 
         await this.termsConditionsLink.click();
-        await navigationPromise; 
+        await navigationPromise;
     }
 
     async clickOnAnnouncementsLink() {
-        await this.announcementsLink.click();
-        await this.page.waitForLoadState('domcontentloaded');
+        const navigationPromise = new Promise<void>(resolve => {
+            this.page.on('framenavigated', frame => {
+                if (frame === this.page.mainFrame()) { 
+                    resolve();
+                }
+            });
+        });
+    
+        await this.announcementsLink.click(); 
+        await navigationPromise; 
     }
 
     async getSearchServiceSpecialEquipmentTitleText() {
@@ -251,10 +262,6 @@ class HomePage extends Page {
         }
     }
 
-    async getConsultationFormPhoneErrorMessageText() {
-        return await this.consultationFormErrorMessage.first().innerText();
-    }
-
     async checkSuccessSubmitConsultationMsg() {
         await this.page.on('dialog', async (dialog) => {
             expect(dialog.type()).toBe('alert');
@@ -302,7 +309,7 @@ class HomePage extends Page {
 
     async clickOnUserIcon() {
         await this.userIcon.click();
-        await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForLoadState('load');
     }
 
     async getProfileDropDownEmail() {
@@ -316,14 +323,6 @@ class HomePage extends Page {
     async clickOnMyProfileMenuItem() {
         await this.myProfileMenuItem.click();
         await this.page.waitForTimeout(2000);
-    }
-    
-    async getIncorrectPasswordFormatErrorText() {
-        return await this.loginErrorInputsMsg.innerText();
-    }
-
-    async getIncorrectEmailOrPhoneFormatErrorText() {
-        return await this.loginErrorInputsMsg.innerText();
     }
 
     async getIncorrectPasswordErrorText() {
@@ -340,6 +339,32 @@ class HomePage extends Page {
 
     async clickOnClosePopUpBtn() {
         await this.closePopUpBtn.click();
+    }
+
+    async clickOnProfileMyAnnouncementsItem() {
+        await this.profileAnnouncementsDropDownMenuItem.click({ force: true });
+    
+        try {
+            const dialog = await this.page.waitForEvent('dialog', { timeout: 3000 });
+            await dialog.accept();
+        } catch (e) {
+        }
+    
+        await this.page.waitForLoadState('networkidle');
+    }
+
+    async logoutUser() {
+        await this.clickOnUserIcon();
+        await this.logout();
+        await this.page.waitForTimeout(2000);
+    }
+
+    async loginUser(email: string, password: string) {
+        await this.clickOnEnterBtn();
+        await this.fillInput('email', email);
+        await this.fillInput('password', password);
+        await this.submitLoginFormBtn.click();
+        await this.page.waitForLoadState('networkidle')
     }
 }
 

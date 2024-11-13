@@ -87,7 +87,7 @@ test.describe('Negative test cases for login form', () => {
             await homepage.fillInput('email', phoneNumber);
             await homepage.clickOnSubmitLoginFormBtn();
 
-            await expect(await homepage.getIncorrectPasswordFormatErrorText()).toBe('Неправильний формат email або номера телефону');
+            await expect(homepage.loginErrorInputsMsg).toHaveText('Неправильний формат email або номера телефону');
         }
     });
 
@@ -101,7 +101,7 @@ test.describe('Negative test cases for login form', () => {
             await homepage.fillInput('email', email);
             await homepage.clickOnSubmitLoginFormBtn();
 
-            await expect(await homepage.getIncorrectEmailOrPhoneFormatErrorText()).toBe('Неправильний формат email або номера телефону');
+            await expect(homepage.loginErrorInputsMsg).toHaveText('Неправильний формат email або номера телефону');
         }
     });
 

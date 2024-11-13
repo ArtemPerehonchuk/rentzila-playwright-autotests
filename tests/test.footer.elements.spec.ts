@@ -53,20 +53,20 @@ test('test case C214: Verify that all elements on the footer are displayed and a
     await homepage.clickOnPrivacyPolicyLink();
 
     await expect(await privacyPolicyPage.getUrl()).toContain(pagesUrlPath["privacy-policy"]);
-    await expect(privacyPolicyPage.privacyPolicyTitle).toBeVisible()
-    await expect(await privacyPolicyPage.getPrivacyPolicyTitleText()).toBe('Політика конфіденційності');
+    await expect(privacyPolicyPage.privacyPolicyTitle).toBeVisible();
+    await expect(privacyPolicyPage.privacyPolicyTitle).toHaveText('Політика конфіденційності');
 
     await homepage.clickOnCookiePolicyLink();
 
     await expect(await cookiePolicyPage.getUrl()).toContain(pagesUrlPath["cookey-policy"]);
     await expect(cookiePolicyPage.cookiePolicyTitle).toBeVisible()
-    await expect(await cookiePolicyPage.getCookiePolicyTitleText()).toBe('Політика використання файлів cookie');
+    await expect(cookiePolicyPage.cookiePolicyTitle).toHaveText('Політика використання файлів cookie');
 
     await homepage.clickOnTermsConditionsLink();
 
     await expect(await termsConditionsPage.getUrl()).toContain(pagesUrlPath["terms-conditions"]);
     await expect(termsConditionsPage.termsConditionsTitle).toBeVisible()
-    await expect(await termsConditionsPage.getCookiePolicyTitleText()).toBe('Угода користувача');
+    await expect(termsConditionsPage.termsConditionsTitle).toHaveText('Угода користувача');
 
     await homepage.clickOnAnnouncementsLink();
 
@@ -126,14 +126,14 @@ test('test case C226: Verify "У Вас залишилися питання?" fo
     await homepage.clickOnSubmitConsultationBtn();
 
     await expect(homepage.consultationFormErrorMessage.first()).toBeVisible();
-    await expect( await homepage.getConsultationFormPhoneErrorMessageText()).toBe('Телефон не пройшов валідацію');
+    await expect(homepage.consultationFormErrorMessage.first()).toHaveText('Телефон не пройшов валідацію');
     await expect(homepage.consultationFormErrorMessage).toHaveCSS('border-color', 'rgb(247, 56, 89)')
 
     await homepage.fillInput('phone', contactUsFormInputValues["incorrect phone same digits and spaces"]);
     await homepage.clickOnSubmitConsultationBtn();
 
     await expect(homepage.consultationFormErrorMessage.first()).toBeVisible();
-    await expect( await homepage.getConsultationFormPhoneErrorMessageText()).toBe('Телефон не пройшов валідацію');
+    await expect(homepage.consultationFormErrorMessage.first()).toHaveText('Телефон не пройшов валідацію');
     await expect(homepage.consultationFormErrorMessage).toHaveCSS('border-color', 'rgb(247, 56, 89)')
 
     await homepage.fillInput('phone', contactUsFormInputValues["other correct phone"]);

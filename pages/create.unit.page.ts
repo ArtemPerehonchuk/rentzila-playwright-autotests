@@ -59,10 +59,6 @@ class CreateUnitPage extends Page {
     vehicleManufacturerList = this.page.locator('[data-testid="input-customSelectWithSearch"]');
     mapLabel = this.page.locator('[data-testid="mapLabel"]');
 
-    async getCreateUnitTitleText() {
-        return await this.createUnitTitle.innerText();
-    }
-
     async checkCreateUnitTabsTitles(activeTabNumber: number) {
         if(await this.createUnitTabs.isVisible) {
             const tabNames = await this.createUnitTabsText.allInnerTexts();
@@ -144,10 +140,6 @@ class CreateUnitPage extends Page {
         await this.categoriesDropDown.click();
     }
 
-    async getCategoriesPopUpTitleText() {
-        return await this.categoriesPopUpTitle.innerText();
-    }
-
     async getAnnouncementNameTitleText() {
         return await this.announcementNameTitle.innerText();
     } 
@@ -160,10 +152,6 @@ class CreateUnitPage extends Page {
         return await this.announcementNameInput.inputValue();
     }
 
-    async getAnnouncementNameInputErrorText() {
-        return await this.announcementNameInputError.innerText();
-    } 
-
     async getAnnouncementInputValueCharCount() {
         const value = await this.announcementNameInput.inputValue();
         return value.length;
@@ -175,10 +163,6 @@ class CreateUnitPage extends Page {
 
     async getVehicleManufacturerInputBgText() {
         return await this.vehicleManufacturerInput.getAttribute('placeholder');
-    } 
-
-    async getVehicleManufacturerInputErrorText() {
-        return await this.vehicleManufacturerInputError.innerText();
     } 
 
     async getVehicleManufacturerInputValueLength() {
@@ -271,24 +255,12 @@ class CreateUnitPage extends Page {
         return await this.modelNameInput.getAttribute('placeholder');
     }
 
-    async getModelNameInputErrorText() {
-        return await this.modelNameInputError.innerText();
-    }
-
     async getModelNameInputText() {
         return await this.modelNameInput.inputValue();
-    }
-   
-    async getTechnicalInfoTitleText() {
-        return await this.technicalInfoTitle.innerText();
     }
 
     async getTechnicalInfoInputText() {
         return await this.technicalInfoInput.inputValue();
-    }
-
-    async getDescriptionInfoTitleText() {
-        return await this.descriptionInfoTitle.innerText();
     }
 
     async getDescriptionInfoInputText() {
@@ -299,21 +271,9 @@ class CreateUnitPage extends Page {
         return await this.addressSelectionTitle.innerText();
     }
 
-    async getAddressSelectionInputText() {
-        return await this.addressSelectionInput.innerText();
-    }
-
-    async getAddressSelectionInputErrorText() {
-        return await this.addressSelectionInputError.innerText();
-    }
-
     async clickOnSelectOnMapBtn() {
         await this.selectOnMapBtn.click();
         await this.page.waitForTimeout(1000)
-    }
-
-    async getMapPopUpTitleText() {
-        return await this.mapPopUpTitle.innerText();
     }
 
     async getMapPopUpAddressLineText() {
@@ -347,10 +307,6 @@ class CreateUnitPage extends Page {
         return '';
     }
 
-    async getCancelBtnText() {
-        return await this.cancelBtn.innerText();
-    }
-
     async clickOnCancelBtn() {
         await this.cancelBtn.click();
     }
@@ -360,10 +316,6 @@ class CreateUnitPage extends Page {
             await dialog.accept();
         })
         await this.page.waitForLoadState('domcontentloaded');
-    }
-
-    async getNextBtnText() {
-        return await this.nextBtn.innerText();
     }
 
     async fillCategory() {

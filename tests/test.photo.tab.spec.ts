@@ -35,7 +35,7 @@ test('Test case C384: Verify same images uploading', async( {page} ) => {
     await photoTab.uploadTwoSamePhotos();
 
     await expect(photoTab.invalidPhotoPopUp).toBeVisible();
-    await expect(await photoTab.getInvalidPhotoPopUpText()).toBe('Ви не можете завантажити двічі один файл.');
+    await expect(photoTab.invalidPhotoPopUp).toHaveText('Ви не можете завантажити двічі один файл.');
 
     await photoTab.clickOnClosePopUpBtn();
     await expect(photoTab.invalidPhotoPopUp).not.toBeVisible();
@@ -69,7 +69,7 @@ test('Test case C401: Verify uploading of invalid file type', async( {page} ) =>
 
     await photoTab.uploadIncorrectFileType();
 
-    await expect(await photoTab.getSubmitPopUpBtnText()).toBe('Зрозуміло');
+    await expect(photoTab.submitPopUpBtn).toHaveText('Зрозуміло');
 
     await photoTab.clickOnSubmitPopUpBtn();
 
@@ -96,7 +96,7 @@ test('Test case C405: Verify uploading of invalid size file', async( {page} ) =>
 
     await photoTab.uploadIncorrectFileSize();
 
-    await expect(await photoTab.getSubmitPopUpBtnText()).toBe('Зрозуміло');
+    await expect(photoTab.submitPopUpBtn).toHaveText('Зрозуміло');
 
     await photoTab.clickOnSubmitPopUpBtn();
 
@@ -111,7 +111,7 @@ test('Test case C405: Verify uploading of invalid size file', async( {page} ) =>
 })
 
 test('Test case 390: Verify ""Назад"" button', async({ page }) => {
-    await expect(await photoTab.getPrevBtnText()).toBe('Назад');
+    await expect(photoTab.prevBtn).toHaveText('Назад');
 
     await photoTab.clickOnPrevBtn();
 
@@ -126,7 +126,7 @@ test('Test case 390: Verify ""Назад"" button', async({ page }) => {
 })
 
 test('Test case 393: Verify ""Далі"" button', async({ page }) => {
-    await expect(await createUnitPage.getNextBtnText()).toBe('Далі');
+    await expect(createUnitPage.nextBtn).toHaveText('Далі');
 
     await createUnitPage.clickOnNextBtn();
 
@@ -136,7 +136,7 @@ test('Test case 393: Verify ""Далі"" button', async({ page }) => {
     await photoTab.uploadPhoto();
     await createUnitPage.clickOnNextBtn();
 
-    await expect(await createUnitPage.getCreateUnitTitleText()).toBe('Створити оголошення');
+    await expect(createUnitPage.createUnitTitle).toHaveText('Створити оголошення');
     await createUnitPage.checkCreateUnitTabsTitles(3);
     await expect(servicesTab.servicesTabTitle).toBeVisible();
     await expect(servicesTab.servicesTabInput).toBeVisible();
@@ -152,7 +152,7 @@ test('Test case C593: Verify image uploading', async( {page}) => {
     await photoTab.uploadToTwelvePhotos(1);
 
     await expect(photoTab.firstImgLable).toBeVisible();
-    await expect(await photoTab.getFirstImgLableText()).toBe('Головне'); 
+    await expect(photoTab.firstImgLable).toHaveText('Головне'); 
 
     const imageBlocksItems = await photoTab.imageBlocks.all();
 

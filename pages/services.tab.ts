@@ -46,10 +46,6 @@ class ServicesTab extends Page {
         return await this.serviceNotFoundMessage.innerText();    
     }
 
-    async getCreateServiceBtnText() {
-        return await this.createServiceBtn.innerText();
-    }
-
     async clickOnCreateServiceBtn() {
         await this.createServiceBtn.click();
     }
@@ -74,17 +70,10 @@ class ServicesTab extends Page {
         await this.servicesTabInput.type(value);
     }
 
-    async getServicesTabTitleText() {
-        return await this.servicesTabTitle.innerText();
-    }
-
     async getServicesParagraphTitleText() {
         return await this.servicesParagraphTitle.innerText();
     }
 
-    async getAddServicesClueText() {
-        return await this.addServiceClueMsg.innerText();
-    }
     async getServiceTabInputBgText() {
         return await this.servicesTabInput.getAttribute('placeholder');
     }

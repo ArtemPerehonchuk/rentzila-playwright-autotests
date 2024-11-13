@@ -1,4 +1,5 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
+import chromeProject from './projects.config';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -20,14 +21,6 @@ export default defineConfig({
     baseURL: process.env.HOMEPAGE_URL,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    ...devices['Desktop Chrome'],
-    headless: true,
-    video: 'retain-on-failure',
   },
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-  ],
+  projects: chromeProject,
 });

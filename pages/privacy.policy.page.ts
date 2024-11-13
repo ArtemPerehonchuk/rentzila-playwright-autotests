@@ -9,10 +9,6 @@ class PrivacyPolicyPage extends Page {
 
     privacyPolicyTitle = this.page.locator('h1[class*="PrivacyPolicy_title"]');
 
-    async getPrivacyPolicyTitleText() {
-        return await this.privacyPolicyTitle.innerText();
-    }
-
 }
 
 export default PrivacyPolicyPage;

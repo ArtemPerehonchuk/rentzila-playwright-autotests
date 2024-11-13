@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      
   pull_request:
     branches:
       - main
@@ -30,11 +31,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install Playwright browsers
-        run: npx playwright install
+      - name: Install Chromium browser only
+        run: npx playwright install chromium
 
       - name: Run tests
-        run: npm run test:chrome
+        run: npm run test:chrome -- --reporter=html
+
+      - name: Deploy report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: playwright-report  
+          publish_branch: gh-pages  
+        continue-on-error: true    
 
       - name: Upload test results
         if: failure()
