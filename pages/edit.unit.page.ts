@@ -62,16 +62,8 @@ class EditUnitPage extends Page {
         await this.page.waitForLoadState('load')
     }
 
-    async getUnitNameInputBgText() {
-        return await this.unitNameInput.first().getAttribute('placeholder');
-    }
-
     async clickOnVehicleManufacturerInputCloseIcon() {
         await this.vehicleManufacturerInputCloseIcon.click();
-    }
-
-    async getVehicleManufacturerInputBgText() {
-        return await this.vehicleManufacturerInput.getAttribute('placeholder');
     }
     
     async fillVehicleManufacturerInput(value: string) {
@@ -101,14 +93,6 @@ class EditUnitPage extends Page {
 
     async clearModelNameInput() {
         await this.modelNameInput.clear();
-    }
-
-    async getModelNameInputBgText() {
-        return await this.modelNameInput.getAttribute('placeholder');
-    }
-
-    async getModelNameInputText() {
-        return await this.modelNameInput.inputValue();
     }
 
     async clearTechnicalCharacteristicsInput() {

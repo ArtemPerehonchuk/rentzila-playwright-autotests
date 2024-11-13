@@ -106,12 +106,12 @@ class AdminUnitsPage extends Page {
 
     async clickOnAdminWatchUnitIcon() {
         await this.adminWatchUnitIcon.first().click();
-        await this.page.waitForTimeout(2000)
+        await this.page.waitForTimeout(3000)
     }
 
     async clickOnAdminShowIcon() {
         await this.adminShowIcon.first().click();
-        await this.page.waitForTimeout(2000)
+        await this.page.waitForTimeout(3000)
     }
 }
 

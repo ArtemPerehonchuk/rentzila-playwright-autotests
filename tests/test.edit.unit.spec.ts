@@ -24,7 +24,6 @@ const VALID_PASSWORD: string = process.env.VALID_PASSWORD || '';
 const ADMIN_EMAIL: string = process.env.ADMIN_EMAIL || '';
 const ADMIN_PASSWORD: string = process.env.ADMIN_PASSWORD || '';
 
-let ownerUnitsPageUrl: string;
 let unitName: string;
 let createdUnitId: number;
 let activeUnitName: string;
@@ -59,10 +58,8 @@ test.beforeEach(async ({ page }) => {
 
     await homepage.clickOnUserIcon();
     await homepage.clickOnProfileMyAnnouncementsItem();
-
-    ownerUnitsPageUrl = await homepage.getUrl();
     
-    await expect(ownerUnitsPageUrl).toContain('owner-units-page');
+    await expect(ownerUnitsPage.page).toHaveURL(/owner-units-page/);
 
     await ownerUnitsPage.clickOnActiveAnnouncementsTab();
 
@@ -95,14 +92,12 @@ test('Test case C182: Edit Unit without changes', async({page}) => {
     await expect(unitCardsLength).not.toBe('');
     
     await ownerUnitsPage.clickOnEditUnitBtn();
-   
-    const editUnitPageUrl = await editUnitPage.getUrl();
 
-    await expect(editUnitPageUrl).toContain('edit-unit');
+    await expect(editUnitPage.page).toHaveURL(/edit-unit/);
 
     await editUnitPage.clickOnCancelUnitChangesBtn();
 
-    await expect(ownerUnitsPageUrl).toContain('owner-units-page');
+    await expect(ownerUnitsPage.page).toHaveURL(/owner-units-page/);
 
     await ownerUnitsPage.clickOnEditUnitBtn();
     await editUnitPage.clickOnSaveUnitChangesBtn();
@@ -140,8 +135,6 @@ test('Test case C272: Check ""Назва оголошення"" input field', as
         over100CharStr
     ];
 
-    const editedUnitName = await ownerUnitsPage.getFirstUnitNameText();
-
     await ownerUnitsPage.clickOnEditUnitBtn();
     await editUnitPage.clearUnitNameInput();
     await editUnitPage.clickOnSaveUnitChangesBtn();
@@ -156,7 +149,7 @@ test('Test case C272: Check ""Назва оголошення"" input field', as
         switch(inputValue) {
             case '<>{};^':
                 await expect(editUnitPage.unitNameInput).toHaveText('', {useInnerText: true});
-                await expect(await editUnitPage.getUnitNameInputBgText()).toBe('Введіть назву оголошення');
+                await expect(editUnitPage.unitNameInput).toHaveAttribute('placeholder', 'Введіть назву оголошення');
                 break
 
             case nineCharStr:
@@ -199,7 +192,7 @@ test('Test case C273: Check ""Виробник транспортного зас
     await ownerUnitsPage.clickOnEditUnitBtn();
     await editUnitPage.clickOnVehicleManufacturerInputCloseIcon();
 
-    await expect(await editUnitPage.getVehicleManufacturerInputBgText()).toBe('Введіть виробника транспортного засобу');
+    await expect(editUnitPage.vehicleManufacturerInput).toHaveAttribute('placeholder', 'Введіть виробника транспортного засобу');
 
     await editUnitPage.clickOnSaveUnitChangesBtn();
 
@@ -252,18 +245,18 @@ test('Test case C273: Check ""Виробник транспортного зас
     await apiHelper.deleteUnit(accessUserToken, createdUnitId);
 })
 
-test('Test case C532: Check ""Check ""Назва моделі"" input field', async({page}) => {
+test('Test case C532: "Check ""Назва моделі"" input field', async({page}) => {
     const random15CharString = faker.string.alpha({length: 15});
     const random16CharString = faker.string.alpha({length: 16});
     const editedUnitName = await ownerUnitsPage.getFirstUnitNameText();
 
     await ownerUnitsPage.clickOnEditUnitBtn();
 
-    await expect(await editUnitPage.getModelNameInputBgText()).toBe('Введіть назву моделі');
+    await expect(editUnitPage.modelNameInput).toHaveAttribute('placeholder', 'Введіть назву моделі');
 
     await editUnitPage.fillModelNameInput('<>{};^');
 
-    await expect(await editUnitPage.getModelNameInputText()).toBe('');
+    await expect(editUnitPage.modelNameInput).toHaveValue('');
 
     await editUnitPage.fillModelNameInput(random16CharString);
 
@@ -394,7 +387,6 @@ test('Test case C534: Check ""Опис"" input field', async({page}) => {
 })
 
 test('Test case C535: Check ""Місце розташування технічного засобу"" functionality', async({page}) => {
-    const editedUnitName = await ownerUnitsPage.getFirstUnitNameText();
 
     await ownerUnitsPage.clickOnEditUnitBtn();
     await editUnitPage.clickOnSelectOnMapBtn();
@@ -439,7 +431,7 @@ test('Test case C535: Check ""Місце розташування технічн
 
     await editUnitPage.clickOnMapPopUpConfirmChoiseBtn();
 
-    await expect(await editUnitPage.getUrl()).toContain('edit-unit');
+    await expect(editUnitPage.page).toHaveURL(/edit-unit/);
     await expect(editUnitPage.mapPopUp).not.toBeVisible();
     await expect(editUnitPage.vehicleLocation).toHaveText(choosenLocation);
 
