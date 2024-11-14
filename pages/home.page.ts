@@ -67,7 +67,7 @@ class HomePage extends Page {
 
     async clickFirstServicesUnit() {
         await this.servicesUnitsList.first().click({force: true});
-        await this.page.waitForTimeout(3000)
+        await this.page.waitForSelector('div[class*="ResetFilters_selectedCategory"]')
     }
 
     async clickFirstSpecialEquipmentUnit() {
